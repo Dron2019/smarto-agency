@@ -1,0 +1,102 @@
+.container1 {
+  position: relative;
+}
+
+
+$base-color: #000;
+
+@for $i from 1 through 3 {
+  .container1:nth-child(3n + #{$i}) {
+    background-color: lighten($base-color, $i * 5%);
+  }
+}
+.page__inner {
+  width: 100vw;
+  height: 100vh;
+}
+[data-canvas] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.main-screen {
+  // max-width: 40vw;
+  min-height: 100vh;
+  padding-left: var(--page-side-fields);
+  padding-right: var(--page-side-fields);
+  padding-bottom: var(--page-side-fields);
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: flex-start;
+  justify-content: flex-end;
+  &>*:not([data-canvas]) {
+    position: relative;
+    z-index: 1;
+  }
+  &__call-popup {
+    margin-bottom: 40px;
+    cursor: pointer;
+  }
+  .h1 {
+    max-width: 16ch;
+  }
+}
+.screen2 {
+  --v-padding: 250px;
+  padding-top: var(--v-padding);
+  padding-bottom: var(--v-padding);
+  @include row-flex();
+  &__text {
+    max-width: 300px;
+    @include shift-left(3);
+  }
+}
+.screen3 {
+  .title-with-star {
+    @include shift-left(2);
+  }
+}
+
+.main-screen__call-popup {
+  @include from(951px){
+    &:hover {
+
+    }
+  }
+}
+.rotate-group {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: rotate-me 7s infinite linear;
+}
+.eyebrows {
+  transform-origin: center;
+  transform-box: fill-box;
+  
+}
+@keyframes rotate-me {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.title-with-star {   
+  padding-left: 18px;
+  --svg-size: 80px;
+  @extend .h1;
+  @extend .uppercase;
+  @extend .text-white;
+  svg {
+    width: var(--svg-size);
+    height: var(--svg-size);
+    margin-right: 50px;
+  }
+}

@@ -1,0 +1,36 @@
+
+extends ../layout/main
+block variable
+  -
+    var title_page = 'animation'
+    var id_page = 'id-page-animation'
+    var class_page = 'class-page-animation'
+    var breadcrumbsSubitem = [
+      {
+        label: 'About',
+        link: pagesLink[0].about
+      }
+    ]
+  
+block meta
+  title= title_page
+  meta(name='description', content='')
+block head
+    link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+  script(defer src='./assets/scripts/vendors.bundle.js')
+  script(defer src='./assets/scripts/index.bundle.js')
+  script(defer src='./assets/scripts/libs.js')
+  script(defer src='./assets/scripts/index.js')
+  script(defer src='./assets/scripts/header.js')
+  
+  <script defer  src='https://tympanus.net/Development/DecorativeBackgrounds/js/three.min.js'></script>
+  <script defer  src='./assets/scripts/perlin.js'></script>
+  script(defer src='./assets/scripts/animation.bundle.js')
+block content
+  <canvas class="scene scene--full" id="scene"></canvas>
+block footer
+  include ../includes/footer.pug
+
+block header
+  include ../includes/header.pug

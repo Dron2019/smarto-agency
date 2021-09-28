@@ -1,0 +1,62 @@
+
+extends ../layout/main
+block variable
+  -
+    var title_page = 'home'
+    var id_page = 'flat-page'
+    var class_page = 'home'
+    var breadcrumbsBtn = 'filter'
+    var breadcrumbsSubitem = [
+      {
+        label: 'About',
+        link: pagesLink[0].about
+      }
+    ]
+    var slider = [{
+      img: 'slider/1.jpg',
+      title: 'Власна резиденція у місті',
+      url: 'about',
+      linkText: 'Обрати квартиру',
+    },{
+      img: 'slider/1.jpg',
+      title: 'Власна резиденція у місті2',
+      url: 'about',
+      linkText: 'Обрати квартиру',
+    },{
+      img: 'slider/1.jpg',
+      title: 'Власна резиденція у місті3',
+      url: 'about',
+      linkText: 'Обрати квартиру',
+    }]
+
+block meta
+  title= 'Главная'
+  meta(name='description', content='')
+block head
+    link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+  //- script(defer src='./assets/scripts/vendors.bundle.js')
+  //- script(defer src='./assets/scripts/index.bundle.js')
+  <script defer  src='https://tympanus.net/Development/DecorativeBackgrounds/js/three.min.js'></script>
+  <script defer  src='./assets/scripts/perlin.js'></script>
+  script(defer src='./assets/scripts/home.bundle.js')
+block content
+  //- include ../includes/breadcrumbs.pug
+  .container1.main-screen
+    canvas(data-canvas)
+    include ../pages-components/index/main-screen-svg.svg
+    .h1.text-white   SIGNIFICANT<br> WEB-PROJECTS<br> <span class="text-red">FOR</span> DEVELOPERS
+  .container1.screen2.container-side-padding
+    div.screen2__text.h5.text-gray.uppercase Уникаємо зневаги зі СТОРОНи КОНКУРЕНТІВ, АЛЕ зухвало <span class="text-red">КИДАєМо ВИКЛИК</span> КЛІЄНТУ НЕ БУТИ СІРОю МАСОЮ
+  .container1.screen3.row-flex
+    .title-with-star
+      include ../pages-components/index/star.svg
+      span 01<span class="text-red">.</span>Про Smartorange
+  .container1
+  .container1
+  .container1
+block footer
+  include ../includes/footer.pug
+
+block header
+  include ../includes/header.pug

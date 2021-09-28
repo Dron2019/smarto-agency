@@ -1,0 +1,42 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: var(--header-h);
+  width: 100%;
+  padding: 0 80px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-black);
+  z-index: 100;
+  @include to(1440px) {
+    padding: 0 50px;
+  }
+  @include to(992px) {
+    padding: 0;
+  }
+  &__links {
+    background-color: var(--color-red);
+    letter-spacing: 0.05em;
+    font-size: 18px;
+    line-height: 100%;
+    padding: 76px 20px 20px 20px;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    position: absolute;
+    right: var(--page-side-fields);
+    top: 0;
+    text-align: right;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    a:nth-last-child(n+2) {
+      margin-bottom: 20px;
+    }
+  }
+}
