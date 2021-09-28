@@ -1,7 +1,12 @@
 .container1 {
   position: relative;
 }
-
+.title-with-star {
+  @include shift-left(3);
+  @include shift-right(0);
+  @include size(9);
+  margin-bottom: 50px;
+}
 
 $base-color: #000;
 
@@ -34,7 +39,7 @@ $base-color: #000;
   align-content: flex-end;
   align-items: flex-start;
   justify-content: flex-end;
-  &>*:not([data-canvas]) {
+  & > *:not([data-canvas]) {
     position: relative;
     z-index: 1;
   }
@@ -47,28 +52,175 @@ $base-color: #000;
   }
 }
 .screen2 {
-  --v-padding: 250px;
+  --v-padding: 300px;
   padding-top: var(--v-padding);
-  padding-bottom: var(--v-padding);
   @include row-flex();
   &__text {
     max-width: 300px;
     @include shift-left(3);
   }
 }
-.screen3 {
-  .title-with-star {
-    @include shift-left(2);
+.about {
+  --v-padding: 300px;
+  padding-top: var(--v-padding);
+  justify-content: space-between;
+  @include row-flex();
+  &__text {
+    @include shift(0);
+    @include size(3);
+    padding-right: 11%;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 120%;
+    text-transform: uppercase;
+  }
+  &__wrapper {
+    @include size(9);
+    @include shift(0);
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 50px));
+    column-gap: 50px;
+    justify-content: space-between;
+  }
+  &__text-uppercase {
+    // max-width: 854px;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 120%;
+    text-transform: uppercase;
   }
 }
-
-.main-screen__call-popup {
-  @include from(951px){
-    &:hover {
-
+.wow {
+  position: relative;
+  --v-padding: 300px;
+  padding-top: var(--v-padding);
+  justify-content: space-between;
+  @include row-flex();
+  &__left {
+    @include shift(0);
+    @include size(3);
+  }
+  &__title {
+    padding-right: 25%;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: var(--h2-size);
+    line-height: 120%;
+    text-transform: uppercase;
+  }
+  &__text {
+    margin-top: 10px;
+    padding-right: 25%;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: var(--h4-size);
+    line-height: 120%;
+  }
+  &__logo {
+    margin-top: 40px;
+    width: 120px;
+    height: 120px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__image {
+    @include size(9);
+    @include shift(0);
+    position: relative;
+    &-logo-1,
+    &-logo-2,
+    &-logo-3 {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+    }
+    &-logo-1 {
+      width: 219px;
+      height: 44px;
+    }
+    &-logo-2,
+    &-logo-3 {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  &__year {
+    @include shift(0);
+    @include size(3);
+    margin-top: 50px;
+    font-family: $default-font;
+    font-weight: 300;
+    font-size: var(--h1-size);
+    line-height: 100%;
+    text-transform: uppercase;
+    -webkit-text-stroke: #656e75;
+    -webkit-text-stroke-width: 1px;
+    color: transparent;
+  }
+  &__wrapper {
+    @include size(9);
+    @include shift(0);
+    margin-top: 50px;
+    margin-bottom: 200px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    &-left {
+      width: 50%;
+    }
+    &-right {
+      width: 41%;
+    }
+  }
+  &__h3 {
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: var(--h3-size);
+    line-height: 120%;
+    text-transform: uppercase;
+  }
+  &__link {
+    display: flex;
+    margin-top: 20px;
+  }
+  &__lists {
+    list-style: none;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: var(--h4-size);
+    line-height: 120%;
+  }
+  &__list {
+    margin-top: 20px;
+    position: relative;
+    &:first-child {
+      margin-top: 0;
+    }
+    &::before {
+      content: "";
+      width: 15px;
+      height: 29px;
+      background-image: url(../images/svg/wow__list-before.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: absolute;
+      right: calc(100% + 18px);
+      top: 7px;
     }
   }
 }
+
+// .main-screen__call-popup {
+//   @include from(951px){
+//     &:hover {
+
+//     }
+//   }
+// }
 .rotate-group {
   transform-origin: center;
   transform-box: fill-box;
@@ -77,7 +229,6 @@ $base-color: #000;
 .eyebrows {
   transform-origin: center;
   transform-box: fill-box;
-  
 }
 @keyframes rotate-me {
   from {
@@ -88,9 +239,10 @@ $base-color: #000;
   }
 }
 
-.title-with-star {   
-  padding-left: 18px;
+.title-with-star {
+  padding-left: 0;
   --svg-size: 80px;
+  position: relative;
   @extend .h1;
   @extend .uppercase;
   @extend .text-white;
@@ -98,5 +250,9 @@ $base-color: #000;
     width: var(--svg-size);
     height: var(--svg-size);
     margin-right: 50px;
+    position: absolute;
+    right: calc(100% + 18px);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
