@@ -111,4 +111,4 @@ const initView = (state, elementsParamFn) => {
 };
 
 export default initView;
-// END
+// // END

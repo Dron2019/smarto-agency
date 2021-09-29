@@ -14,13 +14,14 @@ global.gsap = gsap;
 global.axios = axios;
 
 /* eslint-disable-next-line */
-// const locoScroll = new LocomotiveScroll({
-//   el: document.querySelector('[data-scroll-container]'),
-//   smooth: true,
-//   smoothMobile: false,
-//   inertia: 1.1,
-// });
-
+const locoScroll = new LocomotiveScroll({
+  el: document.querySelector('[data-scroll-container]'),
+  smooth: true,
+  lerp: 0.05,
+  smoothMobile: false,
+  inertia: 1.1,
+});
+locoScroll.destroy();
 global.locoScroll = locoScroll;
 /*
  * smooth scroll end
@@ -30,15 +31,13 @@ global.locoScroll = locoScroll;
 /*
  * form handlers start
  */
-const forms = [
-  '[data-home-contact]',
-];
-const formsWithRedirect = [
-  '[data-popup-form]',
-];
 
-formsWithRedirect.forEach((form) => {
+
+const formsWithTel = ['[data-home-connection]'];
+
+formsWithTel.forEach(form => {
   const $form = document.querySelector(form);
+  console.log(form);
   if ($form) {
     /* eslint-disable */
     new FormMonster({
@@ -46,19 +45,25 @@ formsWithRedirect.forEach((form) => {
       elements: {
         $form,
         showSuccessMessage: false,
-        successAction: () => { window.location.href = 'message'; },
+        successAction: () => {
+          window.location.href = 'message';
+        },
         $btnSubmit: $form.querySelector('[data-btn-submit]'),
         fields: {
-          name: {
-            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-name]') }),
-            rule: yup.string().required(i18next.t('required')).trim(),
-            defaultMessage: i18next.t('name'),
-            valid: false,
-            error: [],
-          },
+          // name: {
+          //   inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-name]') }),
+          //   rule: yup.string().required(i18next.t('required')).trim(),
+          //   defaultMessage: i18next.t('name'),
+          //   valid: false,
+          //   error: [],
+          // },
 
           phone: {
-            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-phone]'), typeInput: 'phone' }),
+            inputWrapper: new SexyInput({
+              animation: 'none',
+              $field: $form.querySelector('[data-field-phone]'),
+              typeInput: 'phone',
+            }),
             rule: yup
               .string()
               .required(i18next.t('required'))
@@ -69,69 +74,26 @@ formsWithRedirect.forEach((form) => {
             error: [],
           },
         },
-
       },
     });
-
-    $form.querySelector('.js-mask-absolute').addEventListener('click', () => {
-      $form.querySelector('[name="phone"]').focus();
-    }, false);
+    // $form.querySelector('.js-mask-absolute').addEventListener('click', () => {
+    //   $form.querySelector('[name="phone"]').focus();
+    // }, false);
   }
 });
 
-forms.forEach((form) => {
-  const $form = document.querySelector(form);
-  if ($form) {
-    /* eslint-disable */
-    new FormMonster({
-      /* eslint-enable */
-      elements: {
-        $form,
-        showSuccessMessage: false,
-        successAction: () => { window.location.href = 'message'; },
-        $btnSubmit: $form.querySelector('[data-btn-submit]'),
-        fields: {
-          name: {
-            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-name]') }),
-            rule: yup.string().required(i18next.t('required')).trim(),
-            defaultMessage: i18next.t('name'),
-            valid: false,
-            error: [],
-          },
-
-          phone: {
-            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-phone]'), typeInput: 'phone' }),
-            rule: yup
-              .string()
-              .required(i18next.t('required'))
-              .min(17, i18next.t('field_too_short', { cnt: 17 - 5 })),
-
-            defaultMessage: i18next.t('phone'),
-            valid: false,
-            error: [],
-          },
-        },
-
-      },
-    });
-
-    $form.querySelector('.js-mask-absolute').addEventListener('click', () => {
-      $form.querySelector('[name="phone"]').focus();
-    }, false);
-  }
-});
 
 /*
  * form handlers end
  */
 function disableScroll() {
   const containersScroll = document.querySelectorAll('[data-disable-page-scroll]');
-  containersScroll.forEach((block) => {
+  containersScroll.forEach(block => {
     block.addEventListener('mouseenter', () => {
-      locoScroll.stop();
+      // locoScroll.stop();
     });
     block.addEventListener('mouseleave', () => {
-      locoScroll.start();
+      // locoScroll.start();
     });
   });
 }

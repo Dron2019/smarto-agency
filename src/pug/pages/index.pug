@@ -36,7 +36,8 @@ block head
   link(rel='stylesheet' href="./assets/styles/main.min.css")
 block scripts
   //- script(defer src='./assets/scripts/vendors.bundle.js')
-  //- script(defer src='./assets/scripts/index.bundle.js')
+  script(defer src='./assets/scripts/index.bundle.js')
+  //- script(defer src='./assets/scripts/index-app.js')
   <script defer  src='https://tympanus.net/Development/DecorativeBackgrounds/js/three.min.js'></script>
   <script defer  src='./assets/scripts/perlin.js'></script>
   script(defer src='./assets/scripts/home.bundle.js')
@@ -243,7 +244,109 @@ block content
         ul.wow__lists.text-gray
           li.wow__list корпоративний сайт будинку з адаптивом до різних пристроїв
           li.wow__list інтерактивну 3Д модель вибору апартаментів яку було приєднано до системи управління DevBase (ERP онлайн бронювання приміщень).
-
+  .container1.partners.row-flex.container-side-padding
+    .title-with-star
+      include ../pages-components/index/star.svg
+      span 03<span class="text-red">.</span>Партнери
+    .partners__text.text-red Ми не просто створюємо продукт, ми ствоорюємо взаємовигідне партнерство
+    .partners__wrapper
+      a(href="#").partners__image-1
+        img(src="./assets/images/svg/saga-03.svg" alt="saga")
+      a(href="#").partners__image-2
+        img(src="./assets/images/svg/perfect-group-03.svg" alt="perfect-group")
+      a(href="#").partners__image-3
+        img(src="./assets/images/svg/intergal-bud-03.svg" alt="intergal-bud")
+      a(href="#").partners__image-4
+        img(src="./assets/images/svg/comfort-life-03.svg" alt="comfort-life")
+      a(href="#").partners__image-5
+        img(src="./assets/images/svg/unfpa-03.svg" alt="unfpa")
+      a(href="#").partners__image-6
+        img(src="./assets/images/svg/bud-03.svg" alt="bud")
+      a(href="#").partners__image-7
+        img(src="./assets/images/svg/linevich-group-03.svg" alt="linevich-group")
+      a(href="#").partners__image-8
+        img(src="./assets/images/svg/development-03.svg" alt="development")
+      a(href="#").partners__image-9
+        img(src="./assets/images/svg/renome-03.svg" alt="renome")
+      a(href="#").partners__image-10
+        img(src="./assets/images/svg/riel-03.svg" alt="riel")
+      a(href="#").partners__image-11
+        img(src="./assets/images/svg/st-sophia-03.svg" alt="st-sophia")
+      a(href="#").partners__image-12
+        img(src="./assets/images/svg/citex-03.svg" alt="citex-03")
+      a(href="#").partners__image-13
+        img(src="./assets/images/svg/edelburg-03.svg" alt="edelburg")
+      a(href="#").partners__image-14
+        img(src="./assets/images/svg/city-consult-03.svg" alt="city-consult")
+      a(href="#").partners__image-15
+        img(src="./assets/images/svg/dm-group-03.svg" alt="dm-group")
+      a(href="#").partners__image-16
+        img(src="./assets/images/svg/quadrum-03.svg" alt="quadrum")
+      a(href="#").partners__image-17
+        img(src="./assets/images/svg/сontour-03.svg" alt="сontour")
+      a(href="#").partners__image-18
+        img(src="./assets/images/svg/sota-03.svg" alt="sota")
+      a(href="#").partners__image-19
+        img(src="./assets/images/svg/smile-03.svg" alt="smile")
+      a(href="#").partners__image-20
+        img(src="./assets/images/svg/adapt-03.svg" alt="adapt")
+  form.home-contact--width.container1.communication.row-flex.container-side-padding(data-home-connection='' autocomplete='off')
+    .title-with-star
+      include ../pages-components/index/star.svg
+      span 04<span class="text-red">.</span>Поспілкуємось?
+    .communication__h5.text-red Ми не хочемо даремно витрачати ваш час
+    .communication__h3.text-gray Щоб бути максимально продуктивними - нам необхідно поспілкуватися. А щоб спілкування було більш предметним, розкажіть про себе і завданнях, скориставшись формою.
+    .communication__h5.text-red.mt100 Розкажіть нам про себе:
+    .communication__form.form.mt70
+      .form-field.form-field-input(data-field-input='' data-field-name='' data-status='field--inactive' data-animation='none')
+        input.form-field__input(type='text' name='name' placeholder='Ім’я:')
+        .input-message(data-input-message='')
+        .form-star
+          svg(width='20' height='20' viewbox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
+            path(d='M10 0L10.7654 8.15224L17.0711 2.92893L11.8478 9.23463L20 10L11.8478 10.7654L17.0711 17.0711L10.7654 11.8478L10 20L9.23463 11.8478L2.92893 17.0711L8.15224 10.7654L0 10L8.15224 9.23463L2.92893 2.92893L9.23463 8.15224L10 0Z' fill='#FF3300')
+      .form-field.disabled.form-field-input(data-field-input='' data-field-phone='' data-status='field--inactive' data-animation='none')
+        input.form-field__input.input-tel(type='tel' name='phone' placeholder='Телефон:' inputmode='tel')
+        //- span.place-holder Телефон:
+        .mask-absolute.js-mask-absolute
+        .input-message(data-input-message='')
+        .form-star
+          svg(width='20' height='20' viewbox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
+            path(d='M10 0L10.7654 8.15224L17.0711 2.92893L11.8478 9.23463L20 10L11.8478 10.7654L17.0711 17.0711L10.7654 11.8478L10 20L9.23463 11.8478L2.92893 17.0711L8.15224 10.7654L0 10L8.15224 9.23463L2.92893 2.92893L9.23463 8.15224L10 0Z' fill='#FF3300')
+      .form-textarea
+        textarea(placeholder='Назва компанії:')
+        .form-star
+          svg(width='20' height='20' viewbox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
+            path(d='M10 0L10.7654 8.15224L17.0711 2.92893L11.8478 9.23463L20 10L11.8478 10.7654L17.0711 17.0711L10.7654 11.8478L10 20L9.23463 11.8478L2.92893 17.0711L8.15224 10.7654L0 10L8.15224 9.23463L2.92893 2.92893L9.23463 8.15224L10 0Z' fill='#FF3300')
+    .communication__h5.text-red.mt100 Яка послуга вам потрібна? (можна обрати декілька)
+    .communication__checkbox.mt100
+      .checkbox
+        input#first.custom-checkbox(type='checkbox' name='checkbox-1' value='website')
+        label(for='first').text-white сайт житлового комплексу
+      .checkbox
+        input#second.custom-checkbox(type='checkbox' name='checkbox-2' value='3D')
+        label(for='second').text-white 3д модель будинку
+        span.text-gray.span Інтерактивний вибір приміщень з обертанням будинку на 360 градусів
+      .checkbox
+        input#third.custom-checkbox(type='checkbox' name='checkbox-3' value='management-system')
+        label(for='third').text-white система управління квартирами
+        span.text-gray.span ERP впровадження онлайн бронювання приміщень
+      .checkbox
+        input#fourth.custom-checkbox(type='checkbox' name='checkbox-4' value='individual-development')
+        label(for='fourth').text-white Індивідуальна розробка
+    .communication__button.form-btn-wrap.df.jcsb.aic
+      button.button.button--surtur.main-button.home-contact-btn--size(type='submit' data-btn-submit='data-btn-submit')
+        svg.textcircle(viewbox='0 0 500 500')
+          //- title надіслати надіслати надіслати надіслати
+          defs
+            path#textcircle(d='M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z')
+          text
+            textpath(xlink:href='#textcircle' aria-label='Projects & client work 2020' textlength='900') надіслати надіслати надіслати надіслати
+        svg.eye(aria-hidden='true' width='70' height='70' viewbox='0 0 70 70' xmlns='http://www.w3.org/2000/svg')
+          path.eye__outer(d='M10.5 35.308c5.227-7.98 14.248-13.252 24.5-13.252s19.273 5.271 24.5 13.252c-5.227 7.98-14.248 13.253-24.5 13.253s-19.273-5.272-24.5-13.253z')
+          path.eye__lashes-up(d='M35 8.802v8.836M49.537 11.383l-3.31 8.192M20.522 11.684l3.31 8.192')
+          path.eye__lashes-down(d='M35 61.818v-8.836 8.836zM49.537 59.237l-3.31-8.193 3.31 8.193zM20.522 58.936l3.31-8.193-3.31 8.193z')
+          circle.eye__iris(cx='35' cy='35.31' r='5.221')
+          circle.eye__inner(cx='35' cy='35.31' r='10.041')
 
 
 block footer
