@@ -24,7 +24,7 @@ camera.position.set(0, 0, 350);
 const sphere = new THREE.Group();
 scene.add(sphere);
 const material = new THREE.LineBasicMaterial({
-//   color: 0x0C50DB,
+  //   color: 0x0C50DB,
   color: 0xfe0e55,
 });
 const linesAmount = 18;
@@ -37,8 +37,8 @@ for (let j = 0; j < linesAmount; j++) {
   geometry.y = (index / linesAmount) * radius * 2;
   for (let i = 0; i <= verticesAmount; i++) {
     const vector = new THREE.Vector3();
-    vector.x = Math.cos(i / verticesAmount * Math.PI * 2);
-    vector.z = Math.sin(i / verticesAmount * Math.PI * 2);
+    vector.x = Math.cos((i / verticesAmount) * Math.PI * 2);
+    vector.z = Math.sin((i / verticesAmount) * Math.PI * 2);
     vector._o = vector.clone();
     geometry.vertices.push(vector);
   }
@@ -51,8 +51,8 @@ for (let j = 0; j < linesAmount; j++) {
   geometry.y = (index / linesAmount) * radius * 2;
   for (let i = 0; i <= verticesAmount; i++) {
     const vector = new THREE.Vector3();
-    vector.x = Math.tan(i / linesAmount * Math.PI * 2);
-    vector.z = Math.tan(i / linesAmount * Math.PI * 2);
+    vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
+    vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
     vector._o = vector.clone();
     geometry.vertices.push(vector);
   }
@@ -72,7 +72,9 @@ function updateVertices(a) {
     const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
     for (let i = 0; i <= verticesAmount; i++) {
       const vector = line.geometry.vertices[i];
-      const ratio = noise.simplex3(vector.x * 0.009, vector.z * 0.009 + a * 0.0006, line.geometry.y * 0.009) * 1;
+      const ratio =
+        noise.simplex3(vector.x * 0.009, vector.z * 0.009 + a * 0.0006, line.geometry.y * 0.009) *
+        1;
       vector.copy(vector._o);
       vector.multiplyScalar(radiusHeight + ratio);
       vector.y = line.geometry.y - radius;
@@ -102,8 +104,8 @@ function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
   gsap.to(sphere.rotation, 0.2, {
-    x: (mouse.y * 1),
-    z: (mouse.x * 0.1),
+    x: mouse.y * 1,
+    z: mouse.x * 0.1,
     ease: 'power1.inOut',
   });
   console.log('ff');
@@ -117,4 +119,37 @@ window.addEventListener('resize', () => {
   resizeTm = setTimeout(onResize, 500);
 });
 
-Scrollbar.init(document.querySelector('.page__inner'), {});
+const scrollBar = Scrollbar.init(document.querySelector('.page__inner'), {});
+scrollBar.addListener(evt => {
+  if (evt.offset > 1000) return;
+  const { y } = evt.offset;
+  const pageUp = document.querySelector('.pageup');
+  y > 1000 ? (pageUp.style.display = 'block') : (pageUp.style.display = 'none');
+});
+
+document.querySelectorAll('.pageup').forEach(el => {
+  el.addEventListener('click', () => {
+    if (Scrollbar !== undefined) {
+      Scrollbar.scrollTo(0);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  });
+});
+
+const year = function() {
+  const date = new Date();
+  const yyyy = date.getFullYear();
+  return yyyy;
+};
+const footer = document.querySelector('.footer__content');
+footer.innerHTML +=
+  '<img src="./assets/images/svg/footer-svg.svg" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;' +
+  year();
+
+const placeHolder = document.querySelector('.place-holder');
+const input = document.querySelector('.input-tel');
+placeHolder.addEventListener('click', () => {
+  placeHolder.style.display = 'none';
+  input.focus();
+});

@@ -5,7 +5,7 @@ import initView from './form-view';
 import { langDetect } from '../../../assets/scripts/modules/helpers/helpers';
 
 const sendForm = async (data) => {
-  const response = await axios.post('/wp-admin/admin-ajax.php', data);
+  const response = await axios.post('static/application.php', data);
   return response.data;
 };
 
@@ -26,6 +26,8 @@ const lang = langDetect();
           sending: 'Отправка',
           field_too_short: 'телефон должен содержать не менее {{cnt}} символов',
           field_too_long: 'телефон должен содержать не более {{cnt}} символов',
+          field_only_letter: 'имя должно содержать только буквы',
+          field_more_letter: 'имя должно содержать не более 30 букв',
           only_number: 'здесь только цифры',
           required: 'это поле обязательне',
           sendingSuccessTitle: 'Cообщение отправлено',
@@ -50,10 +52,12 @@ const lang = langDetect();
           phone: 'Телефон:*',
           send: 'Надіслати',
           sending: 'Відправлення',
-          field_too_short: 'телефон має містити принаймні {{cnt}} символів',
+          field_too_short: 'телефон повинен містити не менше {{cnt}} символів',
           field_too_long: 'телефон має містити не більше {{cnt}} символів',
+          field_only_letter: 'ім`я повинно містити тільки букви',
+          field_more_letter: 'ім`я повинно містити не більше 30 букв',
           only_number: 'тут лише цифри',
-          required: 'Це поле є обов`язковим',
+          required: 'це поле є обов`язковим',
           sendingSuccessTitle: 'Повідомлення надіслано',
           sendingSuccessText: 'Чекайте відповіді наших менеджерів',
           sendingErrorText: 'Чекайте відповіді наших менеджерів',
@@ -80,6 +84,8 @@ const lang = langDetect();
           sending: 'Sanding',
           field_too_short: 'phone must be at least {{cnt}} characters',
           field_too_long: 'phone must be at most {{cnt}} characters',
+          field_only_letter: 'name must contain only letters',
+          field_more_letter: 'name must be at most 30 letters',
           only_number: 'only digits here',
           required: 'this field is required',
           sendingSuccessTitle: 'Message sent',

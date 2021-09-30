@@ -1,0 +1,35 @@
+.footer {
+    --v-padding: 300px;
+    padding-top: var(--v-padding);
+    justify-content: space-between;
+    @include row-flex();
+    &__divider {
+        @include shift(3);
+        @include shift-right(0);
+        @include size(9);
+        height: 1px;
+        background-color: var(--color-gray);
+    }
+    &__content {
+        @include shift(3);
+        @include shift-right(0);
+        @include size(9);
+        padding: 41px 0;
+        display: flex;
+        align-items: center;
+        font-family: $default-font;
+        font-weight: normal;
+        font-size: var(--h5-size);
+        line-height: 70%;
+        text-transform: uppercase;
+        img {
+            margin-right: 15px;
+            height: 40px;
+            width: 40px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}

@@ -33,7 +33,7 @@ global.locoScroll = locoScroll;
  */
 
 
-const formsWithTel = ['[data-home-connection]'];
+const formsWithTel = ['[data-home-communication]'];
 
 formsWithTel.forEach(form => {
   const $form = document.querySelector(form);
