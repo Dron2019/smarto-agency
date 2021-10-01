@@ -129,8 +129,9 @@ scrollBar.addListener(evt => {
 
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
-    if (Scrollbar !== undefined) {
-      Scrollbar.scrollTo(0);
+    if (scrollBar !== undefined) {
+      console.log(scrollBar);
+      scrollBar.scrollTo(0,0,1510);
     } else {
       window.scrollTo(0, 0);
     }

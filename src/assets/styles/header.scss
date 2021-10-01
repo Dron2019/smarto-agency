@@ -4,19 +4,13 @@
   left: 0;
   height: var(--header-h);
   width: 100%;
-  padding: 0 80px;
+  padding: 0 var(--page-side-fields);
   display: flex;
   align-content: center;
   align-items: center;
   justify-content: space-between;
   background-color: var(--color-black);
   z-index: 100;
-  @include to(1440px) {
-    padding: 0 50px;
-  }
-  @include to(992px) {
-    padding: 0;
-  }
   &__links {
     background-color: var(--color-red);
     letter-spacing: 0.05em;
@@ -39,4 +33,15 @@
       margin-bottom: 20px;
     }
   }
+}
+@media (max-width: 1440px) {
+  .header {
+    &__links {
+      padding: 56px 20px 20px 20px;
+      font-size: 14px;
+      a:nth-last-child(n+2) {
+        margin-bottom: 15px;
+      }
+    }
+  } 
 }

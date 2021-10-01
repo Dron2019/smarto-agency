@@ -33,3 +33,9 @@
         }
     }
 }
+@media (max-width: 1920px) {
+    .footer {
+        --v-padding: 150px;
+        padding-top: var(--v-padding);
+    }
+}

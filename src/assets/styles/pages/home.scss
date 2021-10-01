@@ -39,14 +39,6 @@
     transform: translateY(-50%);
   }
 }
-.span {
-  margin-top: 5px;
-  margin-left: 62px;
-  font-family: $default-font;
-  font-weight: normal;
-  font-size: var(--h4-size);
-  line-height: 120%;
-}
 
 $base-color: #000;
 
@@ -92,7 +84,7 @@ $base-color: #000;
   }
 }
 .screen2 {
-  --v-padding: 300px;
+  --v-padding: 200px;
   padding-top: var(--v-padding);
   @include row-flex();
   &__text {
@@ -119,15 +111,13 @@ $base-color: #000;
     @include size(9);
     @include shift(0);
     display: grid;
-    grid-template-columns: repeat(2, calc(50% - 50px));
-    column-gap: 50px;
+    grid-template-columns: repeat(2, calc(50% - 25px));
     justify-content: space-between;
   }
   &__text-uppercase {
-    // max-width: 854px;
     font-family: $default-font;
     font-weight: normal;
-    font-size: 36px;
+    font-size: var(--h3-size);
     line-height: 120%;
     text-transform: uppercase;
   }
@@ -158,15 +148,32 @@ $base-color: #000;
     font-size: var(--h4-size);
     line-height: 120%;
   }
-  &__logo {
+  &__mobile-logo-1,
+  &__mobile-logo-2,
+  &__mobile-logo-3 {
+    display: none;
+  }
+  &__logo-1,
+  &__logo-2,
+  &__logo-3 {
     margin-top: 40px;
-    width: 120px;
-    height: 120px;
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
+  }
+  &__logo-1 {
+    width: 120px;
+    height: 120px;
+  }
+  &__logo-2 {
+    width: 170px;
+    height: 91px;
+  }
+  &__logo-3 {
+    width: 105px;
+    height: 120px;
   }
   &__image {
     @include size(9);
@@ -178,6 +185,11 @@ $base-color: #000;
       position: absolute;
       right: 40px;
       bottom: 40px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
     &-logo-1 {
       width: 219px;
@@ -209,6 +221,9 @@ $base-color: #000;
     margin-bottom: 200px;
     display: grid;
     grid-template-columns: repeat(2, 50%);
+    &:last-child {
+      margin-bottom: 0;
+    }
     &-left {
       width: 50%;
     }
@@ -224,8 +239,60 @@ $base-color: #000;
     text-transform: uppercase;
   }
   &__link {
+    position: relative;
     display: flex;
     margin-top: 20px;
+    padding: 0;
+    border: none;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    transition: all 0.2s linear;
+    .circle-rotate {
+      transform-origin: center;
+      transform-box: fill-box;
+      transition: all 0.2s linear;
+    }
+    .eye {
+      position: absolute;
+      z-index: 2;
+      width: 60px;
+      height: 60px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .eye__outer,
+    .eye__inner,
+    .eye__lashes-up,
+    .eye__lashes-down {
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.5px;
+    }
+    .eye__iris {
+      fill: #fff;
+    }
+    .eye__lashes-down {
+      opacity: 0;
+    }
+    @keyframes blinkHide {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes blinkShow {
+      0% {
+        opacity: 1;
+      }
+      10% {
+        opacity: 0;
+      }
+    }
   }
   &__lists {
     list-style: none;
@@ -275,6 +342,9 @@ $base-color: #000;
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: repeat(5, 200px);
     align-items: center;
+  }
+  &__image-1 {
+    transition: fill 0.2s linear;
   }
   &__image-1 {
     width: 100px;
@@ -396,6 +466,28 @@ $base-color: #000;
       height: 120px;
       width: 100%;
     }
+    .form-field,
+    .form-textarea {
+      position: relative;
+    }
+    // & label {
+    //   display: none;
+    //   position: absolute;
+    //   top: 0;
+    //   transform: translateY(-50%);
+    //   left: 42px;
+    //   z-index: 1;
+    //   height: 34px;
+    //   padding: 6px 20px;
+    //   background-color: #000;
+    //   font-family: $default-font;
+    //   font-weight: normal;
+    //   font-size: 18px;
+    //   line-height: 120%;
+    //   text-transform: uppercase;
+    //   color: #fff;
+    //   transition: all 0.2s linear;
+    // }
     input.form-field__input,
     textarea {
       display: block;
@@ -449,7 +541,70 @@ $base-color: #000;
       box-shadow: none !important;
       outline: none;
     }
+    [data-field-input][data-status="field--inactive"]:not(#r) {
+      label {
+        display: none;
+      }
+    }
+    [data-field-input][data-status="field--active"]:not(#r) {
+      label {
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        left: 42px;
+        z-index: 1;
+        height: 34px;
+        padding: 6px 20px;
+        background-color: #000;
+        font-family: $default-font;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 120%;
+        text-transform: uppercase;
+        color: #fff;
+        transition: all 0.2s linear;
+      }
+    }
+    [data-field-input][data-status="field--success"]:not(#r) {
+      label {
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        left: 42px;
+        z-index: 1;
+        height: 34px;
+        padding: 6px 20px;
+        background-color: #92ac5a;
+        font-family: $default-font;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 120%;
+        text-transform: uppercase;
+        color: #fff;
+        transition: all 0.2s linear;
+      }
+      .form-field__input {
+        border: 1px solid #92ac5a;
+      }
+    }
     [data-field-input][data-status="field--error"]:not(#r) {
+      label {
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        left: 42px;
+        z-index: 1;
+        height: 34px;
+        padding: 6px 20px;
+        background-color: var(--color-red);
+        font-family: $default-font;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 120%;
+        text-transform: uppercase;
+        color: #fff;
+        transition: all 0.2s linear;
+      }
       .input-message {
         position: absolute;
         bottom: 2px;
@@ -498,7 +653,6 @@ $base-color: #000;
   &__checkbox {
     @include size(9);
     @include shift(0);
-
     .checkbox {
       margin-bottom: 40px;
       &:last-child {
@@ -537,6 +691,14 @@ $base-color: #000;
       background-size: 50% 50%;
       transition: color 0.3s linear;
     }
+    .span {
+      margin-top: 5px;
+      margin-left: 62px;
+      font-family: $default-font;
+      font-weight: normal;
+      font-size: var(--h4-size);
+      line-height: 120%;
+    }
     .custom-checkbox:checked + label::before {
       background-color: var(--color-red);
       background-image: url("../images/svg/check-mark.svg");
@@ -562,13 +724,6 @@ $base-color: #000;
         transform-box: fill-box;
         transition: all 0.2s linear;
       }
-      &:hover {
-        border: 1px solid #ffffff;
-        background-color: inherit;
-      }
-      &:hover .button-rotate {
-        animation: rotate-me 5s infinite linear;
-      }
     }
   }
 }
@@ -578,8 +733,6 @@ $base-color: #000;
   z-index: 3;
   bottom: 422px;
   right: 100px;
-  width: 132px;
-  height: 132px;
   svg {
     // width: 100%;
     // height: auto;
@@ -588,7 +741,300 @@ $base-color: #000;
       transition: fill 0.2s linear;
     }
   }
-  &:hover path:not(.arrow) {
-    fill: #fff;
+}
+@media (min-width: 1023px) {
+  .wow {
+    &__link {
+      &:hover {
+        border: 1px solid #ffffff;
+      }
+      &:hover circle {
+        fill: none;
+      }
+      &:hover .circle-rotate {
+        animation: rotate-me 7s infinite linear;
+      }
+      &:hover circle.eye__iris {
+        fill: #fff;
+      }
+      &:hover .eye__lashes-up,
+      &:hover .eye__inner,
+      &:hover .eye__iris {
+        animation: blinkHide 2s step-end infinite;
+      }
+
+      &:hover .eye__lashes-down {
+        animation: blinkShow 2s step-end infinite;
+      }
+    }
+  }
+  .partners {
+    &__image-1 {
+      &:hover {
+        svg {
+          path {
+            fill: #fff;
+          }
+        }
+      }
+    }
+  }
+  .communication {
+    &__button {
+      .button {
+        &:hover {
+          border: 1px solid #ffffff;
+          background-color: inherit;
+        }
+        &:hover .button-rotate {
+          animation: rotate-me 7s infinite linear;
+        }
+      }
+    }
+  }
+  .pageup {
+    &:hover path:not(.arrow) {
+      fill: #fff;
+    }
   }
 }
+
+@media (max-width: 1920px) {
+  .screen2 {
+    --v-padding: 150px;
+    padding-top: var(--v-padding);
+  }
+  .about,
+  .wow,
+  .partners,
+  .communication {
+    --v-padding: 250px;
+    padding-top: var(--v-padding);
+  }
+  .about {
+    &__text {
+      padding-right: 6%;
+    }
+  }
+  .wow {
+    &__text {
+      padding-right: 0;
+    }
+    &__wrapper {
+      margin-bottom: 150px;
+      &-left {
+        width: 395px;
+      }
+      &-right {
+        width: 360px;
+      }
+    }
+  }
+  .partners {
+    &__text {
+      padding-right: 9%;
+    }
+  }
+  .communication {
+    &__h3 {
+      padding-right: 35%;
+    }
+  }
+  .pageup {
+    bottom: 272px;
+  }
+}
+@media (max-width: 1440px) {
+  .title-with-star {
+    --svg-size: 60px;
+    margin-bottom: 30px;
+    svg {
+      margin-right: 0;
+    }
+  }
+  .main-screen {
+    &__call-popup {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 30px;
+    }
+  }
+  .screen2 {
+    --v-padding: 50px;
+    padding-top: var(--v-padding);
+  }
+  .about,
+  .wow,
+  .partners,
+  .communication {
+    --v-padding: 150px;
+    padding-top: var(--v-padding);
+  }
+  .wow {
+    &__title {
+      padding-right: 0;
+    }
+    &__logo-1,
+    &__logo-2,
+    &__logo-3 {
+      margin-top: 30px;
+    }
+    &__logo-1 {
+      width: 80px;
+      height: 80px;
+    }
+    &__logo-2 {
+      width: 131px;
+      height: 70px;
+    }
+    &__logo-3 {
+      width: 75px;
+      height: 86px;
+    }
+    &__image {
+      &-logo-1 {
+        width: 180px;
+        height: 36px;
+      }
+      &-logo-2,
+      &-logo-3 {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    &__wrapper {
+      margin-bottom: 100px;
+      margin-top: 30px;
+    }
+    &__link {
+      width: 130px;
+      height: 130px;
+      svg {
+        width: 130px;
+        height: 130px;
+      }
+    }
+  }
+  .partners {
+    &__text {
+      padding-right: 3%;
+    }
+  }
+  .communication {
+    .mt100 {
+      margin-top: 50px;
+    }
+    .mt70 {
+      margin-top: 30px;
+    }
+    &__h5 {
+      padding-right: 4%;
+    }
+    &__h3 {
+      padding-right: 39%;
+    }
+    &__form {
+      .form-field:not(#t),
+      .form-textarea {
+        height: 90px;
+      }
+      input.form-field__input,
+      textarea {
+        padding: 34px 50px;
+        margin-top: 20px;
+      }
+      .place-holder {
+        padding: 34px 50px;
+      }
+    }
+    &__checkbox {
+      .checkbox {
+        margin-bottom: 30px;
+      }
+      .custom-checkbox + label::before {
+        width: 24px;
+        height: 24px;
+        margin-right: 20px;
+      }
+      .span {
+        margin-left: 44px;
+      }
+    }
+    &__button {
+      margin-top: 50px;
+      .button {
+        width: 170px;
+        height: 170px;
+        svg {
+          width: 170px;
+          height: 170px;
+        }
+      }
+    }
+  }
+  .pageup {
+    right: 75px;
+    svg {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .screen2 {
+    --v-padding: 100px;
+    padding-top: var(--v-padding);
+    &__text {
+      max-width: 250px;
+    }
+  }
+  .about {
+    &__text {
+      padding-right: 0;
+    }
+    &__wrapper {
+      grid-template-columns: 100%;
+      row-gap: 30px;
+    }
+  }
+  .wow {
+    &__logo-1 {
+      display: none;
+    }
+    &__mobile-logo-1 {
+      display: flex;
+      @include shift-left(0);
+      @include size(3);
+      @include shift-right(0);
+      width: 80px;
+      height: 80px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    &__left {
+      @include size(8);
+      @include shift-right(1);
+    }
+    &__image {
+      margin-top: 30px;
+      @include shift-left(0);
+      @include size(12);
+      @include shift-right(0);
+      &-logo-1,
+      &-logo-2,
+      &-logo-3 {
+        right: 20px;
+        bottom: 20px;
+      }
+      &-logo-1 {
+        width: 180px;
+        height: 36px;
+      }
+    }
+  }
+}
+// @media (max-width: 576px) {
+// }
