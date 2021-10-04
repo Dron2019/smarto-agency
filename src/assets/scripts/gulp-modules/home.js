@@ -120,21 +120,44 @@ window.addEventListener('resize', () => {
 });
 
 const scrollBar = Scrollbar.init(document.querySelector('.page__inner'), {});
+
 scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
   const { y } = evt.offset;
-  const pageUp = document.querySelector('.pageup');
-  y > 1000 ? (pageUp.style.display = 'block') : (pageUp.style.display = 'none');
+  const sidePanel = document.querySelector('.sidepanel');
+  y > 1000 ? (sidePanel.style.display = 'block') : (sidePanel.style.display = 'none');
 });
 
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
       console.log(scrollBar);
-      scrollBar.scrollTo(0,0,1510);
+      scrollBar.scrollTo(0, 0, 1510);
     } else {
       window.scrollTo(0, 0);
     }
+  });
+});
+document.querySelectorAll('.pagedown').forEach(el => {
+  el.addEventListener('click', () => {
+    if (scrollBar !== undefined) {
+      console.log(scrollBar);
+      scrollBar.scrollIntoView(document.querySelector('[data-anchor="about"]'));
+    } else {
+      window.scrollTo(0, 0);
+    }
+  });
+});
+
+document.querySelectorAll('[data-href]').forEach(link => {
+  link.addEventListener('click', () => {
+    scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
+      // offsetLeft: 34,
+      offsetTop: 120,
+      // alignToTop: false,
+      // onlyScrollIfNeeded: true,
+      speed: 3000,
+    });
   });
 });
 

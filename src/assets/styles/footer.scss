@@ -1,41 +1,66 @@
 .footer {
-    --v-padding: 300px;
-    padding-top: var(--v-padding);
-    justify-content: space-between;
-    @include row-flex();
-    &__divider {
-        @include shift(3);
-        @include shift-right(0);
-        @include size(9);
-        height: 1px;
-        background-color: var(--color-gray);
+  --v-padding: 300px;
+  padding-top: var(--v-padding);
+  justify-content: space-between;
+  @include row-flex();
+  &__divider {
+    @include shift(3);
+    @include shift-right(0);
+    @include size(9);
+    height: 1px;
+    background-color: var(--color-gray);
+  }
+  &__content {
+    @include shift(3);
+    @include shift-right(0);
+    @include size(9);
+    padding: 41px 0;
+    display: flex;
+    align-items: center;
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: var(--h5-size);
+    line-height: 70%;
+    text-transform: uppercase;
+    img {
+      margin-right: 15px;
+      height: 40px;
+      width: 40px;
     }
-    &__content {
-        @include shift(3);
-        @include shift-right(0);
-        @include size(9);
-        padding: 41px 0;
-        display: flex;
-        align-items: center;
-        font-family: $default-font;
-        font-weight: normal;
-        font-size: var(--h5-size);
-        line-height: 70%;
-        text-transform: uppercase;
-        img {
-            margin-right: 15px;
-            height: 40px;
-            width: 40px;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
     }
+  }
 }
 @media (max-width: 1920px) {
-    .footer {
-        --v-padding: 150px;
-        padding-top: var(--v-padding);
+  .footer {
+    --v-padding: 150px;
+    padding-top: var(--v-padding);
+  }
+}
+@media (max-width: 992px) {
+  .footer {
+    &__content {
+      padding: 30px 0;
+      font-size: 16px;
     }
+  }
+}
+@media (max-width: 576px) {
+  .footer {
+    --v-padding: 100px;
+    &__divider {
+      @include shift-left(0);
+      @include shift-right(0);
+      @include size(12);
+    }
+    &__content {
+      @include shift-left(0);
+      @include shift-right(0);
+      @include size(12);
+      padding: 20px 0;
+      font-size: 12px;
+    }
+  }
 }

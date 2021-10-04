@@ -1,15 +1,25 @@
 -
-    var links = [
-    'Про нас',
-    'Портфоліо',
-    'Партнери',
-    'Контакти',
-    ];
+  var links = [
+  ['Про нас','about','nav-item'],
+  ['Портфоліо','portfolio','nav-item'],
+  ['Партнери','partners','nav-item'],
+  ['Контакти','contacts','nav-item'],
+  ];
 header.header
-    picture
-        source(media="(min-width: 1441px)" srcset="assets/images/logo.svg")
-        source(media="(max-width: 1440px)" srcset="assets/images/logo-mobile.svg")
-        img(src="assets/images/logo.svg")
-    .header__links
-        each val in links
-            a(href=val) #{val} 
+  picture
+    source(media="(min-width: 1441px)" srcset="assets/images/logo.svg")
+    source(media="(min-width: 577px)" srcset="assets/images/logo-mobile.svg")
+    source(media="(max-width: 576px)" srcset="assets/images/logo-mobile-320.svg")
+    img(src="assets/images/logo.svg")
+  .header__links
+    each val in links
+      a(href="#" data-href=val[1] class=val[2]) #{val[0]} 
+.container
+  input#toggle(type='checkbox')
+  label.toggle-container(for='toggle')
+    span.button.button-toggle
+  nav.nav
+    a.nav-item(href='') Про нас
+    a.nav-item(href='') Портфоліо
+    a.nav-item(href='') Партнери
+    a.nav-item(href='') Контакти

@@ -50,13 +50,20 @@ formsWithTel.forEach(form => {
         },
         $btnSubmit: $form.querySelector('[data-btn-submit]'),
         fields: {
-          // name: {
-          //   inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-name]') }),
-          //   rule: yup.string().required(i18next.t('required')).trim(),
-          //   defaultMessage: i18next.t('name'),
-          //   valid: false,
-          //   error: [],
-          // },
+          name: {
+            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-name]') }),
+            rule: yup.string().required(i18next.t('required')).trim(),
+            defaultMessage: i18next.t('name'),
+            valid: false,
+            error: [],
+          },
+          text: {
+            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-text]') }),
+            rule: yup.string().required(i18next.t('required')).trim(),
+            defaultMessage: i18next.t('name'),
+            valid: false,
+            error: [],
+          },
 
           phone: {
             inputWrapper: new SexyInput({

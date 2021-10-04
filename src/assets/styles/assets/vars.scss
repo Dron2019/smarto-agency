@@ -1,5 +1,5 @@
-$default-font: "HelveticaNeueCyr", sans-serif;
-$default-font2: "HelveticaNeueCyr", sans-serif;
+$default-font: 'HelveticaNeueCyr', sans-serif;
+$default-font2: 'HelveticaNeueCyr', sans-serif;
 
 $mc2: #ff554c;
 $mc3: #e5df06;
@@ -46,7 +46,7 @@ $gold: #cfa46e;
     --h5-size: 18px;
   }
 }
-@media (max-width: 1440px) {
+@media (max-width: 1500px) {
   :root {
     --h1-size: 64px;
     --h2-size: 36px;
@@ -59,6 +59,15 @@ $gold: #cfa46e;
     --header-h: 100px;
     --logo-w: 60px;
     --sliceFigure-big: 362px;
+  }
+}
+@media (max-width: 1200px) {
+  :root {
+    --h1-size: 61px;
+    --h2-size: 33px;
+    --h3-size: 22px;
+    // --h4-size: 18px;
+    // --h5-size: 16px;
   }
 }
 @media (max-width: 992px) {
@@ -81,14 +90,10 @@ $gold: #cfa46e;
     --h3-size: 18px;
     --h4-size: 14px;
     --h5-size: 12px;
-  }
-}
 
+    --page-side-fields: 20px;
 
-
-@media screen and (max-width: 576px) {
-  :root {
-    --header-h: 70px;
+    --header-h: 60px;
     --sliceFigure: 100px;
     --sliceFigure-big: 100px;
   }
