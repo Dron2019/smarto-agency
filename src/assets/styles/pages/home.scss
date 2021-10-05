@@ -1,21 +1,37 @@
 .container1 {
   position: relative;
 }
-.rotate-group {
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: rotate-me 7s infinite linear;
-}
-.eyebrows {
-  transform-origin: center;
-  transform-box: fill-box;
-}
+// .rotate-group {
+//   transform-origin: center;
+//   transform-box: fill-box;
+//   animation: rotate-me 7s infinite linear;
+// }
+// .eyebrows {
+//   transform-origin: center;
+//   transform-box: fill-box;
+// }
 @keyframes rotate-me {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(-360deg);
+  }
+}
+@keyframes blinkHide {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+}
+@keyframes blinkShow {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
   }
 }
 .title-with-star {
@@ -46,10 +62,10 @@ $base-color: #000;
 //     background-color: lighten($base-color, $i * 5%);
 //   }
 // }
-.page__inner {
-  width: 100vw;
-  height: 100vh;
-}
+// .page__inner {
+//   width: 100vw;
+//   height: 100vh;
+// }
 [data-canvas] {
   position: absolute;
   left: 0;
@@ -77,6 +93,62 @@ $base-color: #000;
   &__call-popup {
     margin-bottom: 40px;
     cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s linear;
+    .rotate-group {
+      transform-origin: center;
+      transform-box: fill-box;
+      transition: all 0.2s linear;
+    }
+    & .eye__lashes-up,
+    & .eye__inner,
+    & .eye__iris {
+      animation: blinkHide 2s step-end infinite;
+    }
+
+    & .eye__lashes-down {
+      animation: blinkShow 2s step-end infinite;
+    }
+    .eye {
+      position: absolute;
+      z-index: 2;
+      width: 60px;
+      height: 60px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .eye__outer,
+    .eye__inner,
+    .eye__lashes-up,
+    .eye__lashes-down {
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.5px;
+    }
+    .eye__iris {
+      fill: #fff;
+    }
+    .eye__lashes-down {
+      opacity: 0;
+    }
+    @keyframes blinkHide {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes blinkShow {
+      0% {
+        opacity: 1;
+      }
+      10% {
+        opacity: 0;
+      }
+    }
   }
   .h1 {
     max-width: 16ch;
@@ -272,23 +344,6 @@ $base-color: #000;
     .eye__lashes-down {
       opacity: 0;
     }
-    @keyframes blinkHide {
-      0% {
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes blinkShow {
-      0% {
-        opacity: 1;
-      }
-      10% {
-        opacity: 0;
-      }
-    }
   }
   &__lists {
     width: 41%;
@@ -387,24 +442,6 @@ $base-color: #000;
     .form-textarea {
       position: relative;
     }
-    // & label {
-    //   display: none;
-    //   position: absolute;
-    //   top: 0;
-    //   transform: translateY(-50%);
-    //   left: 42px;
-    //   z-index: 1;
-    //   height: 34px;
-    //   padding: 6px 20px;
-    //   background-color: #000;
-    //   font-family: $default-font;
-    //   font-weight: normal;
-    //   font-size: 18px;
-    //   line-height: 120%;
-    //   text-transform: uppercase;
-    //   color: #fff;
-    //   transition: all 0.2s linear;
-    // }
     input.form-field__input,
     textarea {
       display: block;
@@ -432,17 +469,17 @@ $base-color: #000;
       color: #000;
       text-transform: uppercase;
     }
-    .place-holder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 45px 62px;
-      border-radius: 0;
-      background-color: #fff;
-      cursor: text;
-    }
+    // .place-holder {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   padding: 45px 62px;
+    //   border-radius: 0;
+    //   background-color: #fff;
+    //   cursor: text;
+    // }
     textarea {
       padding: 46px 62px 0 62px;
       resize: none;
@@ -458,48 +495,53 @@ $base-color: #000;
       box-shadow: none !important;
       outline: none;
     }
+    [data-field-input][data-status="field--inactive"]:not(#r),
+    [data-field-input]:focus-within:not(#r),
+    [data-field-input][data-status="field--success"]:not(#r),
+    [data-field-input][data-status="field--error"]:not(#r) {
+      label {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        font-family: $default-font;
+        font-weight: normal;
+        line-height: 120%;
+        text-transform: uppercase;
+        transition: all 0.1s linear;
+      }
+    }
     [data-field-input][data-status="field--inactive"]:not(#r) {
       label {
-        display: none;
+        left: 0;
+        height: 100%;
+        padding: 45px 62px;
+        border-radius: 0;
+        cursor: text;
+        color: #000;
+        background-color: #fff;
+        font-size: var(--h4-size);
       }
     }
     [data-field-input]:focus-within:not(#r) {
       label {
-        position: absolute;
-        top: 0;
-        transform: translateY(-50%);
         left: 42px;
-        z-index: 1;
+        transform: translateY(-50%);
         height: 34px;
         padding: 6px 20px;
-        background-color: #000;
-        font-family: $default-font;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 120%;
-        text-transform: uppercase;
         color: #fff;
-        transition: all 0.2s linear;
-        display: block;
+        background-color: #000;
+        font-size: var(--h5-size);
       }
     }
     [data-field-input][data-status="field--success"]:not(#r) {
       label {
-        position: absolute;
-        top: 0;
         transform: translateY(-50%);
         left: 42px;
-        z-index: 1;
         height: 34px;
         padding: 6px 20px;
-        background-color: #92ac5a;
-        font-family: $default-font;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 120%;
-        text-transform: uppercase;
         color: #fff;
-        transition: all 0.2s linear;
+        background-color: #92ac5a;
+        font-size: var(--h5-size);
       }
       .form-field__input {
         border: 1px solid #92ac5a;
@@ -507,21 +549,13 @@ $base-color: #000;
     }
     [data-field-input][data-status="field--error"]:not(#r) {
       label {
-        position: absolute;
-        top: 0;
         transform: translateY(-50%);
         left: 42px;
-        z-index: 1;
         height: 34px;
         padding: 6px 20px;
-        background-color: var(--color-red);
-        font-family: $default-font;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 120%;
-        text-transform: uppercase;
         color: #fff;
-        transition: all 0.2s linear;
+        background-color: var(--color-red);
+        font-size: var(--h5-size);
       }
       .input-message {
         position: absolute;
@@ -529,7 +563,7 @@ $base-color: #000;
         left: 62px;
         font-family: $default-font;
         font-weight: normal;
-        font-size: 14px;
+        font-size: var(--h6-size);
         line-height: 120%;
         text-transform: uppercase;
         color: var(--color-red);
@@ -594,7 +628,7 @@ $base-color: #000;
       text-transform: uppercase;
       transition: color 0.3s linear;
       &:hover {
-        color: var(--color-gray);
+        color: #d2d2d2;
       }
     }
     .custom-checkbox + label::before {
@@ -650,6 +684,12 @@ $base-color: #000;
   bottom: 0;
   right: 132px;
   z-index: 3;
+  transition: all 0.2s linear;
+  .circle-rotate {
+    transform-origin: center;
+    transform-box: fill-box;
+    transition: all 0.2s linear;
+  }
   svg {
     path {
       transition: fill 0.2s linear;
@@ -660,6 +700,12 @@ $base-color: #000;
   position: absolute !important;
   bottom: var(--page-side-fields);
   right: var(--page-side-fields);
+  transition: all 0.2s linear;
+  .circle-rotate {
+    transform-origin: center;
+    transform-box: fill-box;
+    transition: all 0.2s linear;
+  }
   svg {
     path {
       transition: fill 0.2s linear;
@@ -688,6 +734,31 @@ $base-color: #000;
   }
 }
 @media (min-width: 1023px) {
+  .main-screen {
+    &__call-popup {
+      &:hover {
+        border: 1px solid #ffffff;
+      }
+      &:hover circle {
+        fill: none;
+      }
+      &:hover .rotate-group {
+        animation: rotate-me 7s infinite linear;
+      }
+      &:hover circle.eye__iris {
+        fill: #fff;
+      }
+      // &:hover .eye__lashes-up,
+      // &:hover .eye__inner,
+      // &:hover .eye__iris {
+      //   animation: blinkHide 2s step-end infinite;
+      // }
+
+      // &:hover .eye__lashes-down {
+      //   animation: blinkShow 2s step-end infinite;
+      // }
+    }
+  }
   .wow {
     &__link {
       &:hover {
@@ -707,7 +778,6 @@ $base-color: #000;
       &:hover .eye__iris {
         animation: blinkHide 2s step-end infinite;
       }
-
       &:hover .eye__lashes-down {
         animation: blinkShow 2s step-end infinite;
       }
@@ -772,6 +842,13 @@ $base-color: #000;
           animation: rotate-me 7s infinite linear;
         }
       }
+    }
+  }
+
+  .pageup,
+  .pagedown {
+    &:hover .circle-rotate {
+      animation: rotate-me 7s infinite linear;
     }
   }
   .pageup,
@@ -845,9 +922,11 @@ $base-color: #000;
   }
   .main-screen {
     &__call-popup {
-      width: 130px;
-      height: 130px;
       margin-bottom: 30px;
+      svg {
+        width: 130px;
+        height: 130px;
+      }
     }
   }
   .screen2 {
@@ -1054,6 +1133,21 @@ $base-color: #000;
       }
       .place-holder {
         padding: 34px 50px;
+      }
+      [data-field-input][data-status="field--inactive"]:not(#r) {
+        label {
+          padding: 34px 50px;
+        }
+      }
+      [data-field-input]:focus-within:not(#r) {
+        label {
+          padding: 6px 20px;
+        }
+      }
+      [data-field-input][data-status="field--error"]:not(#r) {
+        .input-message {
+          left: 50px;
+        }
       }
     }
     &__checkbox {
@@ -1346,6 +1440,29 @@ $base-color: #000;
         padding: 34px 30px;
       }
     }
+    [data-field-input][data-status="field--inactive"]:not(#r) {
+      label {
+        padding: 34px 30px;
+      }
+    }
+    [data-field-input]:focus-within:not(#r) {
+      label {
+        padding: 6px 20px;
+      }
+    }
+    [data-field-input]:focus-within:not(#r),
+    [data-field-input][data-status="field--success"]:not(#r),
+    [data-field-input][data-status="field--error"]:not(#r) {
+      label {
+        height: 30px;
+        left: 30px;
+      }
+    }
+    [data-field-input][data-status="field--error"]:not(#r) {
+      .input-message {
+        left: 30px;
+      }
+    }
     &__button .button {
       width: 160px;
       height: 160px;
@@ -1379,9 +1496,17 @@ $base-color: #000;
   }
   .main-screen {
     &__call-popup {
-      width: 100px;
-      height: 100px;
+      // width: 100px;
+      // height: 100px;
       margin-bottom: 20px;
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+      .eye {
+        width: 35px;
+        height: 35px;
+      }
     }
   }
   .screen2 {
@@ -1475,6 +1600,10 @@ $base-color: #000;
       svg {
         width: 100px;
         height: 100px;
+      }
+      .eye {
+        width: 35px;
+        height: 35px;
       }
     }
     &__lists {
@@ -1675,6 +1804,29 @@ $base-color: #000;
       .place-holder {
         padding: 22px 20px;
       }
+      [data-field-input][data-status="field--inactive"]:not(#r) {
+        label {
+          padding: 22px 20px;
+        }
+      }
+      [data-field-input]:focus-within:not(#r) {
+        label {
+          padding: 6px 20px;
+        }
+      }
+      [data-field-input]:focus-within:not(#r),
+      [data-field-input][data-status="field--success"]:not(#r),
+      [data-field-input][data-status="field--error"]:not(#r) {
+        label {
+          height: 25px;
+          left: 20px;
+        }
+      }
+      [data-field-input][data-status="field--error"]:not(#r) {
+        .input-message {
+          left: 20px;
+        }
+      }
       .form-star {
         right: 5px;
         top: 5px;
@@ -1717,7 +1869,7 @@ $base-color: #000;
     right: 50px;
   }
   .pagedown {
-    bottom: 130px;
+    display: none;
   }
   .sidepanel {
     width: 14px;

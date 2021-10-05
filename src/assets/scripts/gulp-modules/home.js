@@ -118,14 +118,43 @@ window.addEventListener('resize', () => {
   resizeTm = clearTimeout(resizeTm);
   resizeTm = setTimeout(onResize, 500);
 });
+// class HorizontalScrollPlugin extends Scrollbar.ScrollbarPlugin {
+//   static pluginName = "horizontalScroll";
+//   constructor() {
+//     super();
+//     this.pluginName = "horizontalScroll";
+//   }
+//   get pluginName() {
+//     return this.pluginName;
+//   }
+//   transformDelta(delta, fromEvent) {
+//     if (!/wheel/.test(fromEvent.type)) {
+//       return delta;
+//     }
 
+//     const { x, y } = delta;
+
+//     return {
+//       y: y,
+//       x: 0
+//     };
+//   }
+// }
+
+// Scrollbar.use(HorizontalScrollPlugin);
 const scrollBar = Scrollbar.init(document.querySelector('.page__inner'), {});
-
 scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
   y > 1000 ? (sidePanel.style.display = 'block') : (sidePanel.style.display = 'none');
+  if (y > 100) {
+    console.log('BIGGER');
+    document.querySelector('.header').style.backgroundColor = 'transparent';
+  } else {
+    console.log('SMALLER');
+    document.querySelector('.header').style.backgroundColor = '#000000';
+  }
 });
 
 document.querySelectorAll('.pageup').forEach(el => {
@@ -148,9 +177,9 @@ document.querySelectorAll('.pagedown').forEach(el => {
     }
   });
 });
-
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
+    document.querySelector('#toggle').checked = false;
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
       offsetTop: 120,
@@ -177,3 +206,8 @@ placeHolder.addEventListener('click', () => {
   placeHolder.style.display = 'none';
   input.focus();
 });
+
+
+if (window.matchMedia('(max-width: 992px)').matches) {
+  Scrollbar.destroyAll();
+}

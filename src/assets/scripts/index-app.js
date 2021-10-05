@@ -21,7 +21,7 @@ const locoScroll = new LocomotiveScroll({
   smoothMobile: false,
   inertia: 1.1,
 });
-locoScroll.destroy();
+// locoScroll.destroy();
 global.locoScroll = locoScroll;
 /*
  * smooth scroll end
@@ -110,3 +110,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.locoScroll.update();
 });
 /** ******************************* */
+
