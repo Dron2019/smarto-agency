@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
-import Scrollbar from 'smooth-scrollbar';
+// import Scrollbar from 'smooth-scrollbar';
+import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 // import * as THREE from 'three';
 
 const canvas = document.querySelector('[data-canvas]');
@@ -118,31 +119,35 @@ window.addEventListener('resize', () => {
   resizeTm = clearTimeout(resizeTm);
   resizeTm = setTimeout(onResize, 500);
 });
-// class HorizontalScrollPlugin extends Scrollbar.ScrollbarPlugin {
-//   static pluginName = "horizontalScroll";
-//   constructor() {
-//     super();
-//     this.pluginName = "horizontalScroll";
-//   }
-//   get pluginName() {
-//     return this.pluginName;
-//   }
-//   transformDelta(delta, fromEvent) {
-//     if (!/wheel/.test(fromEvent.type)) {
-//       return delta;
-//     }
+class DisableScrollPlugin extends ScrollbarPlugin {
+  static pluginName = 'disableScroll';
 
-//     const { x, y } = delta;
+  static defaultOptions = {
+    direction: null,
+  };
+  onRender(r) {
+    // console.log(r);
+  }
+  onUpdate() {
+    // console.log('scrollbar updated');
 
-//     return {
-//       y: y,
-//       x: 0
-//     };
-//   }
-// }
+    // this._update();
+  }
+  transformDelta(delta) {
+    if (this.options.direction) {
+      delta[this.options.direction] = 0;
+    }
 
-// Scrollbar.use(HorizontalScrollPlugin);
-const scrollBar = Scrollbar.init(document.querySelector('.page__inner'), {});
+    return { x: 0, y: delta.y};
+  }
+}
+
+SmoothScrollbar.use(DisableScrollPlugin);
+const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
+  overflowScroll: false,
+});
+scrollBar.track.xAxis.element.remove()
+
 scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
   const { y } = evt.offset;
