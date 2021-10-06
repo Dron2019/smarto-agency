@@ -125,14 +125,6 @@ class DisableScrollPlugin extends ScrollbarPlugin {
   static defaultOptions = {
     direction: null,
   };
-  onRender(r) {
-    // console.log(r);
-  }
-  onUpdate() {
-    // console.log('scrollbar updated');
-
-    // this._update();
-  }
   transformDelta(delta) {
     if (this.options.direction) {
       delta[this.options.direction] = 0;
@@ -144,10 +136,9 @@ class DisableScrollPlugin extends ScrollbarPlugin {
 
 SmoothScrollbar.use(DisableScrollPlugin);
 const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
-  overflowScroll: false,
 });
 scrollBar.track.xAxis.element.remove()
-
+console.log(scrollBar);
 scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
   const { y } = evt.offset;
@@ -205,14 +196,14 @@ footer.innerHTML +=
   '<img src="./assets/images/svg/footer-svg.svg" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;' +
   year();
 
-const placeHolder = document.querySelector('.place-holder');
+// const placeHolder = document.querySelector('.place-holder');
 const input = document.querySelector('.input-tel');
-placeHolder.addEventListener('click', () => {
-  placeHolder.style.display = 'none';
-  input.focus();
-});
+// placeHolder.addEventListener('click', () => {
+//   placeHolder.style.display = 'none';
+//   input.focus();
+// });
 
 
-if (window.matchMedia('(max-width: 992px)').matches) {
-  Scrollbar.destroyAll();
-}
+// if (window.matchMedia('(max-width: 992px)').matches) {
+//   Scrollbar.destroyAll();
+// }

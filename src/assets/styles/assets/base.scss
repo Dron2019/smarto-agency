@@ -32,13 +32,9 @@ body {
 .page__inner {
 	width: 100%;
 	overflow-x: hidden;
+	width: 100vw;
+	height: 100vh;
 }
-
-// body input, body textarea {
-// 	border: #666 1px solid;
-// 	outline: none;
-// }
-
 ::-webkit-scrollbar {
 	width: 2px;
 }
