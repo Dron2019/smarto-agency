@@ -17,9 +17,25 @@ const config = {
     }
     return acc;
   }, {}),
+  
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './assets/scripts/'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+    ],
   },
   // output: {
   //   filename: '[name].bundle.js',

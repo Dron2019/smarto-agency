@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
-import Scrollbar from 'smooth-scrollbar';
+// import Scrollbar from 'smooth-scrollbar';
+import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 // import * as THREE from 'three';
 
 const canvas = document.querySelector('[data-canvas]');
@@ -118,8 +119,34 @@ window.addEventListener('resize', () => {
   resizeTm = clearTimeout(resizeTm);
   resizeTm = setTimeout(onResize, 500);
 });
+class DisableScrollPlugin extends ScrollbarPlugin {
+  static pluginName = 'disableScroll';
 
-const scrollBar = Scrollbar.init(document.querySelector('.page__inner'), {});
+  static defaultOptions = {
+    direction: null,
+  };
+  onRender(r) {
+    // console.log(r);
+  }
+  onUpdate() {
+    // console.log('scrollbar updated');
+
+    // this._update();
+  }
+  transformDelta(delta) {
+    if (this.options.direction) {
+      delta[this.options.direction] = 0;
+    }
+
+    return { x: 0, y: delta.y};
+  }
+}
+
+SmoothScrollbar.use(DisableScrollPlugin);
+const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
+  overflowScroll: false,
+});
+scrollBar.track.xAxis.element.remove()
 
 scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
