@@ -17,7 +17,7 @@ $dark: #1a2941;
 $gold: #cfa46e;
 :root {
   --in: cubic-bezier(0.13, 0.81, 0.23, 0.96);
-  --header-h: 120px;
+  --header-h: 144px;
   --logo-w: 160px;
   --sliceFigure: 239px;
   --sliceFigure-big: 541px;
@@ -40,6 +40,7 @@ $gold: #cfa46e;
 }
 @media (max-width: 1920px) {
   :root {
+    --header-h: 124px;
     --h1-size: 96px;
     --h2-size: 48px;
     --h3-size: 36px;
@@ -89,7 +90,7 @@ $gold: #cfa46e;
 }
 @media (max-width: 576px) {
   :root {
-    --h1-size: 30px;
+    // --h1-size: 30px;
     --h2-size: 24px;
     --h3-size: 18px;
     --h4-size: 14px;
@@ -98,8 +99,18 @@ $gold: #cfa46e;
 
     --page-side-fields: 20px;
 
-    --header-h: 60px;
+    --header-h: 56px;
     --sliceFigure: 100px;
     --sliceFigure-big: 100px;
+  }
+}
+@media (max-width: 576px) {
+  :root {
+    --h1-size: 42px;
+  }
+}
+@media (max-width: 420px) {
+  :root {
+    --h1-size: 30px;
   }
 }

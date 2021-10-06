@@ -2,8 +2,9 @@ import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 // import * as THREE from 'three';
-
+gsap.registerPlugin(ScrollTrigger);
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
 let height = canvas.offsetHeight;
@@ -130,33 +131,70 @@ class DisableScrollPlugin extends ScrollbarPlugin {
       delta[this.options.direction] = 0;
     }
 
-    return { x: 0, y: delta.y};
+    return { x: 0, y: delta.y };
   }
 }
 
 SmoothScrollbar.use(DisableScrollPlugin);
-const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
+const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {});
+scrollBar.track.xAxis.element.remove();
+
+ScrollTrigger.scrollerProxy('.page__inner', {
+  scrollTop(value) {
+    if (arguments.length) {
+      scrollBar.scrollTop = value;
+    }
+    return scrollBar.scrollTop;
+  },
 });
-scrollBar.track.xAxis.element.remove()
+
+scrollBar.addListener(ScrollTrigger.update);
+
+ScrollTrigger.defaults({ scroller: document.querySelector('.page__inner') });
+
 console.log(scrollBar);
 scrollBar.addListener(evt => {
-  if (evt.offset > 1000) return;
+  if (evt.offset.y > 1500) return;
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
-  y > 1000 ? (sidePanel.style.display = 'block') : (sidePanel.style.display = 'none');
+  // if (y > 1000) {
+  //   sidePanel.style.display = 'block';
+  //   gsap.fromTo(sidePanel,
+  //     { xPercent: 150 },
+  //     { yPercent: -50, xPercent: 0 }
+  //   );
+  // } else {
+  //   gsap.timeline().fromTo(sidePanel,
+  //     { yPercent: -50, xPercent: 0 },
+  //     { xPercent: 150 },
+  //   )
+  //   .set(sidePanel, { display: 'none' })
+  //   // sidePanel.style.display = 'none'
+  // };
   if (y > 100) {
-    console.log('BIGGER');
     document.querySelector('.header').style.backgroundColor = 'transparent';
   } else {
-    console.log('SMALLER');
     document.querySelector('.header').style.backgroundColor = '#000000';
   }
 });
-
+ScrollTrigger.create({
+  trigger: '.wow',
+  onEnter: () => {
+    const sidePanel = document.querySelector('.sidepanel');
+    sidePanel.style.display = 'block';
+    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
+  },
+  onLeaveBack: () => {
+    const sidePanel = document.querySelector('.sidepanel');
+    gsap
+      .timeline()
+      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
+      .set(sidePanel, { display: 'none' });
+  },
+});
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
-      console.log(scrollBar);
       scrollBar.scrollTo(0, 0, 1510);
     } else {
       window.scrollTo(0, 0);
@@ -166,7 +204,6 @@ document.querySelectorAll('.pageup').forEach(el => {
 document.querySelectorAll('.pagedown').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
-      console.log(scrollBar);
       scrollBar.scrollIntoView(document.querySelector('[data-anchor="about"]'));
     } else {
       window.scrollTo(0, 0);
@@ -203,7 +240,54 @@ const input = document.querySelector('.input-tel');
 //   input.focus();
 // });
 
-
 // if (window.matchMedia('(max-width: 992px)').matches) {
 //   Scrollbar.destroyAll();
 // }
+
+document.querySelector('#toggle').addEventListener('change', function(evt) {
+  if (window.matchMedia('(min-width:992px)').matches) return;
+  if (this.checked) {
+    gsap.to('.page__inner', { y: '50vh' });
+  } else {
+    gsap.to('.page__inner', { y: 0 });
+  }
+});
+
+// $(document).ready(function(){
+//   $.fn.animate_Text = function() {
+//    var string = this.text();
+//    return this.each(function(){
+//     var $this = $(this);
+//     $this.html(string.replace(/./g, '<span class="new">$&</span>'));
+//     $this.find('span.new').each(function(i, el){
+//      setTimeout(function(){ $(el).addClass('div_opacity'); }, 40 * i);
+//     });
+//    });
+//   };
+//   $('#sidepanel__text').show();
+//   $('#sidepanel__text').animate_Text();
+//  });
+
+// single effect Start
+//  document.querySelectorAll('.sidepanel__text').forEach(text => {
+//   let mathM = text.textContent.split('');
+//   mathM = mathM.map(el => `<span style="display:inline-flex">${el}</span>`);
+//   text.innerHTML = mathM.join(' ');
+//   gsap.set(text.children, { overflow: 'hidden', });
+//   gsap.set(text.querySelectorAll('span>span'), { overflow: 'initial', display: 'inline-block' });
+//   let tl = gsap.timeline({
+//     paused: true,
+//     scrollTrigger: {
+//       trigger: text,
+//       once: true,
+//     }
+//   })
+//   .fromTo(
+//     text.querySelectorAll('span>span'),
+//   { yPercent: 100, skewY: 3 },
+//   { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' }
+//   );
+//   window.addEventListener('preloaderOff', () => tl.play())
+
+// })
+// single effect END

@@ -1,3 +1,9 @@
+.scrollbar-track {
+  background: transparent !important;
+}
+.scrollbar-thumb {
+  background: var(--color-red) !important;
+}
 .container1 {
   position: relative;
 }
@@ -85,7 +91,9 @@ $base-color: #000;
 
 .main-screen {
   // max-width: 40vw;
-  min-height: 100vh;
+  // min-height: 100vh;
+  height: 100vh;
+  min-height: -webkit-fill-available;
   padding-left: var(--page-side-fields);
   padding-right: var(--page-side-fields);
   padding-bottom: var(--page-side-fields);
@@ -107,6 +115,8 @@ $base-color: #000;
       transform-origin: center;
       transform-box: fill-box;
       transition: all 0.2s linear;
+      animation: rotate-me 7s infinite linear;
+      animation-play-state: paused;
     }
     & .eye__lashes-up,
     & .eye__inner,
@@ -328,6 +338,8 @@ $base-color: #000;
       transform-origin: center;
       transform-box: fill-box;
       transition: all 0.2s linear;
+      animation: rotate-me 7s infinite linear;
+      animation-play-state: paused;
     }
     .eye {
       position: absolute;
@@ -684,6 +696,8 @@ $base-color: #000;
         transform-origin: center;
         transform-box: fill-box;
         transition: all 0.2s linear;
+        animation: rotate-me 7s infinite linear;
+        animation-play-state: paused;
       }
     }
   }
@@ -698,6 +712,8 @@ $base-color: #000;
     transform-origin: center;
     transform-box: fill-box;
     transition: all 0.2s linear;
+    animation: rotate-me 7s infinite linear;
+    animation-play-state: paused;
   }
   svg {
     path {
@@ -714,6 +730,8 @@ $base-color: #000;
     transform-origin: center;
     transform-box: fill-box;
     transition: all 0.2s linear;
+    animation: rotate-me 7s infinite linear;
+    animation-play-state: paused;
   }
   svg {
     path {
@@ -725,7 +743,7 @@ $base-color: #000;
   display: none;
   position: fixed;
   top: 50%;
-  right: 15px;
+  right: 0;
   transform: translateY(-50%);
   z-index: 3;
   width: 28px;
@@ -737,10 +755,23 @@ $base-color: #000;
     line-height: 120%;
     text-transform: uppercase;
     transform: rotate(-90deg);
+    transform: translateX(-75px) translateY(-80px) rotate(-90deg);
   }
   &__svg {
     margin-top: 16px;
   }
+}
+
+#sidepanel__text .new {
+  opacity: 0;
+}
+#sidepanel__text .div_opacity {
+  -webkit-transition: opacity 0.1s ease-in-out;
+  -moz-transition: opacity 0.1s ease-in-out;
+  -ms-transition: opacity 0.1s ease-in-out;
+  -o-transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+  opacity: 1;
 }
 @media (min-width: 1023px) {
   .main-screen {
@@ -752,7 +783,8 @@ $base-color: #000;
         fill: none;
       }
       &:hover .rotate-group {
-        animation: rotate-me 7s infinite linear;
+        // animation: rotate-me 7s infinite linear;
+        animation-play-state: running;
       }
       &:hover circle.eye__iris {
         fill: #fff;
@@ -777,7 +809,8 @@ $base-color: #000;
         fill: none;
       }
       &:hover .circle-rotate {
-        animation: rotate-me 7s infinite linear;
+        // animation: rotate-me 7s infinite linear;
+        animation-play-state: running;
       }
       &:hover circle.eye__iris {
         fill: #fff;
@@ -848,9 +881,10 @@ $base-color: #000;
           background-color: inherit;
         }
         &:hover .button-rotate {
-          animation: rotate-me 7s infinite linear;
+          // animation: rotate-me 7s infinite linear;
+          animation-play-state: running;
         }
-        &:hover svg > path  {
+        &:hover svg > path {
           animation: transform-path 1s infinite linear;
         }
       }
@@ -859,7 +893,8 @@ $base-color: #000;
   .pageup,
   .pagedown {
     &:hover .circle-rotate {
-      animation: rotate-me 7s infinite linear;
+      // animation: rotate-me 7s infinite linear;
+      animation-play-state: running;
     }
   }
   .pageup,
@@ -1198,7 +1233,7 @@ $base-color: #000;
     }
   }
   .sidepanel {
-    width: 18px;
+    // width: 18px;
     &__svg {
       svg {
         width: 18px;
@@ -1883,8 +1918,10 @@ $base-color: #000;
     display: none;
   }
   .sidepanel {
-    width: 14px;
+    width: 18px;
     &__svg {
+      margin-top: 10px;
+      text-align: center;
       svg {
         width: 12px;
         height: 12px;
