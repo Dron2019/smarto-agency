@@ -34,6 +34,14 @@
     opacity: 0;
   }
 }
+@keyframes transform-path {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
 .title-with-star {
   position: relative;
   padding-left: 0;
@@ -670,6 +678,7 @@ $base-color: #000;
       height: 230px;
       border-radius: 50%;
       background-color: var(--color-red);
+      border: 1px solid var(--color-red);
       transition: all 0.2s linear;
       &-rotate {
         transform-origin: center;
@@ -840,6 +849,9 @@ $base-color: #000;
         }
         &:hover .button-rotate {
           animation: rotate-me 7s infinite linear;
+        }
+        &:hover svg > path  {
+          animation: transform-path 1s infinite linear;
         }
       }
     }
