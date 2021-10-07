@@ -2,9 +2,9 @@ import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-// import * as THREE from 'three';
-gsap.registerPlugin(ScrollTrigger);
+const loader = new THREE.ObjectLoader();
+
+
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
 let height = canvas.offsetHeight;
@@ -16,15 +16,49 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 renderer.setSize(width, height);
-renderer.setClearColor(0x000000, 0);
+renderer.setClearColor(0xffffff, 0);
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
 camera.position.set(0, 0, 350);
-
+window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
+
+loader.load(
+	// resource URL
+	"./static/model.json",
+
+	// onLoad callback
+	// Here the loaded data is assumed to be an object
+	function ( obj ) {
+		// Add the loaded object to the scene
+    console.log(obj.children[0].material);
+    obj.children[0].material =  new THREE.MeshBasicMaterial({
+      //   color: 0x0C50DB,
+      color: 0xff3300,
+    });
+    window.mesh = obj.children[0];
+    // setInterval(() => window.mesh.rotation.set(0,window.mesh.rotation.y+0.001,-10), 10)
+    obj.children[0].rotation.set(0,0,-41);
+    obj.children[0].vert = true;
+    // obj.color.setHex( 0xffffff );
+    // obj.children[0].material.color = new THREE.Color(0xf7b000);
+		scene.add( obj.children[0] );
+    console.log(scene);
+	},
+
+	// onProgress callback
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+
+	// onError callback
+	function ( err ) {
+		console.error( 'An error happened' );
+	}
+);
 const material = new THREE.LineBasicMaterial({
   //   color: 0x0C50DB,
   color: 0xfe0e55,
@@ -34,6 +68,7 @@ const radius = 100;
 const verticesAmount = 100;
 const verticalLinesAmount = 100;
 for (let j = 0; j < linesAmount; j++) {
+
   const index = j;
   const geometry = new THREE.Geometry();
   geometry.y = (index / linesAmount) * radius * 2;
@@ -45,28 +80,14 @@ for (let j = 0; j < linesAmount; j++) {
     geometry.vertices.push(vector);
   }
   const line = new THREE.Line(geometry, material);
+  line.hor = true;
   sphere.add(line);
-}
-for (let j = 0; j < linesAmount; j++) {
-  const index = j;
-  const geometry = new THREE.Geometry();
-  geometry.y = (index / linesAmount) * radius * 2;
-  for (let i = 0; i <= verticesAmount; i++) {
-    const vector = new THREE.Vector3();
-    vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
-    vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
-    vector._o = vector.clone();
-    geometry.vertices.push(vector);
-  }
-  const line = new THREE.Line(geometry, material);
-  sphere.add(line);
-  line.vert = true;
 }
 
 function updateVertices(a) {
   for (let j = 0; j < sphere.children.length; j++) {
     const line = sphere.children[j];
-    if (line.vert === true) break;
+    if (line.hor !== true) break;
     line.geometry.y += 0.1;
     if (line.geometry.y > radius * 2) {
       line.geometry.y = 0;
@@ -126,75 +147,40 @@ class DisableScrollPlugin extends ScrollbarPlugin {
   static defaultOptions = {
     direction: null,
   };
+  onRender(r) {
+    // console.log(r);
+  }
+  onUpdate() {
+    // console.log('scrollbar updated');
+
+    // this._update();
+  }
   transformDelta(delta) {
     if (this.options.direction) {
       delta[this.options.direction] = 0;
     }
 
-    return { x: 0, y: delta.y };
+    return { x: 0, y: delta.y};
   }
 }
 
 SmoothScrollbar.use(DisableScrollPlugin);
-const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {});
-scrollBar.track.xAxis.element.remove();
-
-ScrollTrigger.scrollerProxy('.page__inner', {
-  scrollTop(value) {
-    if (arguments.length) {
-      scrollBar.scrollTop = value;
-    }
-    return scrollBar.scrollTop;
-  },
+const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
+  overflowScroll: false,
 });
+scrollBar.track.xAxis.element.remove()
 
-scrollBar.addListener(ScrollTrigger.update);
-
-ScrollTrigger.defaults({ scroller: document.querySelector('.page__inner') });
-
-console.log(scrollBar);
 scrollBar.addListener(evt => {
-  if (evt.offset.y > 1500) return;
+  if (evt.offset > 1000) return;
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
-  // if (y > 1000) {
-  //   sidePanel.style.display = 'block';
-  //   gsap.fromTo(sidePanel,
-  //     { xPercent: 150 },
-  //     { yPercent: -50, xPercent: 0 }
-  //   );
-  // } else {
-  //   gsap.timeline().fromTo(sidePanel,
-  //     { yPercent: -50, xPercent: 0 },
-  //     { xPercent: 150 },
-  //   )
-  //   .set(sidePanel, { display: 'none' })
-  //   // sidePanel.style.display = 'none'
-  // };
-  if (y > 100) {
-    document.querySelector('.header').style.backgroundColor = 'transparent';
-  } else {
-    document.querySelector('.header').style.backgroundColor = '#000000';
-  }
+  y > 1000 ? (sidePanel.style.display = 'block') : (sidePanel.style.display = 'none');
 });
-ScrollTrigger.create({
-  trigger: '.wow',
-  onEnter: () => {
-    const sidePanel = document.querySelector('.sidepanel');
-    sidePanel.style.display = 'block';
-    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
-  },
-  onLeaveBack: () => {
-    const sidePanel = document.querySelector('.sidepanel');
-    gsap
-      .timeline()
-      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
-      .set(sidePanel, { display: 'none' });
-  },
-});
+
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
+      console.log(scrollBar);
       scrollBar.scrollTo(0, 0, 1510);
     } else {
       window.scrollTo(0, 0);
@@ -204,15 +190,16 @@ document.querySelectorAll('.pageup').forEach(el => {
 document.querySelectorAll('.pagedown').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
+      console.log(scrollBar);
       scrollBar.scrollIntoView(document.querySelector('[data-anchor="about"]'));
     } else {
       window.scrollTo(0, 0);
     }
   });
 });
+
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
-    document.querySelector('#toggle').checked = false;
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
       offsetTop: 120,
@@ -233,61 +220,9 @@ footer.innerHTML +=
   '<img src="./assets/images/svg/footer-svg.svg" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;' +
   year();
 
-// const placeHolder = document.querySelector('.place-holder');
+const placeHolder = document.querySelector('.place-holder');
 const input = document.querySelector('.input-tel');
-// placeHolder.addEventListener('click', () => {
-//   placeHolder.style.display = 'none';
-//   input.focus();
-// });
-
-// if (window.matchMedia('(max-width: 992px)').matches) {
-//   Scrollbar.destroyAll();
-// }
-
-document.querySelector('#toggle').addEventListener('change', function(evt) {
-  if (window.matchMedia('(min-width:992px)').matches) return;
-  if (this.checked) {
-    gsap.to('.page__inner', { y: '50vh' });
-  } else {
-    gsap.to('.page__inner', { y: 0 });
-  }
+placeHolder.addEventListener('click', () => {
+  placeHolder.style.display = 'none';
+  input.focus();
 });
-
-// $(document).ready(function(){
-//   $.fn.animate_Text = function() {
-//    var string = this.text();
-//    return this.each(function(){
-//     var $this = $(this);
-//     $this.html(string.replace(/./g, '<span class="new">$&</span>'));
-//     $this.find('span.new').each(function(i, el){
-//      setTimeout(function(){ $(el).addClass('div_opacity'); }, 40 * i);
-//     });
-//    });
-//   };
-//   $('#sidepanel__text').show();
-//   $('#sidepanel__text').animate_Text();
-//  });
-
-// single effect Start
-//  document.querySelectorAll('.sidepanel__text').forEach(text => {
-//   let mathM = text.textContent.split('');
-//   mathM = mathM.map(el => `<span style="display:inline-flex">${el}</span>`);
-//   text.innerHTML = mathM.join(' ');
-//   gsap.set(text.children, { overflow: 'hidden', });
-//   gsap.set(text.querySelectorAll('span>span'), { overflow: 'initial', display: 'inline-block' });
-//   let tl = gsap.timeline({
-//     paused: true,
-//     scrollTrigger: {
-//       trigger: text,
-//       once: true,
-//     }
-//   })
-//   .fromTo(
-//     text.querySelectorAll('span>span'),
-//   { yPercent: 100, skewY: 3 },
-//   { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' }
-//   );
-//   window.addEventListener('preloaderOff', () => tl.play())
-
-// })
-// single effect END
