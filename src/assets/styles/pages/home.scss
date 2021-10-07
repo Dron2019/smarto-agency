@@ -7,15 +7,6 @@
 .container1 {
   position: relative;
 }
-// .rotate-group {
-//   transform-origin: center;
-//   transform-box: fill-box;
-//   animation: rotate-me 7s infinite linear;
-// }
-// .eyebrows {
-//   transform-origin: center;
-//   transform-box: fill-box;
-// }
 @keyframes rotate-me {
   from {
     transform: rotate(0deg);
@@ -83,17 +74,14 @@ $base-color: #000;
 [data-canvas] {
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--header-h));
   z-index: 0;
 }
 
 .main-screen {
-  // max-width: 40vw;
-  // min-height: 100vh;
   height: 100vh;
-  min-height: -webkit-fill-available;
   padding-left: var(--page-side-fields);
   padding-right: var(--page-side-fields);
   padding-bottom: var(--page-side-fields);
@@ -110,11 +98,11 @@ $base-color: #000;
     margin-bottom: 40px;
     cursor: pointer;
     border-radius: 50%;
-    transition: all 0.2s linear;
+    // transition: all 0.2s linear;
     .rotate-group {
       transform-origin: center;
       transform-box: fill-box;
-      transition: all 0.2s linear;
+      // transition: all 0.2s linear;
       animation: rotate-me 7s infinite linear;
       animation-play-state: paused;
     }
@@ -307,7 +295,7 @@ $base-color: #000;
     @include size(9);
     @include shift(0);
     margin-top: 50px;
-    margin-bottom: 200px;
+    margin-bottom: var(--v-padding);
     display: grid;
     grid-template-columns: repeat(2, 50%);
     &:last-child {
@@ -333,11 +321,11 @@ $base-color: #000;
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    transition: all 0.2s linear;
+    // transition: all 0.2s linear;
     .circle-rotate {
       transform-origin: center;
       transform-box: fill-box;
-      transition: all 0.2s linear;
+      // transition: all 0.2s linear;
       animation: rotate-me 7s infinite linear;
       animation-play-state: paused;
     }
@@ -430,9 +418,9 @@ $base-color: #000;
     margin-top: 70px;
   }
   &__h5 {
-    @include shift(0);
-    @include size(3);
-    padding-right: 14%;
+    @include shift-left(0);
+    @include size(2);
+    @include shift-right(0);
     font-family: $default-font;
     font-weight: normal;
     font-size: var(--h5-size);
@@ -440,8 +428,9 @@ $base-color: #000;
     text-transform: uppercase;
   }
   &__h3 {
+    @include shift-left(1);
     @include size(9);
-    @include shift(0);
+    @include shift-right(0);
     font-family: $default-font;
     font-weight: normal;
     font-size: var(--h3-size);
@@ -450,8 +439,9 @@ $base-color: #000;
     padding-right: 46%;
   }
   &__form {
+    @include shift-left(1);
     @include size(9);
-    @include shift(0);
+    @include shift-right(0);
     .form-field:not(#t),
     .form-textarea {
       position: relative;
@@ -489,17 +479,6 @@ $base-color: #000;
       color: #000;
       text-transform: uppercase;
     }
-    // .place-holder {
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 100%;
-    //   padding: 45px 62px;
-    //   border-radius: 0;
-    //   background-color: #fff;
-    //   cursor: text;
-    // }
     textarea {
       padding: 46px 62px 0 62px;
       resize: none;
@@ -623,8 +602,9 @@ $base-color: #000;
     }
   }
   &__checkbox {
+    @include shift-left(1);
     @include size(9);
-    @include shift(0);
+    @include shift-right(0);
     .checkbox {
       margin-bottom: 40px;
       &:last-child {
@@ -691,11 +671,11 @@ $base-color: #000;
       border-radius: 50%;
       background-color: var(--color-red);
       border: 1px solid var(--color-red);
-      transition: all 0.2s linear;
+      // transition: all 0.2s linear;
       &-rotate {
         transform-origin: center;
         transform-box: fill-box;
-        transition: all 0.2s linear;
+        // transition: all 0.2s linear;
         animation: rotate-me 7s infinite linear;
         animation-play-state: paused;
       }
@@ -929,9 +909,6 @@ $base-color: #000;
     &__text {
       padding-right: 0;
     }
-    &__wrapper {
-      margin-bottom: 150px;
-    }
     &__h3 {
       width: 395px;
     }
@@ -1014,7 +991,6 @@ $base-color: #000;
       }
     }
     &__wrapper {
-      margin-bottom: 100px;
       margin-top: 30px;
     }
     &__link {
@@ -1160,9 +1136,6 @@ $base-color: #000;
     }
     .mt70 {
       margin-top: 30px;
-    }
-    &__h5 {
-      padding-right: 4%;
     }
     &__h3 {
       padding-right: 39%;
@@ -1475,6 +1448,20 @@ $base-color: #000;
     }
   }
   .communication {
+    &__h5 {
+      @include shift-left(0);
+      @include size(3);
+      @include shift-right(0);
+      width: calc(25% - 25px) !important;
+      margin-right: 0 !important;
+    }
+    &__h3,
+    &__form,
+    &__checkbox {
+      @include shift-left(0);
+      @include size(9);
+      @include shift-right(0);
+    }
     &__h5,
     &__h3 {
       padding-right: 0;
@@ -1526,6 +1513,9 @@ $base-color: #000;
   .page__inner {
     min-width: 320px;
     overflow-x: hidden;
+    height: 100%;
+    min-height: -webkit-fill-available; 
+    min-height: fill-available; 
   }
   .title-with-star {
     --svg-size: 50px;
@@ -1541,9 +1531,10 @@ $base-color: #000;
     }
   }
   .main-screen {
+    height: calc(100vh - var(--header-h) - var(--page-side-fields));
+    min-height: -webkit-fill-available;
+    min-height: fill-available; 
     &__call-popup {
-      // width: 100px;
-      // height: 100px;
       margin-bottom: 20px;
       svg {
         width: 100px;
@@ -1633,7 +1624,7 @@ $base-color: #000;
       @include shift-left(0);
       @include size(12);
       @include shift-right(0);
-      margin-bottom: 70px;
+      margin-bottom: calc(var(--v-padding) - 50px);
       margin-top: 14px;
     }
     &__h3 {
@@ -1825,9 +1816,9 @@ $base-color: #000;
       margin-top: 0;
     }
     &__h5 {
-      @include shift-left(0);
-      @include size(7);
-      @include shift-right(5);
+      margin-left: calc(0% + 25px) !important;
+      width: calc(58.33333% - 50px) !important;
+      margin-right: calc(41.66667% + 25px) !important;
       margin-bottom: 0;
     }
     &__h3 {
@@ -1926,6 +1917,166 @@ $base-color: #000;
         width: 12px;
         height: 12px;
       }
+    }
+  }
+}
+
+.overlay {
+  display: none;
+  // display: block;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.thanks-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1150px;
+  height: 740px;
+  padding: 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  background-color: var(--color-red);
+  &__close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+  }
+  &__title,
+  &__subtitle {
+    font-family: $default-font;
+    font-weight: 300;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+  &__title {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    font-size: var(--h1-size);
+  }
+  &__subtitle {
+    width: 364px;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: self-end;
+    font-size: var(--h3-size);
+  }
+  &__svg {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    align-self: self-end;
+    justify-self: flex-end;
+    cursor: pointer;
+    // transition: all 0.2s linear;
+    .button-rotate {
+      transform-origin: center;
+      transform-box: fill-box;
+      // transition: all 0.2s linear;
+      animation: rotate-me 7s infinite linear;
+      animation-play-state: paused;
+      animation-play-state: running;
+    }
+  }
+}
+// @media (min-width: 1023px) {
+//   .thanks-form {
+//     &__svg {
+//       &:hover .button-rotate {
+//         // animation: rotate-me 7s infinite linear;
+//         animation-play-state: running;
+//       }
+//       // &:hover .arrow {
+//       //   animation: transform-path 1s infinite linear;
+//       // }
+//     }
+//   }
+// }
+@media (max-width: 1600px) {
+  .thanks-form {
+    width: 810px;
+    height: 484px;
+    padding: 50px;
+    &__close {
+      top: 25px;
+      right: 25px;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    &__subtitle {
+      width: 280px;
+    }
+    &__svg {
+      width: 170px;
+      height: 170px;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .thanks-form {
+    width: calc(100% - var(--page-side-fields) - var(--page-side-fields));
+    height: 520px;
+    &__close {
+      top: 20px;
+      right: 20px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__subtitle {
+      width: 220px;
+    }
+    &__svg {
+      width: 160px;
+      height: 160px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .thanks-form {
+    height: auto;
+    padding: 10px 10px 20px 10px;
+    grid-template-columns: 100%;
+    &__close {
+      top: 10px;
+      right: 10px;
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    &__title {
+      width: 240px;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    &__subtitle {
+      margin-top: 10px;
+      align-self: flex-start;
+      justify-self: flex-start;
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      width: 100%;
+    }
+    &__svg {
+      margin-top: 20px;
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+      align-self: flex-start;
+      justify-self: flex-start;
+      width: 100px;
+      height: 100px;
     }
   }
 }

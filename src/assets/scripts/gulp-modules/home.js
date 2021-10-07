@@ -25,9 +25,13 @@ camera.position.set(0, 0, 350);
 
 const sphere = new THREE.Group();
 scene.add(sphere);
+if (window.matchMedia('(max-width: 575px)').matches) {
+  const scaleFactor = 0.65;
+  sphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+}
 const material = new THREE.LineBasicMaterial({
   //   color: 0x0C50DB,
-  color: 0xfe0e55,
+  color: 0xff3300,
 });
 const linesAmount = 18;
 const radius = 100;
@@ -47,21 +51,21 @@ for (let j = 0; j < linesAmount; j++) {
   const line = new THREE.Line(geometry, material);
   sphere.add(line);
 }
-for (let j = 0; j < linesAmount; j++) {
-  const index = j;
-  const geometry = new THREE.Geometry();
-  geometry.y = (index / linesAmount) * radius * 2;
-  for (let i = 0; i <= verticesAmount; i++) {
-    const vector = new THREE.Vector3();
-    vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
-    vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
-    vector._o = vector.clone();
-    geometry.vertices.push(vector);
-  }
-  const line = new THREE.Line(geometry, material);
-  sphere.add(line);
-  line.vert = true;
-}
+// for (let j = 0; j < linesAmount; j++) {
+//   const index = j;
+//   const geometry = new THREE.Geometry();
+//   geometry.y = (index / linesAmount) * radius * 2;
+//   for (let i = 0; i <= verticesAmount; i++) {
+//     const vector = new THREE.Vector3();
+//     vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
+//     vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
+//     vector._o = vector.clone();
+//     geometry.vertices.push(vector);
+//   }
+//   const line = new THREE.Line(geometry, material);
+//   sphere.add(line);
+//   line.vert = true;
+// }
 
 function updateVertices(a) {
   for (let j = 0; j < sphere.children.length; j++) {
@@ -75,8 +79,7 @@ function updateVertices(a) {
     for (let i = 0; i <= verticesAmount; i++) {
       const vector = line.geometry.vertices[i];
       const ratio =
-        noise.simplex3(vector.x * 0.009, vector.z * 0.009 + a * 0.0006, line.geometry.y * 0.009) *
-        1;
+        noise.simplex3(vector.x * 0.009, vector.z * 0.04 + a * 0.005, line.geometry.y * 0.04) * 1;
       vector.copy(vector._o);
       vector.multiplyScalar(radiusHeight + ratio);
       vector.y = line.geometry.y - radius;
@@ -171,11 +174,11 @@ scrollBar.addListener(evt => {
   //   .set(sidePanel, { display: 'none' })
   //   // sidePanel.style.display = 'none'
   // };
-  if (y > 100) {
-    document.querySelector('.header').style.backgroundColor = 'transparent';
-  } else {
-    document.querySelector('.header').style.backgroundColor = '#000000';
-  }
+  // if (y > 100) {
+  //   document.querySelector('.header').style.backgroundColor = 'transparent';
+  // } else {
+  //   document.querySelector('.header').style.backgroundColor = '#000000';
+  // }
 });
 ScrollTrigger.create({
   trigger: '.wow',
@@ -212,7 +215,7 @@ document.querySelectorAll('.pagedown').forEach(el => {
 });
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
-    document.querySelector('#toggle').checked = false;
+    disaptchChangeMenuState();
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
       offsetTop: 120,
@@ -245,14 +248,26 @@ const input = document.querySelector('.input-tel');
 // }
 
 document.querySelector('#toggle').addEventListener('change', function(evt) {
-  if (window.matchMedia('(min-width:992px)').matches) return;
-  if (this.checked) {
-    gsap.to('.page__inner', { y: '50vh' });
-  } else {
-    gsap.to('.page__inner', { y: 0 });
-  }
+  handleContentTransformOnMobMenu(evt);
 });
 
+function disaptchChangeMenuState() {
+  const mobMenu = document.querySelector('#toggle');
+  if (mobMenu.checked) {
+    mobMenu.checked = false;
+    mobMenu.dispatchEvent(new Event('change'));
+  }
+}
+
+function handleContentTransformOnMobMenu(evt) {
+  if (window.matchMedia('(min-width:992px)').matches) return;
+  console.log('i change checkbox', document.querySelector('#toggle').checked);
+  if (document.querySelector('#toggle').checked) {
+    gsap.to('.page__inner', { y: '30vh', filter: 'brightness(0.5)' });
+  } else {
+    gsap.to('.page__inner', { y: 0, filter: '' });
+  }
+}
 // $(document).ready(function(){
 //   $.fn.animate_Text = function() {
 //    var string = this.text();
@@ -291,3 +306,12 @@ document.querySelector('#toggle').addEventListener('change', function(evt) {
 
 // })
 // single effect END
+
+// document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
+//   console.log(target);
+//   const mobMenu = document.querySelector('#toggle');
+//   if (mobMenu.checked) {
+//     mobMenu.checked = false;
+//     mobMenu.dispatchEvent(new Event('change'));
+//   }
+// });

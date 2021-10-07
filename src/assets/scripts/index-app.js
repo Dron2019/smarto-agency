@@ -46,7 +46,13 @@ formsWithTel.forEach(form => {
         $form,
         showSuccessMessage: false,
         successAction: () => {
-          window.location.href = 'message';
+          const tl = gsap.timeline({paused: true})
+            .set('[data-thank-page]', { display: 'block' })
+            .fromTo('[data-thank-page]', { autoAlpha: 0 }, { autoAlpha: 1 });
+            tl.play();
+            document.querySelector('.thanks-form__close').onclick = () => {
+              tl.reverse();
+          }
         },
         $btnSubmit: $form.querySelector('[data-btn-submit]'),
         fields: {

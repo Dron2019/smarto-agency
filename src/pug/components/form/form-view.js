@@ -85,7 +85,6 @@ const renderForm = (form, elements, toast) => {
         'send',
       );
       break;
-
     default:
       throw Error(`Unknown form status: ${form.status}`);
   }
