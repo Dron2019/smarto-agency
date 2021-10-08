@@ -26,7 +26,7 @@ camera.position.set(0, 0, 350);
 const sphere = new THREE.Group();
 scene.add(sphere);
 if (window.matchMedia('(max-width: 575px)').matches) {
-  const scaleFactor = 0.65;
+  const scaleFactor = 0.8;
   sphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
 }
 const material = new THREE.LineBasicMaterial({
@@ -37,6 +37,7 @@ const linesAmount = 18;
 const radius = 100;
 const verticesAmount = 100;
 const verticalLinesAmount = 100;
+
 for (let j = 0; j < linesAmount; j++) {
   const index = j;
   const geometry = new THREE.Geometry();
@@ -78,8 +79,7 @@ function updateVertices(a) {
     const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
     for (let i = 0; i <= verticesAmount; i++) {
       const vector = line.geometry.vertices[i];
-      const ratio =
-        noise.simplex3(vector.x * 0.009, vector.z * 0.04 + a * 0.005, line.geometry.y * 0.04) * 1;
+      var ratio = noise.simplex3(vector.x*0.009, vector.z*0.009 + a*0.0006, line.geometry.y*0.009) * 15;
       vector.copy(vector._o);
       vector.multiplyScalar(radiusHeight + ratio);
       vector.y = line.geometry.y - radius;
@@ -88,6 +88,7 @@ function updateVertices(a) {
   }
 }
 
+sphere.rotation.x = 0.75;
 function render(a) {
   requestAnimationFrame(render);
   updateVertices(a);
@@ -109,10 +110,12 @@ function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
   gsap.to(sphere.rotation, 0.2, {
-    x: mouse.y * 1,
+    x: 0.75,
     z: mouse.x * 0.1,
     ease: 'power1.inOut',
   });
+
+  console.log( mouse.y * 0.1);
   console.log('ff');
 }
 

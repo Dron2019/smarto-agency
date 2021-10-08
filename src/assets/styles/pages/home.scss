@@ -76,8 +76,13 @@ $base-color: #000;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: calc(100% - var(--header-h));
+  height: 100%;
   z-index: 0;
+  @include to(575px) {
+    top: var(--header-h);
+    bottom: auto;
+    height: calc(100% - var(--header-h) - 120px);
+  }
 }
 
 .main-screen {
@@ -506,7 +511,8 @@ $base-color: #000;
         font-weight: normal;
         line-height: 120%;
         text-transform: uppercase;
-        transition: all 0.1s linear;
+        transition: transform 0.3s ease-out;
+        -webkit-transition: transform 0.3s ease-out;
       }
     }
     [data-field-input][data-status="field--inactive"]:not(#r) {
@@ -517,9 +523,12 @@ $base-color: #000;
         border-radius: 0;
         cursor: text;
         color: #000;
-        background-color: #fff;
+        background-color: transparent;
         font-size: var(--h4-size);
       }
+    }
+    [data-status="field--inactive"] input:not(:focus) {
+      color: transparent;
     }
     [data-field-input]:focus-within:not(#r) {
       label {
@@ -623,7 +632,8 @@ $base-color: #000;
       font-family: $default-font;
       font-weight: normal;
       font-size: var(--h4-size);
-      line-height: 120%;
+      // line-height: 120%;
+      line-height: 135%;
       cursor: pointer;
       text-transform: uppercase;
       transition: color 0.3s linear;
@@ -1514,8 +1524,8 @@ $base-color: #000;
     min-width: 320px;
     overflow-x: hidden;
     // height: 100%;
-    min-height: -webkit-fill-available; 
-    min-height: fill-available; 
+    min-height: -webkit-fill-available;
+    min-height: fill-available;
   }
   .title-with-star {
     --svg-size: 50px;
@@ -1532,28 +1542,29 @@ $base-color: #000;
   }
   .main-screen {
     height: calc(100vh - var(--header-h) - var(--page-side-fields));
-    min-height: -webkit-fill-available;
-    min-height: fill-available; 
     &__call-popup {
       margin-bottom: 20px;
       svg {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
       }
       .eye {
-        width: 35px;
-        height: 35px;
+        width: 50px;
+        height: 50px;
       }
     }
   }
   .screen2 {
-    --v-padding: 80px;
+    --v-padding: 50px;
     &__text {
       max-width: 100%;
       @include shift-left(0);
       @include size(9);
       @include shift-right(3);
     }
+  }
+  .about {
+    --v-padding: 100px;
   }
   .about {
     &__text {
@@ -1609,8 +1620,8 @@ $base-color: #000;
       }
       &-logo-2,
       &-logo-3 {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
       }
     }
     &__year {
@@ -1632,15 +1643,15 @@ $base-color: #000;
     }
     &__link {
       margin-top: 30px;
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
       svg {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
       }
       .eye {
-        width: 35px;
-        height: 35px;
+        width: 50px;
+        height: 50px;
       }
     }
     &__lists {
@@ -1831,7 +1842,7 @@ $base-color: #000;
       @include shift-left(0);
       @include size(12);
       @include shift-right(0);
-      margin-bottom: 30px;
+      margin-bottom: 0;
       .form-field:not(#t),
       .form-textarea {
         height: 60px;
@@ -1886,11 +1897,11 @@ $base-color: #000;
       @include shift-right(7);
       margin-top: 20px;
       .button {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
         svg {
-          width: 100px;
-          height: 100px;
+          width: 140px;
+          height: 140px;
         }
       }
     }
@@ -1898,8 +1909,8 @@ $base-color: #000;
   .pageup,
   .pagedown {
     svg {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
     }
   }
   .pageup {
@@ -1910,17 +1921,36 @@ $base-color: #000;
   }
   .sidepanel {
     width: 18px;
+    mix-blend-mode: difference;
+    &__text {
+      font-size: 20px;
+    }
     &__svg {
       margin-top: 10px;
       text-align: center;
       svg {
-        width: 12px;
-        height: 12px;
+        width: 18px;
+        height: 18px;
       }
     }
   }
 }
-
+@media (max-width: 350px) {
+  .main-screen {
+    height: calc(100vh - var(--header-h) - var(--page-side-fields));
+    &__call-popup {
+      margin-bottom: 20px;
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+      .eye {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+}
 .overlay {
   display: none;
   // display: block;
@@ -2075,8 +2105,8 @@ $base-color: #000;
       grid-row: 3 / 4;
       align-self: flex-start;
       justify-self: flex-start;
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
     }
   }
 }
