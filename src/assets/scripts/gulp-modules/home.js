@@ -2,6 +2,9 @@ import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+// import * as THREE from 'three';
+gsap.registerPlugin(ScrollTrigger);
 import headerLogo3d from '../modules/3d-header-logo'
 
 headerLogo3d('[data-canvas-logo]');
