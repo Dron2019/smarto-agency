@@ -215,6 +215,7 @@ document.querySelectorAll('.pagedown').forEach(el => {
 });
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
+    console.log('fff');
     disaptchChangeMenuState();
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
@@ -307,11 +308,11 @@ function handleContentTransformOnMobMenu(evt) {
 // })
 // single effect END
 
-// document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
-//   console.log(target);
-//   const mobMenu = document.querySelector('#toggle');
-//   if (mobMenu.checked) {
-//     mobMenu.checked = false;
-//     mobMenu.dispatchEvent(new Event('change'));
-//   }
-// });
+document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
+  console.log(target);
+  const mobMenu = document.querySelector('#toggle');
+  if (mobMenu.checked) {
+    mobMenu.checked = false;
+    mobMenu.dispatchEvent(new Event('change'));
+  }
+});
