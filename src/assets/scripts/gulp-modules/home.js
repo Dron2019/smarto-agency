@@ -2,9 +2,9 @@ import gsap from 'gsap';
 import { langDetect } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
-const loader = new THREE.ObjectLoader();
+import headerLogo3d from '../modules/3d-header-logo'
 
-
+headerLogo3d('[data-canvas-logo]');
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
 let height = canvas.offsetHeight;
@@ -21,44 +21,10 @@ renderer.setClearColor(0xffffff, 0);
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-camera.position.set(0, 0, 350);
+camera.position.set(20, 20, 350);
 window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
-
-loader.load(
-	// resource URL
-	"./static/model.json",
-
-	// onLoad callback
-	// Here the loaded data is assumed to be an object
-	function ( obj ) {
-		// Add the loaded object to the scene
-    console.log(obj.children[0].material);
-    obj.children[0].material =  new THREE.MeshBasicMaterial({
-      //   color: 0x0C50DB,
-      color: 0xff3300,
-    });
-    window.mesh = obj.children[0];
-    // setInterval(() => window.mesh.rotation.set(0,window.mesh.rotation.y+0.001,-10), 10)
-    obj.children[0].rotation.set(0,0,-41);
-    obj.children[0].vert = true;
-    // obj.color.setHex( 0xffffff );
-    // obj.children[0].material.color = new THREE.Color(0xf7b000);
-		scene.add( obj.children[0] );
-    console.log(scene);
-	},
-
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-);
 const material = new THREE.LineBasicMaterial({
   //   color: 0x0C50DB,
   color: 0xfe0e55,
@@ -95,9 +61,7 @@ function updateVertices(a) {
     const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
     for (let i = 0; i <= verticesAmount; i++) {
       const vector = line.geometry.vertices[i];
-      const ratio =
-        noise.simplex3(vector.x * 0.009, vector.z * 0.009 + a * 0.0006, line.geometry.y * 0.009) *
-        1;
+      var ratio = noise.simplex3(vector.x*0.009, vector.z*0.009 + a*0.0006, line.geometry.y*0.009) * 15;
       vector.copy(vector._o);
       vector.multiplyScalar(radiusHeight + ratio);
       vector.y = line.geometry.y - radius;
