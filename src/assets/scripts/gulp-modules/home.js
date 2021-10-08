@@ -25,14 +25,19 @@ camera.position.set(20, 20, 350);
 window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
+if (window.matchMedia('(max-width: 575px)').matches) {
+  const scaleFactor = 0.8;
+  sphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+}
 const material = new THREE.LineBasicMaterial({
   //   color: 0x0C50DB,
-  color: 0xfe0e55,
+  color: 0xff3300,
 });
 const linesAmount = 18;
 const radius = 100;
 const verticesAmount = 100;
 const verticalLinesAmount = 100;
+
 for (let j = 0; j < linesAmount; j++) {
 
   const index = j;
@@ -49,6 +54,21 @@ for (let j = 0; j < linesAmount; j++) {
   line.hor = true;
   sphere.add(line);
 }
+// for (let j = 0; j < linesAmount; j++) {
+//   const index = j;
+//   const geometry = new THREE.Geometry();
+//   geometry.y = (index / linesAmount) * radius * 2;
+//   for (let i = 0; i <= verticesAmount; i++) {
+//     const vector = new THREE.Vector3();
+//     vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
+//     vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
+//     vector._o = vector.clone();
+//     geometry.vertices.push(vector);
+//   }
+//   const line = new THREE.Line(geometry, material);
+//   sphere.add(line);
+//   line.vert = true;
+// }
 
 function updateVertices(a) {
   for (let j = 0; j < sphere.children.length; j++) {
@@ -70,6 +90,7 @@ function updateVertices(a) {
   }
 }
 
+sphere.rotation.x = 0.75;
 function render(a) {
   requestAnimationFrame(render);
   updateVertices(a);
@@ -91,10 +112,12 @@ function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
   gsap.to(sphere.rotation, 0.2, {
-    x: mouse.y * 1,
+    x: 0.75,
     z: mouse.x * 0.1,
     ease: 'power1.inOut',
   });
+
+  console.log( mouse.y * 0.1);
   console.log('ff');
 }
 
@@ -138,7 +161,40 @@ scrollBar.addListener(evt => {
   if (evt.offset > 1000) return;
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
-  y > 1000 ? (sidePanel.style.display = 'block') : (sidePanel.style.display = 'none');
+  // if (y > 1000) {
+  //   sidePanel.style.display = 'block';
+  //   gsap.fromTo(sidePanel,
+  //     { xPercent: 150 },
+  //     { yPercent: -50, xPercent: 0 }
+  //   );
+  // } else {
+  //   gsap.timeline().fromTo(sidePanel,
+  //     { yPercent: -50, xPercent: 0 },
+  //     { xPercent: 150 },
+  //   )
+  //   .set(sidePanel, { display: 'none' })
+  //   // sidePanel.style.display = 'none'
+  // };
+  // if (y > 100) {
+  //   document.querySelector('.header').style.backgroundColor = 'transparent';
+  // } else {
+  //   document.querySelector('.header').style.backgroundColor = '#000000';
+  // }
+});
+ScrollTrigger.create({
+  trigger: '.wow',
+  onEnter: () => {
+    const sidePanel = document.querySelector('.sidepanel');
+    sidePanel.style.display = 'block';
+    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
+  },
+  onLeaveBack: () => {
+    const sidePanel = document.querySelector('.sidepanel');
+    gsap
+      .timeline()
+      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
+      .set(sidePanel, { display: 'none' });
+  },
 });
 
 document.querySelectorAll('.pageup').forEach(el => {
@@ -164,6 +220,8 @@ document.querySelectorAll('.pagedown').forEach(el => {
 
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
+    console.log('fff');
+    disaptchChangeMenuState();
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
       offsetTop: 120,
@@ -186,7 +244,80 @@ footer.innerHTML +=
 
 const placeHolder = document.querySelector('.place-holder');
 const input = document.querySelector('.input-tel');
-placeHolder.addEventListener('click', () => {
-  placeHolder.style.display = 'none';
-  input.focus();
+// placeHolder.addEventListener('click', () => {
+//   placeHolder.style.display = 'none';
+//   input.focus();
+// });
+
+// if (window.matchMedia('(max-width: 992px)').matches) {
+//   Scrollbar.destroyAll();
+// }
+
+document.querySelector('#toggle').addEventListener('change', function(evt) {
+  handleContentTransformOnMobMenu(evt);
+});
+
+function disaptchChangeMenuState() {
+  const mobMenu = document.querySelector('#toggle');
+  if (mobMenu.checked) {
+    mobMenu.checked = false;
+    mobMenu.dispatchEvent(new Event('change'));
+  }
+}
+
+function handleContentTransformOnMobMenu(evt) {
+  if (window.matchMedia('(min-width:992px)').matches) return;
+  console.log('i change checkbox', document.querySelector('#toggle').checked);
+  if (document.querySelector('#toggle').checked) {
+    gsap.to('.page__inner', { y: '30vh', filter: 'brightness(0.5)' });
+  } else {
+    gsap.to('.page__inner', { y: 0, filter: '' });
+  }
+}
+// $(document).ready(function(){
+//   $.fn.animate_Text = function() {
+//    var string = this.text();
+//    return this.each(function(){
+//     var $this = $(this);
+//     $this.html(string.replace(/./g, '<span class="new">$&</span>'));
+//     $this.find('span.new').each(function(i, el){
+//      setTimeout(function(){ $(el).addClass('div_opacity'); }, 40 * i);
+//     });
+//    });
+//   };
+//   $('#sidepanel__text').show();
+//   $('#sidepanel__text').animate_Text();
+//  });
+
+// single effect Start
+//  document.querySelectorAll('.sidepanel__text').forEach(text => {
+//   let mathM = text.textContent.split('');
+//   mathM = mathM.map(el => `<span style="display:inline-flex">${el}</span>`);
+//   text.innerHTML = mathM.join(' ');
+//   gsap.set(text.children, { overflow: 'hidden', });
+//   gsap.set(text.querySelectorAll('span>span'), { overflow: 'initial', display: 'inline-block' });
+//   let tl = gsap.timeline({
+//     paused: true,
+//     scrollTrigger: {
+//       trigger: text,
+//       once: true,
+//     }
+//   })
+//   .fromTo(
+//     text.querySelectorAll('span>span'),
+//   { yPercent: 100, skewY: 3 },
+//   { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' }
+//   );
+//   window.addEventListener('preloaderOff', () => tl.play())
+
+// })
+// single effect END
+
+document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
+  console.log(target);
+  const mobMenu = document.querySelector('#toggle');
+  if (mobMenu.checked) {
+    mobMenu.checked = false;
+    mobMenu.dispatchEvent(new Event('change'));
+  }
 });

@@ -9,9 +9,11 @@
   align-content: center;
   align-items: flex-end;
   justify-content: space-between;
-  background-color: var(--color-black);
   z-index: 100;
   pointer-events: none;
+  * {
+    pointer-events: all;
+  }
   &__links {
     background-color: var(--color-red);
     letter-spacing: 0.05em;
@@ -49,7 +51,6 @@
         transform-origin: bottom left;
         transition: transform 0.3s;
       }
-
       &:hover {
         &:after {
           transform-origin: bottom right;
@@ -62,12 +63,6 @@
 .wrapper {
   display: none;
 }
-// @media (min-width: 1023px) {
-//   .header {
-//     &__links {
-//     }
-//   }
-// }
 @media (max-width: 1440px) {
   .header {
     &__links {
@@ -99,7 +94,7 @@
     position: fixed;
     z-index: 100;
     width: 100vw;
-    height: 270px;
+    height: 315px;
     background-color: transparent;
     overflow: hidden;
   }
@@ -107,9 +102,8 @@
     display: none;
   }
   #toggle:checked {
-    
     & ~ .toggle-wrapper .button-toggle {
-      box-shadow: 0 0 0 540px rgba(255, 51, 0, 1), inset 0 0 0 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 0 700px rgba(255, 51, 0, 1), inset 0 0 0 0 rgba(0, 0, 0, 0.1);
       &:before {
         transform: translateY(-50%) rotate(45deg) scale(1);
       }
@@ -126,7 +120,8 @@
         margin-top: 25px;
         font-family: $default-font;
         font-weight: normal;
-        font-size: 14px;
+        font-size: 20px;
+        height: 20px;
         line-height: 100%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -157,11 +152,9 @@
     position: absolute;
     top: 10px;
     right: 20px;
-    // display: inline-block;
     width: 46px;
     height: 46px;
-    background-color: #ff3300;
-    // border: none;
+    background-color: var(--color-red);
     cursor: pointer;
     border-radius: 50%;
     transition: $transition-duration + 0.1;
@@ -186,16 +179,11 @@
   #toggle:checked ~ .nav {
     right: 50%;
   }
-  // #toggle:checked ~ .nav .nav-item {
-  //   float: left;
-  // }
   .nav {
     position: absolute;
     top: 22px;
     right: 34px;
     pointer-events: none;
-    // width: 17px;
-    // height: 12px;
     transition: $transition-duration;
   }
   .nav-item {
@@ -243,6 +231,21 @@
       background-color: #fafafa;
       transform: translateY(-50%) scaleY(5);
       transition: $transition-duration;
+    }
+  }
+}
+@media (max-width: 350px) {
+  .wrapper {
+    height: 270px;
+    background-color: transparent;
+    overflow: hidden;
+  }
+  #toggle:checked {
+    & ~ .nav {
+      .nav-item {
+        font-size: 14px;
+        height: 7px;
+      }
     }
   }
 }
