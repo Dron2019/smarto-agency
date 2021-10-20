@@ -327,3 +327,37 @@ document.querySelector('.page__inner').addEventListener('click', ({ target }) =>
     mobMenu.dispatchEvent(new Event('change'));
   }
 });
+
+ScrollTrigger.scrollerProxy(".page__inner", {
+  scrollTop(value) {
+    if (arguments.length) {
+      scrollBar.scrollTop = value;
+    }
+    return scrollBar.scrollTop;
+  }
+});
+const scroller = document.querySelector('.page__inner');
+scrollBar.addListener(ScrollTrigger.update);
+
+ScrollTrigger.defaults({ scroller: scroller });
+ // single effect Start
+ document.querySelectorAll('[data-split-text]').forEach(text => {
+  let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
+  mathM = mathM.map(el => `<span style="display:inline-flex">${el}&nbsp;</span>`);
+  text.innerHTML = mathM.join(' ');
+  gsap.set(text, { overflow: 'hidden',display: 'inline-flex' });
+  gsap.set(text.querySelectorAll('span>span'), { overflow: 'initial', display: 'inline-block' });
+  let tl = gsap.timeline({
+    // paused: true,
+    scrollTrigger: {
+      trigger: text,
+      once: true,
+    }
+  })
+  .fromTo(
+    text.querySelectorAll('span>span'), 
+  { yPercent: 100, skewY: 3 }, 
+  { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' },
+  );
+})
+// single effect END
