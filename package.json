@@ -86,6 +86,7 @@
     "webpack-cli": "^3.0.2"
   },
   "dependencies": {
+    "@johh/three-effectcomposer": "^0.1.0",
     "axios": "^0.21.1",
     "bezier-easing": "^2.1.0",
     "cleave.js": "^1.6.0",

@@ -5,8 +5,11 @@ import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 // import * as THREE from 'three';
 gsap.registerPlugin(ScrollTrigger);
-import headerLogo3d from '../modules/3d-header-logo'
+import headerLogo3d from '../modules/3d-header-logo';
+import picturesHoverEffect from '../modules/projects-webgl-hover';
 
+
+console.log(picturesHoverEffect('[data-webgl]'));
 headerLogo3d('[data-canvas-logo]');
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
@@ -120,8 +123,8 @@ function onMouseMove(e) {
     ease: 'power1.inOut',
   });
 
-  console.log( mouse.y * 0.1);
-  console.log('ff');
+  // console.log( mouse.y * 0.1);
+  // console.log('ff');
 }
 
 requestAnimationFrame(render);

@@ -39,3 +39,12 @@
 .animated-logo-wrapper~picture {
     display: none;
 }
+
+
+[data-webgl_rederer] {
+    // display: block; 
+	// position: fixed;
+	// z-index: -1; // put it to background
+	// left: 0; // position it to fill the whole screen
+	// top: 0; // position it to fill the whole screen
+}
