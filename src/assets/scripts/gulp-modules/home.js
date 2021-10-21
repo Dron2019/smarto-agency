@@ -295,29 +295,6 @@ function handleContentTransformOnMobMenu(evt) {
 //   $('#sidepanel__text').animate_Text();
 //  });
 
-// single effect Start
-//  document.querySelectorAll('.sidepanel__text').forEach(text => {
-//   let mathM = text.textContent.split('');
-//   mathM = mathM.map(el => `<span style="display:inline-flex">${el}</span>`);
-//   text.innerHTML = mathM.join(' ');
-//   gsap.set(text.children, { overflow: 'hidden', });
-//   gsap.set(text.querySelectorAll('span>span'), { overflow: 'initial', display: 'inline-block' });
-//   let tl = gsap.timeline({
-//     paused: true,
-//     scrollTrigger: {
-//       trigger: text,
-//       once: true,
-//     }
-//   })
-//   .fromTo(
-//     text.querySelectorAll('span>span'),
-//   { yPercent: 100, skewY: 3 },
-//   { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' }
-//   );
-//   window.addEventListener('preloaderOff', () => tl.play())
-
-// })
-// single effect END
 
 document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
   console.log(target);

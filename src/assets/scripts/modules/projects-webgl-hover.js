@@ -128,6 +128,7 @@ function aa(image) {
     var camera, scene, renderer, composer,renderPass,customPass;
     var geometry, material, mesh, texture,uMouse = new THREE.Vector2(0,0);
     var img = image;
+    const { innerHeight, innerWidth } = window;
     const { width, height, left, right} = image.getBoundingClientRect();
     let dummyimg = image;
     dummyimg.onload = function(){
@@ -201,11 +202,37 @@ function aa(image) {
       composer.addPass(customPass);
 
     }
+  function getRelativeCoordinates (event, referenceElement) {
+    const { width, height, top } = referenceElement.getBoundingClientRect();
+    const position = {
+      x: event.pageX,
+      y: event.clientY
+    };
 
+    const offset = {
+      left: referenceElement.offsetLeft,
+      top: top
+    };
+
+    let reference = referenceElement.offsetParent;
+
+    while(reference){
+      offset.left += reference.offsetLeft;
+      offset.top += top;
+      reference = reference.offsetParent;
+    }
+
+    return { 
+      x: (position.x - offset.left) / width,
+      y: (position.y - top) / height,
+    }; 
+
+  }
     image.parentElement.addEventListener('mousemove', (e) => {
       // mousemove / touchmove
-      uMouse.x = ( e.clientX / window.innerWidth ) - (left / window.innerWidth  ) + ((window.innerWidth - right) / window.innerWidth);
-      uMouse.y = 1. - ( e.clientY/ window.innerHeight );
+      const { x, y } =  getRelativeCoordinates(e, image.parentElement);
+      uMouse.x = x;
+      uMouse.y = 1 - y;
     });
 
     function animate() {
