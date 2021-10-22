@@ -338,3 +338,29 @@ ScrollTrigger.defaults({ scroller: scroller });
   );
 })
 // single effect END
+
+var wrap = function (toWrap, wrapper) {
+    wrapper = wrapper || document.createElement('div');
+    toWrap.parentNode.appendChild(wrapper);
+    wrapper.appendChild(toWrap);
+    return wrapper;
+};
+/*SIngle effect  */
+    const paralaxImages = document.querySelectorAll(
+      '.wow__left>*',
+    );
+    paralaxImages.forEach(image => {
+     const $wrap = wrap(image);
+     gsap.set($wrap, { overflow: 'hidden' });
+      gsap.from($wrap.querySelector(':first-child'), {
+        scrollTrigger: {
+          trigger: $wrap,
+          once: true,
+        },
+        ease: 'power4.out',
+        yPercent: 100,
+        skewX: 3,
+        duration: 1.5,
+      })
+    });
+  /*SIngle effect END */
