@@ -117,13 +117,10 @@ const mouse = new THREE.Vector2(0.8, 0.5);
 function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
-  gsap.to(sphere.rotation, 0.2, {
-    x: 0.75,
-    z: mouse.x * 0.1,
-    ease: 'power1.inOut',
-  });
+  sphere.rotation.z = -0.25 + (mouse.x * 0.5);
+  sphere.rotation.x = 0.5 + (mouse.y * 0.5);
 
-  // console.log( mouse.y * 0.1);
+  console.log( mouse.x * 0.5);
   // console.log('ff');
 }
 
