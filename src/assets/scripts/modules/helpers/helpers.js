@@ -21,3 +21,21 @@ export const langDetect = () => {
   }
   return 'uk';
 };
+
+export const addIntersectionOnceWithCallback = (el, cb = () => {}) => {
+  const image = el;
+  const target = image;
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              const lazyImage = entry.target;
+              cb();
+              observer.unobserve(target);
+          }
+        });
+      }, {
+          rootMargin: '0px',
+          threshold: 0.1,
+        });
+      observer.observe(target);
+}

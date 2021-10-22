@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { langDetect } from '../modules/helpers/helpers';
+import { addIntersectionOnceWithCallback } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -7,9 +7,11 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import headerLogo3d from '../modules/3d-header-logo';
 import picturesHoverEffect from '../modules/projects-webgl-hover';
+import fake3d from '../modules/sequence';
 
 
-console.log(picturesHoverEffect('[data-webgl]'));
+
+picturesHoverEffect('[data-webgl]');
 headerLogo3d('[data-canvas-logo]');
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
@@ -27,7 +29,7 @@ renderer.setClearColor(0xffffff, 0);
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-camera.position.set(20, 20, 350);
+camera.position.set(0, 20, 350);
 window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
@@ -120,8 +122,6 @@ function onMouseMove(e) {
   sphere.rotation.z = -0.25 + (mouse.x * 0.5);
   sphere.rotation.x = 0.5 + (mouse.y * 0.5);
 
-  console.log( mouse.x * 0.5);
-  // console.log('ff');
 }
 
 requestAnimationFrame(render);
@@ -203,7 +203,7 @@ ScrollTrigger.create({
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
-      console.log(scrollBar);
+      // console.log(scrollBar);
       scrollBar.scrollTo(0, 0, 1510);
     } else {
       window.scrollTo(0, 0);
@@ -213,7 +213,7 @@ document.querySelectorAll('.pageup').forEach(el => {
 document.querySelectorAll('.pagedown').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
-      console.log(scrollBar);
+      // console.log(scrollBar);
       scrollBar.scrollIntoView(document.querySelector('[data-anchor="about"]'));
     } else {
       window.scrollTo(0, 0);
@@ -223,7 +223,7 @@ document.querySelectorAll('.pagedown').forEach(el => {
 
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
-    console.log('fff');
+    // console.log('fff');
     disaptchChangeMenuState();
     scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
       // offsetLeft: 34,
@@ -270,7 +270,7 @@ function disaptchChangeMenuState() {
 
 function handleContentTransformOnMobMenu(evt) {
   if (window.matchMedia('(min-width:992px)').matches) return;
-  console.log('i change checkbox', document.querySelector('#toggle').checked);
+  // console.log('i change checkbox', document.querySelector('#toggle').checked);
   if (document.querySelector('#toggle').checked) {
     gsap.to('.page__inner', { y: '30vh', filter: 'brightness(0.5)' });
   } else {
@@ -294,7 +294,7 @@ function handleContentTransformOnMobMenu(evt) {
 
 
 document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
-  console.log(target);
+  // console.log(target);
   const mobMenu = document.querySelector('#toggle');
   if (mobMenu.checked) {
     mobMenu.checked = false;
@@ -361,3 +361,45 @@ var wrap = function (toWrap, wrapper) {
       })
     });
   /*SIngle effect END */
+
+
+
+
+addIntersectionOnceWithCallback(document.querySelector('[data-sequence]'), () => {
+  const fake3d1 = fake3d(document.querySelector('[data-sequence]'), './assets/images/sequence/');
+  ScrollTrigger.create({
+    trigger: document.querySelector('[data-sequence]'),
+    onUpdate: ({progress}) => {
+      const scaleFactor = fake3d1.imagesCount / 100; 
+      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+      fake3d1.changeImage(percentage);
+    }
+  })
+})
+
+
+addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0], () => {
+  const fake3d2 = fake3d(document.querySelectorAll('[data-sequence]')[1], './assets/images/grand-byrzhe/', 100);
+  ScrollTrigger.create({
+    trigger: document.querySelectorAll('[data-sequence]')[1],
+    onUpdate: ({progress}) => {
+  
+      const scaleFactor = fake3d2.imagesCount / 100; 
+      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+      fake3d2.changeImage(percentage);
+    }
+  })
+});
+
+addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],() => {
+
+  const fake3d3 = fake3d(document.querySelectorAll('[data-sequence]')[2], './assets/images/a-station/', 100);
+  ScrollTrigger.create({
+    trigger: document.querySelectorAll('[data-sequence]')[2],
+    onUpdate: ({progress}) => {
+      const scaleFactor = fake3d3.imagesCount / 100; 
+      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+      fake3d3.changeImage(percentage);
+    }
+  })
+})
