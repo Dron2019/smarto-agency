@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { addIntersectionOnceWithCallback } from '../modules/helpers/helpers';
+import { addIntersectionOnceWithCallback, loader } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -364,18 +364,22 @@ var wrap = function (toWrap, wrapper) {
 
 
 
-
-addIntersectionOnceWithCallback(document.querySelector('[data-sequence]'), () => {
-  const fake3d1 = fake3d(document.querySelector('[data-sequence]'), './assets/images/sequence/');
-  ScrollTrigger.create({
-    trigger: document.querySelector('[data-sequence]'),
-    onUpdate: ({progress}) => {
-      const scaleFactor = fake3d1.imagesCount / 100; 
-      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
-      fake3d1.changeImage(percentage);
-    }
-  })
+loader(({fastSpeed}) => {
+  if (fastSpeed) {
+    addIntersectionOnceWithCallback(document.querySelector('[data-sequence]'), () => {
+      const fake3d1 = fake3d(document.querySelector('[data-sequence]'), './assets/images/sequence/');
+      ScrollTrigger.create({
+        trigger: document.querySelector('[data-sequence]'),
+        onUpdate: ({progress}) => {
+          const scaleFactor = fake3d1.imagesCount / 100; 
+          const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+          fake3d1.changeImage(percentage);
+        }
+      })
+    })
+  }
 })
+
 
 
 addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0], () => {
@@ -400,6 +404,18 @@ addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],
       const scaleFactor = fake3d3.imagesCount / 100; 
       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
       fake3d3.changeImage(percentage);
+    }
+  })
+})
+addIntersectionOnceWithCallback(document.querySelector('[data-sequence-bogun]'),() => {
+
+  const fakeBogun = fake3d(document.querySelector('[data-sequence-bogun]'), './assets/images/bogun/', 51);
+  ScrollTrigger.create({
+    trigger: document.querySelector('[data-sequence-bogun]'),
+    onUpdate: ({progress}) => {
+      const scaleFactor = fakeBogun.imagesCount / 100; 
+      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+      fakeBogun.changeImage(percentage);
     }
   })
 })

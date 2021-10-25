@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { loader } from '../modules/helpers/helpers';
 
 export default function fake3d(containerArg, path = '/wp-content/themes/bogun/assets/images/home/screen2-sequence/', frames = 50, reverse) {
     const containerToAdd = document.createElement('img');
@@ -17,7 +18,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
     const container = containerArg;
     container.style.overflow = 'hidden';
     container.append(containerToAdd);
-    container.querySelector(':first-child').style.opacity = 0;
+
     // container.querySelector('.container').style.transform = 'translateZ(5px)';
     // document.documentElement.clientWidth > 950 ? container.querySelector('.container').style.height = '100%' : null;
     const imagesCount = frames;
@@ -40,12 +41,14 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
                 if ((loadedCounter * 100  / (imagesCount - 1)).toFixed(0) == 100) {
                     // loadText.innerHTML = 'Start move';
                     console.log('loaded');
+                    container.querySelector(':first-child').style.opacity = 0;
                     container.style.background = 'none';
                     gsap.set(containerToAdd, { attr: { src: array[2] } });
                 };
             })
     }
     container.addEventListener('mouseenter', (e) => {
+        return;
         if (loadedCounter < imagesCount -1) return;
         window.requestAnimationFrame(() => { 
             const cords = getAmplitudeOfMoving();
@@ -75,6 +78,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
         });
     });
     container.addEventListener('touchmove', (e) => {
+        return;
         e.preventDefault();
         if (loadedCounter < imagesCount -1) return;
         const posInPercent = Math.floor(e.targetTouches[0].clientX * imagesCount / document.documentElement.clientWidth);
