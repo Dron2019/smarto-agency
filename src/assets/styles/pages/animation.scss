@@ -10,14 +10,14 @@
     animation: littleMove var(--moveDuration) linear infinite;
 }
 .little-move-r {
-    animation: littleMoveR var(--moveDuration) ease-in-out infinite;
+    animation: littleMoveR var(--moveDuration) linear infinite;
 }
 @keyframes littleMove {
     0% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(5px);
+        transform: translateY(10px);
     }
     100% {
         transform: translateY(0px);
@@ -25,12 +25,12 @@
 }
 @keyframes littleMoveR {
     0% {
-        transform: translateY(5px);
+        transform: translateY(10px);
     }
     50% {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(5px);
+        transform: translateY(10px);
     }
 }
