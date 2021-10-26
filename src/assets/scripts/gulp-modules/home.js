@@ -419,3 +419,40 @@ addIntersectionOnceWithCallback(document.querySelector('[data-sequence-bogun]'),
     }
   })
 })
+
+
+
+
+const partnersTL = gsap.timeline({ repeat: -1, paused: true, })
+  .fromTo('[class*="partners__image"]:nth-child(odd)', {
+    y: 0,
+  } , { y: 5, stagger: .5, duration: 5 })
+  .fromTo('[class*="partners__image"]:nth-child(even)', {
+    y: 5,
+  } , { y: 0, stagger: .5, duration: 5 }, '<')
+
+document.querySelectorAll('[class*="partners__image"]:nth-child(odd)').forEach(el => {
+  el.classList.add('little-move')
+})
+document.querySelectorAll('[class*="partners__image"]:nth-child(even)').forEach(el => {
+  el.classList.add('little-move-r')
+});
+
+
+document.querySelectorAll('[data-first-entry]').forEach(span => {
+  const $wrap = wrap(span);
+  gsap.set($wrap, { overflow: 'hidden' });
+  gsap.set(span, { display: 'inline-block' });
+  gsap.timeline({
+    // scrollTrigger: {
+    //   trigger: $wrap,
+    //   once: true,
+    // }
+  })
+  .to(span, {
+    y: 0,
+    autoAlpha: 1,
+    ease: 'power4.out',
+    duration: 2
+  })
+})
