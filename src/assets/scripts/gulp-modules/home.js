@@ -184,21 +184,7 @@ scrollBar.addListener(evt => {
   //   document.querySelector('.header').style.backgroundColor = '#000000';
   // }
 });
-ScrollTrigger.create({
-  trigger: '.wow',
-  onEnter: () => {
-    const sidePanel = document.querySelector('.sidepanel');
-    sidePanel.style.display = 'block';
-    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
-  },
-  onLeaveBack: () => {
-    const sidePanel = document.querySelector('.sidepanel');
-    gsap
-      .timeline()
-      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
-      .set(sidePanel, { display: 'none' });
-  },
-});
+
 
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
@@ -314,6 +300,22 @@ const scroller = document.querySelector('.page__inner');
 scrollBar.addListener(ScrollTrigger.update);
 
 ScrollTrigger.defaults({ scroller: scroller });
+ ScrollTrigger.create({
+  trigger: '.wow',
+  onEnter: () => {
+    console.log('dd');
+    const sidePanel = document.querySelector('.sidepanel');
+    sidePanel.style.display = 'block';
+    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
+  },
+  onLeaveBack: () => {
+    const sidePanel = document.querySelector('.sidepanel');
+    gsap
+      .timeline()
+      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
+      .set(sidePanel, { display: 'none' });
+  },
+});
  // single effect Start
  document.querySelectorAll('[data-split-text]').forEach(text => {
   let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
