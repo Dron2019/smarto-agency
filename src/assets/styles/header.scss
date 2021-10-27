@@ -15,14 +15,14 @@
     pointer-events: all;
   }
   &__links {
-    background-color: var(--color-red);
+    // background-color: var(--color-red);
     letter-spacing: 0.05em;
     font-size: 18px;
     line-height: 100%;
-    padding: 76px 20px 20px 20px;
+    padding: 76px 0px 20px 20px;
     color: var(--color-white);
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     text-transform: uppercase;
     position: absolute;
     right: var(--page-side-fields);
@@ -33,7 +33,7 @@
       color: inherit;
     }
     a:nth-last-child(n + 2) {
-      margin-bottom: 20px;
+      margin-right: 60px;
     }
     .nav-item {
       position: relative;
@@ -95,6 +95,7 @@
     z-index: 100;
     width: 100vw;
     height: 315px;
+    height: 390px;
     background-color: transparent;
     overflow: hidden;
   }

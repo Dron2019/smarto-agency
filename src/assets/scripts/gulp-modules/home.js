@@ -300,22 +300,22 @@ const scroller = document.querySelector('.page__inner');
 scrollBar.addListener(ScrollTrigger.update);
 
 ScrollTrigger.defaults({ scroller: scroller });
- ScrollTrigger.create({
-  trigger: '.wow',
-  onEnter: () => {
-    console.log('dd');
-    const sidePanel = document.querySelector('.sidepanel');
-    sidePanel.style.display = 'block';
-    gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
-  },
-  onLeaveBack: () => {
-    const sidePanel = document.querySelector('.sidepanel');
-    gsap
-      .timeline()
-      .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
-      .set(sidePanel, { display: 'none' });
-  },
-});
+//  ScrollTrigger.create({
+//   trigger: '.wow',
+//   onEnter: () => {
+//     console.log('dd');
+//     const sidePanel = document.querySelector('.sidepanel');
+//     sidePanel.style.display = 'block';
+//     gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
+//   },
+//   onLeaveBack: () => {
+//     const sidePanel = document.querySelector('.sidepanel');
+//     gsap
+//       .timeline()
+//       .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
+//       .set(sidePanel, { display: 'none' });
+//   },
+// });
  // single effect Start
  document.querySelectorAll('[data-split-text]').forEach(text => {
   let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
@@ -484,4 +484,94 @@ document.querySelectorAll('.partners__text').forEach(text => {
       }
     }
   });
-})
+});
+
+gsap.registerEffect({
+  name: "counter",
+  extendTimeline: true,
+  defaults: {
+    end: 0,
+
+    duration: 0.5,
+    ease: "power1",
+    increment: 1,
+  },
+  effect: (targets, config) => {
+    console.log(targets,config, 'EFFECT');
+    let tl = gsap.timeline();
+    let num = 2000 /* targets[0].innerText.replace(/\,/g, "") */;
+    targets[0].innerText = num;
+
+    tl.to(
+      targets,
+      {
+        duration: config.duration,
+        innerText: config.end,
+        //snap:{innerText:config.increment},
+        modifiers: {
+          innerText: function (innerText) {
+            return gsap.utils
+              .snap(config.increment, innerText)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, "");
+          },
+        },
+        ease: config.ease,
+      },
+      0
+    );
+
+    return tl;
+  },
+});
+
+/*SIngle effect*/
+  document.querySelectorAll(".wow__year").forEach((el) => {
+    const end = +el.innerText;
+    if (isNaN(end)) return;
+    el.textContent = 0;
+    ScrollTrigger.create({
+      trigger: el,
+      once: true,
+      onEnter: () => {
+        let tl = gsap.timeline().counter(el, {
+          end: end,
+          autoAlpha: 0,
+          duration: 2.5,
+        });
+      },
+    });
+  });
+    /*SIngle effect  END*/
+/*SIngle effect*/
+
+  document.querySelectorAll('.title-with-star path').forEach(el => {
+    const morphFrom = el.getAttribute('d');
+    const morphTo =  'M 40 24 L 40.4592 38.8913 L 52 28 L 41.1087 39.5408 L 56 40 L 41.1087 40.4592 L 52 51 L 40.4592 41.1087 L 40 55 L 39.5408 41.1087 L 29 52 L 38.8913 40.4592 L 24 40 L 38.8913 39.5408 L 28 28 L 39.5408 38.8913 L 40 24 Z';
+    const tl = gsap.timeline({
+      repeat: -1,
+      paused: true,
+      yoyo: true,
+    })
+    .fromTo(
+      el, 
+      { attr: { d: morphFrom } },
+      { attr: { d: morphTo }, duration: 2.5 },
+    );
+    ScrollTrigger.create({
+      trigger: el,
+      onEnter: () => tl.play(),
+      onLeave: () => tl.pause(),
+      onEnterBack: () => tl.play(),
+      onLeaveBack: () => tl.pause(),
+    })
+  })
+/*SIngle effect  END*/
+
+    scrollBar.scrollIntoView(document.querySelector(`form`), {
+      // offsetLeft: 34,
+      offsetTop: 120,
+      // alignToTop: false,
+      // onlyScrollIfNeeded: true,
+      speed: 3000,
+    });

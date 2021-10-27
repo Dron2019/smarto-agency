@@ -417,10 +417,13 @@ $base-color: #000;
   padding-top: var(--v-padding);
   @include row-flex();
   .mt100 {
-    margin-top: 100px;
+    margin-top: 80px;
   }
   .mt70 {
     margin-top: 70px;
+  }
+  .mt50 {
+    margin-top: 50px;
   }
   &__h5 {
     @include shift-left(0);
@@ -438,19 +441,20 @@ $base-color: #000;
     @include shift-right(0);
     font-family: $default-font;
     font-weight: normal;
-    font-size: var(--h3-size);
+    font-size: var(--h4-size);
     line-height: 120%;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     padding-right: 46%;
   }
   &__form {
     @include shift-left(1);
-    @include size(9);
+    @include size(5);
     @include shift-right(0);
+    margin-top: 50px;
     .form-field:not(#t),
     .form-textarea {
       position: relative;
-      height: 120px;
+      height: 80px;
       width: 100%;
     }
     .form-field,
@@ -519,7 +523,7 @@ $base-color: #000;
       label {
         left: 0;
         height: 100%;
-        padding: 45px 62px;
+        padding: 25px 62px;
         border-radius: 0;
         cursor: text;
         color: #000;
@@ -611,11 +615,11 @@ $base-color: #000;
     }
   }
   &__checkbox {
-    @include shift-left(1);
-    @include size(9);
+    @include shift-left(0);
+    @include size(4);
     @include shift-right(0);
     .checkbox {
-      margin-bottom: 40px;
+      margin-bottom: 15px;
       &:last-child {
         margin-bottom: 0;
       }
@@ -670,10 +674,58 @@ $base-color: #000;
     }
   }
   &__button {
-    @include shift(3);
+    @include shift-left(3);
+    @include shift-right(0);
     @include size(9);
-    margin-top: 80px;
-    .button {
+    margin-top: 50px;
+    button {
+      background-color: var(--color-red);
+      color: var(--color-white);
+      width: 100% !important;
+      height: 80px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      line-height: 120%;
+      text-transform: uppercase;
+      border: none;
+      font-family: $default-font;
+      transition: .3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+      @include to(1680px){
+        font-size: 18px;
+
+      }
+    }
+    button span {
+      position: relative;
+      z-index: 2;
+    }
+    button:after {
+      content: '';
+      background-color: var(--color-white);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transform: translateY(-100%);
+      transition: transform .3s ease-in-out;
+
+    }
+    button:hover {
+      border: 1px solid white;
+      background-color: transparent;
+      // color: var(--color-red);
+      // background-color: var(--color-white);
+    }
+    button:hover:after {
+      // transform: none;
+    }
+    .button:not(.button--atlas) {
       padding: 0;
       border: none;
       width: 230px;
@@ -698,6 +750,9 @@ $base-color: #000;
   right: 132px;
   z-index: 3;
   transition: all 0.2s linear;
+  margin-left: auto;
+  margin-top: 100px;
+  position: static;
   .circle-rotate {
     transform-origin: center;
     transform-box: fill-box;
@@ -1147,17 +1202,20 @@ $base-color: #000;
     .mt70 {
       margin-top: 30px;
     }
+    .mt50 {
+      margin-top: 30px;
+    }
     &__h3 {
       padding-right: 39%;
     }
     &__form {
       .form-field:not(#t),
       .form-textarea {
-        height: 90px;
+        height: 60px;
       }
       input.form-field__input,
       textarea {
-        padding: 34px 50px;
+        padding: 15px 50px;
         margin-top: 20px;
       }
       .place-holder {
@@ -1165,7 +1223,7 @@ $base-color: #000;
       }
       [data-field-input][data-status="field--inactive"]:not(#r) {
         label {
-          padding: 34px 50px;
+          padding: 20px 50px;
         }
       }
       [data-field-input]:focus-within:not(#r) {
@@ -2109,4 +2167,74 @@ $base-color: #000;
       height: 140px;
     }
   }
+}
+
+@keyframes marquee {
+	0% {
+		transform: translate3d(var(--move-initial), 0, 0);
+	}
+
+	100% {
+		transform: translate3d(var(--move-final), 0, 0);
+	}
+}
+.button--atlas {
+	font-family: signo, sans-serif;
+	font-weight: 500;
+}
+
+.button--atlas > span {
+	display: inline-block;
+}
+
+.button--atlas:hover > span {
+	opacity: 0;
+}
+
+.button--atlas:hover .marquee__inner {
+	animation-play-state: running;
+	opacity: 1;
+	transition-duration: 0.4s;
+}
+
+
+.marquee__inner {
+	width: fit-content;
+	display: flex;
+	position: relative;
+	--offset: 1rem;
+	--move-initial: calc(-25% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	transform: translate3d(var(--move-initial), 0, 0);
+	animation: marquee 1s linear infinite;
+	animation-play-state: paused;
+	opacity: 0;
+}
+.marquee {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	pointer-events: none;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.marquee__inner {
+	width: fit-content;
+	display: flex;
+	position: relative;
+	--offset: 1rem;
+	--move-initial: calc(-25% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	transform: translate3d(var(--move-initial), 0, 0);
+	animation: marquee 1s linear infinite;
+	animation-play-state: paused;
+	opacity: 0;
 }
