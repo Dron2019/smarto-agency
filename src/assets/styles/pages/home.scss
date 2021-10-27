@@ -678,11 +678,11 @@ $base-color: #000;
     @include shift-right(0);
     @include size(9);
     margin-top: 50px;
-    button {
+    button.button {
       background-color: var(--color-red);
       color: var(--color-white);
       width: 100% !important;
-      height: 80px !important;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1903,28 +1903,28 @@ $base-color: #000;
       margin-bottom: 0;
       .form-field:not(#t),
       .form-textarea {
-        height: 60px;
+        height: 40px;
       }
       input.form-field__input,
       textarea,
       .place-holder {
-        padding: 22px 20px;
+        padding: 5px 20px;
       }
       [data-field-input][data-status="field--inactive"]:not(#r) {
         label {
-          padding: 22px 20px;
+          padding: 11px 20px;
         }
       }
       [data-field-input]:focus-within:not(#r) {
         label {
-          padding: 6px 20px;
+          padding: 3px 20px;
         }
       }
       [data-field-input]:focus-within:not(#r),
       [data-field-input][data-status="field--success"]:not(#r),
       [data-field-input][data-status="field--error"]:not(#r) {
         label {
-          height: 25px;
+          height: 20px;
           left: 20px;
         }
       }
@@ -1944,6 +1944,7 @@ $base-color: #000;
       @include shift-right(0);
       .checkbox {
         margin-bottom: 20px;
+        margin-bottom: 10px;
       }
       .span {
         margin-top: 10px;
@@ -1951,9 +1952,11 @@ $base-color: #000;
     }
     &__button {
       @include shift-left(0);
-      @include size(5);
-      @include shift-right(7);
+      @include size(12);
+      @include shift-right(0);
+      height: 40px;
       margin-top: 20px;
+      margin-top: 30px;
       .button {
         width: 140px;
         height: 140px;
@@ -1961,6 +1964,11 @@ $base-color: #000;
           width: 140px;
           height: 140px;
         }
+      }
+      button.button {
+        
+        height: 40px;
+        font-size: 14px;
       }
     }
   }
@@ -2198,18 +2206,7 @@ $base-color: #000;
 }
 
 
-.marquee__inner {
-	width: fit-content;
-	display: flex;
-	position: relative;
-	--offset: 1rem;
-	--move-initial: calc(-25% + var(--offset));
-	--move-final: calc(-50% + var(--offset));
-	transform: translate3d(var(--move-initial), 0, 0);
-	animation: marquee 1s linear infinite;
-	animation-play-state: paused;
-	opacity: 0;
-}
+
 .marquee {
 	position: absolute;
 	top: 0;
@@ -2227,14 +2224,19 @@ $base-color: #000;
 }
 
 .marquee__inner {
-	width: fit-content;
+	width: 100%;
 	display: flex;
 	position: relative;
-	--offset: 1rem;
-	--move-initial: calc(-25% + var(--offset));
+	--offset: 0rem;
+	--move-initial: calc(0% + var(--offset));
+	--move-final: calc(-30% + var(--offset));
+  --move-initial: calc(-25% + var(--offset));
 	--move-final: calc(-50% + var(--offset));
 	transform: translate3d(var(--move-initial), 0, 0);
-	animation: marquee 1s linear infinite;
+	animation: marquee 2s linear infinite;
 	animation-play-state: paused;
 	opacity: 0;
+  span::after {
+    content: '  ';
+  }
 }

@@ -567,11 +567,3 @@ gsap.registerEffect({
     })
   })
 /*SIngle effect  END*/
-
-    scrollBar.scrollIntoView(document.querySelector(`form`), {
-      // offsetLeft: 34,
-      offsetTop: 120,
-      // alignToTop: false,
-      // onlyScrollIfNeeded: true,
-      speed: 3000,
-    });
