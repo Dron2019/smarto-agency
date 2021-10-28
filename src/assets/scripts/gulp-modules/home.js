@@ -29,7 +29,7 @@ renderer.setClearColor(0xffffff, 0);
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-camera.position.set(0, 20, 350);
+camera.position.set(0, 20, 375);
 window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
@@ -120,7 +120,7 @@ function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
   sphere.rotation.z = -0.25 + (mouse.x * 0.5);
-  sphere.rotation.x = 0.5 + (mouse.y * 0.5);
+  // sphere.rotation.x = 0.5 + (mouse.y * 0.5);
 
 }
 
@@ -161,9 +161,17 @@ const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
 scrollBar.track.xAxis.element.remove()
 
 scrollBar.addListener(evt => {
-  if (evt.offset > 1000) return;
+  if (evt.offset.y > 1000) return;
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
+  const header = document.querySelector('.header');
+  console.log(y);
+
+  if (y > 200) {
+    header.classList.add('not-on-top');
+  } else {
+    header.classList.remove('not-on-top');
+  }
   // if (y > 1000) {
   //   sidePanel.style.display = 'block';
   //   gsap.fromTo(sidePanel,
@@ -263,21 +271,6 @@ function handleContentTransformOnMobMenu(evt) {
     gsap.to('.page__inner', { y: 0, filter: '' });
   }
 }
-// $(document).ready(function(){
-//   $.fn.animate_Text = function() {
-//    var string = this.text();
-//    return this.each(function(){
-//     var $this = $(this);
-//     $this.html(string.replace(/./g, '<span class="new">$&</span>'));
-//     $this.find('span.new').each(function(i, el){
-//      setTimeout(function(){ $(el).addClass('div_opacity'); }, 40 * i);
-//     });
-//    });
-//   };
-//   $('#sidepanel__text').show();
-//   $('#sidepanel__text').animate_Text();
-//  });
-
 
 document.querySelector('.page__inner').addEventListener('click', ({ target }) => {
   // console.log(target);
@@ -385,7 +378,7 @@ loader(({fastSpeed}) => {
 
 
 addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0], () => {
-  const fake3d2 = fake3d(document.querySelectorAll('[data-sequence]')[1], './assets/images/grand-byrzhe/', 100);
+  const fake3d2 = fake3d(document.querySelectorAll('[data-sequence]')[1], './assets/images/grand-byrzhe/', 38);
   ScrollTrigger.create({
     trigger: document.querySelectorAll('[data-sequence]')[1],
     onUpdate: ({progress}) => {
@@ -442,6 +435,13 @@ document.querySelectorAll('[class*="partners__image"]:nth-child(even)').forEach(
 
 
 document.querySelectorAll('[data-first-entry]').forEach(span => {
+
+  span.addEventListener('mouseenter',function(evt){
+    gsap.to(span, { x: 10 })
+  });
+  span.addEventListener('mouseleave',function(evt){
+    gsap.to(span, { x: 0 })
+  });
   const $wrap = wrap(span);
   gsap.set($wrap, { overflow: 'hidden' });
   gsap.set(span, { display: 'inline-block' });
@@ -457,6 +457,7 @@ document.querySelectorAll('[data-first-entry]').forEach(span => {
     ease: 'power4.out',
     duration: 2
   })
+  .set($wrap, { overflow: 'initial' })
 });
 
 
@@ -470,16 +471,18 @@ document.querySelectorAll('.partners__text').forEach(text => {
       trigger: ".partners__wrapper",
       // start: "top top",
       // end: "+=300%",
-      scrub: true,
+      scrub: 0.1,
       pin: '.partners__text div',
       onEnter: () => {
         gsap.to('.partners__text', { 
-          y: height
+          y: height,
+          duration: 0.2,
         })
       },
       onLeaveBack: () => {
         gsap.to('.partners__text', { 
-          y: 0
+          y: 0,
+          duration: 0.2,
         })
       }
     }

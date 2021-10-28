@@ -85,7 +85,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
         window.requestAnimationFrame(() => { changeImage(posInPercent) });
     });
     gsap.set(containerToAdd.parentElement, {webkitPerspective:100, /*webkitTransformStyle:"preserve-3d"*/})
-    gsap.set(containerToAdd, {scale: 1.2, /*webkitTransformStyle:"preserve-3d"*/})
+    // gsap.set(containerToAdd, {scale: 1.2, /*webkitTransformStyle:"preserve-3d"*/})
     function changeImage(posInPercent, mouseenter = false) {
         if (isAnimating) return;
         if (mouseenter) {

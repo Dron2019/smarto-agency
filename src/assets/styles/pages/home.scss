@@ -109,7 +109,7 @@ $base-color: #000;
       transform-box: fill-box;
       // transition: all 0.2s linear;
       animation: rotate-me 7s infinite linear;
-      animation-play-state: paused;
+      // animation-play-state: paused;
     }
     & .eye__lashes-up,
     & .eye__inner,
@@ -664,6 +664,7 @@ $base-color: #000;
       font-weight: normal;
       font-size: var(--h4-size);
       line-height: 120%;
+      display: flex;
     }
     .custom-checkbox:checked + label::before {
       background-color: var(--color-red);
@@ -1056,7 +1057,7 @@ $base-color: #000;
       }
     }
     &__wrapper {
-      margin-top: 30px;
+      margin-top: 50px;
     }
     &__link {
       width: 130px;
