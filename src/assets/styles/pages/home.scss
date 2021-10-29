@@ -692,7 +692,7 @@ $base-color: #000;
       text-transform: uppercase;
       border: none;
       font-family: $default-font;
-      transition: .3s ease-in-out;
+      // transition: .3s ease-in-out;
       position: relative;
       overflow: hidden;
       @include to(1680px){
@@ -2240,4 +2240,22 @@ $base-color: #000;
   span::after {
     content: '  ';
   }
+}
+
+
+button.swal2-confirm.swal2-styled {
+  width: 225px;
+  height: 60px;
+  background-color: var(--color-white);
+
+  color: var(--color-red);
+  border-radius: 0px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+}
+
+.swal2-popup.swal2-modal {
+  background-color: var(--color-red);
+  border-radius: 0;
 }

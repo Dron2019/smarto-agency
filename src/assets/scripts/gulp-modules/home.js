@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 import headerLogo3d from '../modules/3d-header-logo';
 import picturesHoverEffect from '../modules/projects-webgl-hover';
 import fake3d from '../modules/sequence';
-
+import Swal from 'sweetalert2';
 
 
 picturesHoverEffect('[data-webgl]');
@@ -570,3 +570,22 @@ gsap.registerEffect({
     })
   })
 /*SIngle effect  END*/
+
+
+document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
+  showreelButton.addEventListener('click',function(evt){
+    Swal.fire({
+      width: 'auto',
+      showConfirmButton: false,
+      html: `
+      <video width="640" height="400" muted autoplay controls>
+        <source src="${showreelButton.dataset.showreel}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      `,
+      customClass: {
+        confirmButton: 'button'
+      }
+    })
+  });
+})

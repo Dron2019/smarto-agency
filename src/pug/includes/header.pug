@@ -30,7 +30,7 @@ header.header
     each val in links
       a(href="#" data-href=val[1] class=val[2]) #{val[0]} 
     a(href="./static/Smart_Orange_Presentation_compressed.pdf" target='_blank' class="nav-item") PDF ПРЕЗЕНТАЦІЯ
-    a(href="#" class="nav-item") SHOWREEL
+    a(href="#" class="nav-item" data-showreel="./static/smartorange_showreel.MP4" ) SHOWREEL
 .wrapper
   input#toggle(type='checkbox')
   label.toggle-wrapper(for='toggle')
@@ -41,4 +41,4 @@ header.header
     a.nav-item(href='#' data-href='partners') Партнери
     a.nav-item(href='#' data-href='contacts') Контакти
     a.nav-item(href="./static/Smart_Orange_Presentation_compressed.pdf" target='_blank') PDF ПРЕЗЕНТАЦІЯ
-    a.nav-item(href='#') SHOWREEL
+    a.nav-item(href='#' data-showreel="./static/smartorange_showreel.MP4") SHOWREEL

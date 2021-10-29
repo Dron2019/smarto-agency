@@ -97,6 +97,7 @@
     "locomotive-scroll": "^4.0.6",
     "on-change": "^2.2.1",
     "smooth-scrollbar": "^8.6.3",
+    "sweetalert2": "^11.1.9",
     "three": "^0.132.2",
     "yup": "^0.32.8"
   }
