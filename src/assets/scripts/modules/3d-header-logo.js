@@ -16,14 +16,14 @@ export default function headerLogo3d(selector) {
     renderer.setClearColor(0xffffff, 0);
 
     camera.position.set(0, 0, 70);
-    console.log(scene);
+    // console.log(scene);
 
     var clock = new THREE.Clock();
     loader.load(
-        "./static/model (12).json",
+        canvas.dataset.canvasLogo || "./static/model (12).json",
         function ( obj ) {
         const group = new THREE.Group();
-        console.log(obj);
+        // console.log(obj);
         obj.material =  new THREE.MeshBasicMaterial({
         //   color: 0x0C50DB,
         color: 0xff3300,
@@ -36,7 +36,7 @@ export default function headerLogo3d(selector) {
         }, 10)
         },
         function ( xhr ) {
-            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+            // console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
         },
         function ( err ) {
             console.error( 'An error happened' );

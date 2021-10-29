@@ -89,3 +89,10 @@ function testLatency(cb) {
     }
   }
 }
+
+export const wrap = function (toWrap, wrapper) {
+  wrapper = wrapper || document.createElement('div');
+  toWrap.parentNode.appendChild(wrapper);
+  wrapper.appendChild(toWrap);
+  return wrapper;
+};

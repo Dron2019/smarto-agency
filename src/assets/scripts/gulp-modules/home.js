@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { addIntersectionOnceWithCallback, loader } from '../modules/helpers/helpers';
+import { addIntersectionOnceWithCallback, loader, wrap } from '../modules/helpers/helpers';
 // import Scrollbar from 'smooth-scrollbar';
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 
 picturesHoverEffect('[data-webgl]');
 headerLogo3d('[data-canvas-logo]');
+
+/**Шарик на первом Экране */
 const canvas = document.querySelector('[data-canvas]');
 let width = canvas.offsetWidth;
 let height = canvas.offsetHeight;
@@ -29,7 +31,7 @@ renderer.setClearColor(0xffffff, 0);
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-camera.position.set(0, 20, 375);
+camera.position.set(0, 0, 375);
 window.camera = camera;
 const sphere = new THREE.Group();
 scene.add(sphere);
@@ -131,6 +133,11 @@ window.addEventListener('resize', () => {
   resizeTm = clearTimeout(resizeTm);
   resizeTm = setTimeout(onResize, 500);
 });
+
+
+/**Шарик на первом Экране END*/
+/**SMOOTH SCROLL */
+
 class DisableScrollPlugin extends ScrollbarPlugin {
   static pluginName = 'disableScroll';
 
@@ -165,7 +172,7 @@ scrollBar.addListener(evt => {
   const { y } = evt.offset;
   const sidePanel = document.querySelector('.sidepanel');
   const header = document.querySelector('.header');
-  console.log(y);
+  // console.log(y);
 
   if (y > 200) {
     header.classList.add('not-on-top');
@@ -214,7 +221,8 @@ document.querySelectorAll('.pagedown').forEach(el => {
     }
   });
 });
-
+/**SMOOTH SCROLL END*/
+/**SMOOTH SCROLL NAVIGATION */
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
     // console.log('fff');
@@ -228,7 +236,7 @@ document.querySelectorAll('[data-href]').forEach(link => {
     });
   });
 });
-
+/**SMOOTH SCROLL NAVIGATION END*/
 const year = function() {
   const date = new Date();
   const yyyy = date.getFullYear();
@@ -236,7 +244,7 @@ const year = function() {
 };
 const footer = document.querySelector('.footer__content');
 footer.innerHTML +=
-  '<img src="./assets/images/svg/footer-svg.svg" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;' +
+  `<img src="${footer.dataset.src}" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;` +
   year();
 
 const placeHolder = document.querySelector('.place-holder');
@@ -249,7 +257,7 @@ const input = document.querySelector('.input-tel');
 // if (window.matchMedia('(max-width: 992px)').matches) {
 //   Scrollbar.destroyAll();
 // }
-
+/**MOBILE MENU OPEN HANDLER */
 document.querySelector('#toggle').addEventListener('change', function(evt) {
   handleContentTransformOnMobMenu(evt);
 });
@@ -280,6 +288,7 @@ document.querySelector('.page__inner').addEventListener('click', ({ target }) =>
     mobMenu.dispatchEvent(new Event('change'));
   }
 });
+/**MOBILE MENU OPEN HANDLER END*/
 
 ScrollTrigger.scrollerProxy(".page__inner", {
   scrollTop(value) {
@@ -293,24 +302,8 @@ const scroller = document.querySelector('.page__inner');
 scrollBar.addListener(ScrollTrigger.update);
 
 ScrollTrigger.defaults({ scroller: scroller });
-//  ScrollTrigger.create({
-//   trigger: '.wow',
-//   onEnter: () => {
-//     console.log('dd');
-//     const sidePanel = document.querySelector('.sidepanel');
-//     sidePanel.style.display = 'block';
-//     gsap.fromTo(sidePanel, { xPercent: 150 }, { yPercent: -50, xPercent: 0 });
-//   },
-//   onLeaveBack: () => {
-//     const sidePanel = document.querySelector('.sidepanel');
-//     gsap
-//       .timeline()
-//       .fromTo(sidePanel, { yPercent: -50, xPercent: 0 }, { xPercent: 150 })
-//       .set(sidePanel, { display: 'none' });
-//   },
-// });
- // single effect Start
- document.querySelectorAll('[data-split-text]').forEach(text => {
+
+document.querySelectorAll('[data-split-text]').forEach(text => {
   let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
   mathM = mathM.map(el => `<span style="display:inline-flex">${el}&nbsp;</span>`);
   text.innerHTML = mathM.join(' ');
@@ -331,12 +324,7 @@ ScrollTrigger.defaults({ scroller: scroller });
 })
 // single effect END
 
-var wrap = function (toWrap, wrapper) {
-    wrapper = wrapper || document.createElement('div');
-    toWrap.parentNode.appendChild(wrapper);
-    wrapper.appendChild(toWrap);
-    return wrapper;
-};
+
 /*SIngle effect  */
     const paralaxImages = document.querySelectorAll(
       '.wow__left>*',
@@ -361,8 +349,10 @@ var wrap = function (toWrap, wrapper) {
 
 loader(({fastSpeed}) => {
   if (fastSpeed) {
-    addIntersectionOnceWithCallback(document.querySelector('[data-sequence]'), () => {
-      const fake3d1 = fake3d(document.querySelector('[data-sequence]'), './assets/images/sequence/');
+    const andriivskiySequence = document.querySelector('[data-sequence]');
+    addIntersectionOnceWithCallback(andriivskiySequence, () => {
+      const fake3d1 = fake3d(document.querySelector('[data-sequence]'), andriivskiySequence.dataset.sequence);
+      if (fake3d1 === undefined) return;
       ScrollTrigger.create({
         trigger: document.querySelector('[data-sequence]'),
         onUpdate: ({progress}) => {
@@ -376,23 +366,25 @@ loader(({fastSpeed}) => {
 })
 
 
-
+const grandByrzheSequence = document.querySelectorAll('[data-sequence]')[1];
 addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0], () => {
-  const fake3d2 = fake3d(document.querySelectorAll('[data-sequence]')[1], './assets/images/grand-byrzhe/', 38);
+  const fake3d2 = fake3d(grandByrzheSequence, grandByrzheSequence.dataset.sequence, 38);
+  if (fake3d2 === undefined) return;
   ScrollTrigger.create({
     trigger: document.querySelectorAll('[data-sequence]')[1],
     onUpdate: ({progress}) => {
-  
+      
       const scaleFactor = fake3d2.imagesCount / 100; 
       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
       fake3d2.changeImage(percentage);
     }
   })
 });
-
+const aStationSequence = document.querySelectorAll('[data-sequence]')[2];
 addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],() => {
 
-  const fake3d3 = fake3d(document.querySelectorAll('[data-sequence]')[2], './assets/images/a-station/', 100);
+  const fake3d3 = fake3d(aStationSequence, aStationSequence.dataset.sequence, 100);
+  if (fake3d3 === undefined) return;
   ScrollTrigger.create({
     trigger: document.querySelectorAll('[data-sequence]')[2],
     onUpdate: ({progress}) => {
@@ -401,10 +393,14 @@ addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],
       fake3d3.changeImage(percentage);
     }
   })
-})
-addIntersectionOnceWithCallback(document.querySelector('[data-sequence-bogun]'),() => {
+});
 
-  const fakeBogun = fake3d(document.querySelector('[data-sequence-bogun]'), './assets/images/bogun/', 51);
+
+const bogunSequenceEl = document.querySelector('[data-sequence-bogun]');
+addIntersectionOnceWithCallback(bogunSequenceEl,() => {
+
+  const fakeBogun = fake3d(bogunSequenceEl, bogunSequenceEl.dataset.sequence, 51);
+  if (fakeBogun === undefined) return;
   ScrollTrigger.create({
     trigger: document.querySelector('[data-sequence-bogun]'),
     onUpdate: ({progress}) => {
@@ -500,7 +496,7 @@ gsap.registerEffect({
     increment: 1,
   },
   effect: (targets, config) => {
-    console.log(targets,config, 'EFFECT');
+    // console.log(targets,config, 'EFFECT');
     let tl = gsap.timeline();
     let num = 2000 /* targets[0].innerText.replace(/\,/g, "") */;
     targets[0].innerText = num;

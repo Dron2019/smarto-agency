@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { loader } from '../modules/helpers/helpers';
 
 export default function fake3d(containerArg, path = '/wp-content/themes/bogun/assets/images/home/screen2-sequence/', frames = 50, reverse) {
+    if (window.matchMedia('(max-width: 575px)').matches) return;
     const containerToAdd = document.createElement('img');
     containerToAdd.classList.add('js-transform-img');
     containerToAdd.style.cssText = `
@@ -40,7 +41,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
                 // loadText.innerHTML = 'Loading ' + (loadedCounter * 100  / (imagesCount - 1)).toFixed(0);
                 if ((loadedCounter * 100  / (imagesCount - 1)).toFixed(0) == 100) {
                     // loadText.innerHTML = 'Start move';
-                    console.log('loaded');
+                    // console.log('loaded');
                     container.querySelector(':first-child').style.opacity = 0;
                     container.style.background = 'none';
                     gsap.set(containerToAdd, { attr: { src: array[2] } });
@@ -61,7 +62,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
         });
     });
     container.addEventListener('mousemove', (e) => {
-        console.log(isAnimating);
+        // console.log(isAnimating);
         return;
         // if (isAnimating) return;
         if (loadedCounter < imagesCount -1) return;
