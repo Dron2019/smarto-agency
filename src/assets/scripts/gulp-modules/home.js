@@ -338,6 +338,7 @@ document.querySelectorAll('[data-split-text]').forEach(text => {
       gsap.from(image.querySelector('div'), {
         scrollTrigger: {
           trigger: image,
+          start: '100px bottom',
           once: true,
         },
         ease: 'power4.out',
