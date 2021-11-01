@@ -354,7 +354,7 @@ loader(({fastSpeed}) => {
   if (fastSpeed) {
     const andriivskiySequence = document.querySelector('[data-sequence]');
     addIntersectionOnceWithCallback(andriivskiySequence, () => {
-      const fake3d1 = fake3d(document.querySelector('[data-sequence]'), andriivskiySequence.dataset.sequence);
+      const fake3d1 = fake3d(document.querySelector('[data-sequence]'), andriivskiySequence.dataset.sequence, 50);
       if (fake3d1 === undefined) return;
       ScrollTrigger.create({
         trigger: document.querySelector('[data-sequence]'),
@@ -370,6 +370,7 @@ loader(({fastSpeed}) => {
 
 
 const grandByrzheSequence = document.querySelectorAll('[data-sequence]')[1];
+
 addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0], () => {
   const fake3d2 = fake3d(grandByrzheSequence, grandByrzheSequence.dataset.sequence, 38);
   if (fake3d2 === undefined) return;
@@ -402,7 +403,7 @@ addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0],
 const bogunSequenceEl = document.querySelector('[data-sequence-bogun]');
 addIntersectionOnceWithCallback(bogunSequenceEl,() => {
 
-  const fakeBogun = fake3d(bogunSequenceEl, bogunSequenceEl.dataset.sequence, 51);
+  const fakeBogun = fake3d(bogunSequenceEl, bogunSequenceEl.dataset.sequenceBogun, 51);
   if (fakeBogun === undefined) return;
   ScrollTrigger.create({
     trigger: document.querySelector('[data-sequence-bogun]'),
