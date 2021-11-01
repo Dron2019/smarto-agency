@@ -90,8 +90,8 @@ function testLatency(cb) {
   }
 }
 
-export const wrap = function (toWrap, wrapper) {
-  wrapper = wrapper || document.createElement('div');
+export const wrap = function (toWrap, wrapper, tag = 'div') {
+  wrapper = wrapper || document.createElement(tag);
   toWrap.parentNode.appendChild(wrapper);
   wrapper.appendChild(toWrap);
   return wrapper;

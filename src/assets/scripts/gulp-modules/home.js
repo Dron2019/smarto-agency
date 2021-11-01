@@ -121,8 +121,8 @@ const mouse = new THREE.Vector2(0.8, 0.5);
 function onMouseMove(e) {
   mouse.y = e.clientY / window.innerHeight;
   mouse.x = e.clientX / window.innerWidth;
-  sphere.rotation.z = -0.25 + (mouse.x * 0.5);
-  // sphere.rotation.x = 0.5 + (mouse.y * 0.5);
+  sphere.rotation.z = -0.25 + (mouse.x * 0.75);
+  sphere.rotation.x = 0.5 + (mouse.y * 0.75);
 
 }
 
@@ -313,13 +313,14 @@ document.querySelectorAll('[data-split-text]').forEach(text => {
     // paused: true,
     scrollTrigger: {
       trigger: text,
+      start: '20% bottom',
       once: true,
     }
   })
   .fromTo(
     text.querySelectorAll('span>span'), 
   { yPercent: 100, skewY: 3 }, 
-  { yPercent: 0, skewY: 0, stagger: 0.05, duration: 1.25, ease: 'power4.out' },
+  { yPercent: 0, skewY: 0, stagger: 0.15, duration: 1.5, ease: 'power4.out' },
   );
 })
 // single effect END
@@ -327,14 +328,16 @@ document.querySelectorAll('[data-split-text]').forEach(text => {
 
 /*SIngle effect  */
     const paralaxImages = document.querySelectorAll(
-      '.wow__left>*',
+      '.wow__left>*, .communication__h5',
     );
     paralaxImages.forEach(image => {
-     const $wrap = wrap(image);
-     gsap.set($wrap, { overflow: 'hidden' });
-      gsap.from($wrap.querySelector(':first-child'), {
+    //  const $wrap = wrap(image);
+
+    image.innerHTML = '<div>'+ image.innerHTML +'</div>'
+     gsap.set(image, { overflow: 'hidden', height: 'max-content' });
+      gsap.from(image.querySelector('div'), {
         scrollTrigger: {
-          trigger: $wrap,
+          trigger: image,
           once: true,
         },
         ease: 'power4.out',
@@ -429,9 +432,7 @@ document.querySelectorAll('[class*="partners__image"]:nth-child(even)').forEach(
   el.classList.add('little-move-r')
 });
 
-
-document.querySelectorAll('[data-first-entry]').forEach(span => {
-
+document.querySelectorAll('[data-first-entry]').forEach((span, i) => {
   span.addEventListener('mouseenter',function(evt){
     gsap.to(span, { x: 10 })
   });
@@ -451,7 +452,9 @@ document.querySelectorAll('[data-first-entry]').forEach(span => {
     y: 0,
     autoAlpha: 1,
     ease: 'power4.out',
-    duration: 2
+    delay: i * 0.1,
+    duration: 2.5,
+
   })
   .set($wrap, { overflow: 'initial' })
 });
@@ -465,21 +468,21 @@ document.querySelectorAll('.partners__text').forEach(text => {
     ease: "none",
     scrollTrigger: {
       trigger: ".partners__wrapper",
-      // start: "top top",
+      start: "-150px top",
       // end: "+=300%",
       scrub: 0.1,
       pin: '.partners__text div',
       onEnter: () => {
-        gsap.to('.partners__text', { 
-          y: height,
-          duration: 0.2,
-        })
+        // gsap.to('.partners__text', { 
+        //   y: height,
+        //   duration: 0.2,
+        // })
       },
       onLeaveBack: () => {
-        gsap.to('.partners__text', { 
-          y: 0,
-          duration: 0.2,
-        })
+        // gsap.to('.partners__text', { 
+        //   y: 0,
+        //   duration: 0.2,
+        // })
       }
     }
   });
@@ -572,9 +575,17 @@ document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
   showreelButton.addEventListener('click',function(evt){
     Swal.fire({
       width: 'auto',
+      showCloseButton: true,
       showConfirmButton: false,
+      padding: '20px',
+      showClass: {
+        popup: 'fade-in-top'
+      },
+      hideClass: {
+        popup: 'fade-out-bottom'
+      },
       html: `
-      <video width="640" height="400" muted autoplay controls>
+      <video muted autoplay controls playsinline>
         <source src="${showreelButton.dataset.showreel}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -584,4 +595,88 @@ document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
       }
     })
   });
+});
+
+ScrollTrigger.create({
+  trigger: '.main-screen__call-popup .rotate-group',
+  once: true,
+  onEnter: () => {
+    gsap.timeline()
+      .add(() => {
+        document.querySelector('.main-screen__call-popup .rotate-group').style.animationDuration = '1s';
+      })
+      .fromTo('.main-screen__call-popup svg', {
+        scale: 0,
+        autoAlpha: 0
+      }, {
+        scale: 1.2,
+        autoAlpha: 1,
+        duration: 1.25
+      })
+      .to('.main-screen__call-popup svg', {
+        scale: 1
+      })
+      .to('.main-screen__call-popup .rotate-group', {
+        animationDuration: '7s',
+        duration: 2,
+      })
+      // .add(() => {
+      //   document.querySelector('.main-screen__call-popup .rotate-group').style.animationDuration = '7s';
+      // })
+      // .set('.main-screen__call-popup .rotate-group', {
+      //   animationDuration: 7,
+      // })
+      
+  }
+})
+
+
+
+document.querySelectorAll('[data-about-entry]').forEach(el => {
+  el.innerHTML = '<div>'+ el.innerHTML +'</div>';
+  el.style.overflow = 'hidden';
+})
+ScrollTrigger.create({
+  trigger: '.about',
+  start: '20% bottom',
+  once: true,
+  onEnter: () => {
+    gsap.fromTo('[data-about-entry]>div', {
+      yPercent: 100
+    }, {
+      
+      yPercent: 0,
+      stagger: 0.15,
+      duration: 1.5,
+       ease: 'power4.out'
+    })
+  }
+})
+document.querySelectorAll('.partners__wrapper>a').forEach(el => {
+  el.innerHTML = '<div>'+ el.innerHTML +'</div>';
+  el.style.overflow = 'hidden';
+  el.timeline = gsap.timeline({
+
+  })
+})
+
+const partTimeline = gsap.timeline({
+  paused: true,
+})
+.fromTo('.partners__wrapper>a>div', {
+  yPercent: 100
+}, {
+  
+  yPercent: 0,
+  stagger: 0.05,
+  duration: 0.5,
+   ease: 'power4.out'
+})
+ScrollTrigger.create({
+  trigger: '.partners__wrapper',
+  start: '20% bottom',
+  once: true,
+  onEnter: () => {
+    partTimeline.play();
+  }
 })

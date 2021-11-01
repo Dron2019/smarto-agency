@@ -2203,7 +2203,7 @@ $base-color: #000;
 .button--atlas:hover .marquee__inner {
 	animation-play-state: running;
 	opacity: 1;
-	transition-duration: 0.4s;
+	// transition-duration: 0.4s;
 }
 
 
@@ -2258,4 +2258,23 @@ button.swal2-confirm.swal2-styled {
 .swal2-popup.swal2-modal {
   background-color: var(--color-red);
   border-radius: 0;
+}
+
+
+.swal2-close:focus {
+  box-shadow: none !important;
+}
+
+.swal2-close {
+  margin-bottom: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.swal2-html-container {
+  margin: 0 !important;
+}
+
+.swal2-show {
+  padding-top: 0 !important;
 }
