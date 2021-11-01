@@ -104,3 +104,18 @@
 	-webkit-animation: fade-out-bottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: fade-out-bottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+.swal2-html-container video {
+    width: 80vw;
+    height: calc(80vw / 1280 * 720);
+    @include to(575px){
+        width: 100vw;
+        height: calc(100vw / 1280 * 720);
+    }
+}
+
+.swal2-close {
+    position: fixed;
+    right: 0%;
+    top: 0%;
+}

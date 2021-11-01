@@ -383,20 +383,20 @@ addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0],
     }
   })
 });
-const aStationSequence = document.querySelectorAll('[data-sequence]')[2];
-addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],() => {
+// const aStationSequence = document.querySelectorAll('[data-sequence]')[2];
+// addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[1],() => {
 
-  const fake3d3 = fake3d(aStationSequence, aStationSequence.dataset.sequence, 100);
-  if (fake3d3 === undefined) return;
-  ScrollTrigger.create({
-    trigger: document.querySelectorAll('[data-sequence]')[2],
-    onUpdate: ({progress}) => {
-      const scaleFactor = fake3d3.imagesCount / 100; 
-      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
-      fake3d3.changeImage(percentage);
-    }
-  })
-});
+//   const fake3d3 = fake3d(aStationSequence, aStationSequence.dataset.sequence, 50);
+//   if (fake3d3 === undefined) return;
+//   ScrollTrigger.create({
+//     trigger: document.querySelectorAll('[data-sequence]')[2],
+//     onUpdate: ({progress}) => {
+//       const scaleFactor = fake3d3.imagesCount / 100; 
+//       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+//       fake3d3.changeImage(percentage);
+//     }
+//   })
+// });
 
 
 const bogunSequenceEl = document.querySelector('[data-sequence-bogun]');
@@ -577,7 +577,7 @@ document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
       width: 'auto',
       showCloseButton: true,
       showConfirmButton: false,
-      padding: '20px',
+      padding: '0px',
       showClass: {
         popup: 'fade-in-top'
       },
@@ -585,7 +585,7 @@ document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
         popup: 'fade-out-bottom'
       },
       html: `
-      <video muted autoplay controls playsinline>
+      <video playsinline src="${showreelButton.dataset.showreel}" autoplay loop controls="controls">
         <source src="${showreelButton.dataset.showreel}" type="video/mp4">
         Your browser does not support the video tag.
       </video>

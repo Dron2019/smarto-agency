@@ -2256,7 +2256,7 @@ button.swal2-confirm.swal2-styled {
 }
 
 .swal2-popup.swal2-modal {
-  background-color: var(--color-red);
+  background-color: transparent;
   border-radius: 0;
 }
 
@@ -2278,3 +2278,4 @@ button.swal2-confirm.swal2-styled {
 .swal2-show {
   padding-top: 0 !important;
 }
+
