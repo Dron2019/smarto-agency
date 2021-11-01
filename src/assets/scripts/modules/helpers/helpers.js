@@ -46,7 +46,7 @@ export function loader(callback, config, nameProject) {
   const timesToTest = 3;
   const tThreshold = 400; // ms
   const numImage = 1;
-  const testImage = `./assets/images/jpg/andriyivsky-city-space.jpg`; // small image in your server
+  const testImage = `/wp-content/themes/smartoagency/assets/images/jpg/andriyivsky-city-space.jpg`; // small image in your server
   const dummyImage = new Image();
   let isConnectedFast = false;
 

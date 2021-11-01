@@ -103,7 +103,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
                     currentDisplayedImage = posInPercent;
                 })
                 tlBig
-                    .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 })
+                    // .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 })
                     .play();
             } else if (+currentDisplayedImage < +posInPercent) {
                 const tlBig =  gsap.timeline({ immediateRender: true });
@@ -116,7 +116,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
                     currentDisplayedImage = posInPercent;
                 })
                 tlBig
-                    .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 })
+                    // .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 })
                     .play();
                 
             }
@@ -125,7 +125,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
     if (currentDisplayedImage !== posInPercent && array[posInPercent] !== undefined && isAnimating === false) {
         gsap.timeline()
         .set(containerToAdd, { attr: { src: array[posInPercent] } })
-        .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 });
+        // .to(containerToAdd, { x: posInPercent/-100, duration: 0.5 });
             currentDisplayedImage = posInPercent;
         }
     }
