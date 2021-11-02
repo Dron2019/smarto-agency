@@ -12,12 +12,15 @@ const config = {
     if (name === 'index') {
       acc[name] = './src/assets/scripts/index-app.js';
       console.warn('Dont use index.js in gulp-modules folder, it will be ignored')
-    } else {
+    } 
+    else if (name === 'libs') {
+      console.log('libs script ingrored by webpack');
+    }
+    else {
       acc[name] = item;
     }
     return acc;
   }, {}),
-  
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './assets/scripts/'),

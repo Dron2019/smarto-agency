@@ -1,4 +1,3 @@
-import LocomotiveScroll from 'locomotive-scroll';
 import i18next from 'i18next';
 import gsap from 'gsap';
 import axios from 'axios';
@@ -12,17 +11,6 @@ import SexyInput from '../../pug/components/input/input';
  */
 global.gsap = gsap;
 global.axios = axios;
-
-/* eslint-disable-next-line */
-const locoScroll = new LocomotiveScroll({
-  el: document.querySelector('[data-scroll-container]'),
-  smooth: true,
-  lerp: 0.05,
-  smoothMobile: false,
-  inertia: 1.1,
-});
-locoScroll.destroy();
-global.locoScroll = locoScroll;
 /*
  * smooth scroll end
  */
@@ -95,25 +83,6 @@ formsWithTel.forEach(form => {
   }
 });
 
-
-/*
- * form handlers end
- */
-function disableScroll() {
-  const containersScroll = document.querySelectorAll('[data-disable-page-scroll]');
-  containersScroll.forEach(block => {
-    block.addEventListener('mouseenter', () => {
-      // locoScroll.stop();
-    });
-    block.addEventListener('mouseleave', () => {
-      // locoScroll.start();
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  disableScroll();
-  window.locoScroll.update();
-});
 /** ******************************* */
 
+console.log('i here');
