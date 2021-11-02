@@ -15,22 +15,22 @@ jobs:
         node-version: [14.x]
     
     steps:
-    - uses: actions/checkout@v2
+    # - uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
 
     - name: Build
       run: |
-        npm install
-        gulp prod
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: smartora.ftp.tools
-        username: smartora_main_verst
-        password: 3c4SE7Nvp5cL
-        local-dir: ./prod/
-        server-dir: /
+        ls
+    #     npm install
+    #     gulp prod
+    # - name: 📂 Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@4.1.0
+    #   with:
+    #     server: smartora.ftp.tools
+    #     username: smartora_main_verst
+    #     password: 3c4SE7Nvp5cL
+    #     local-dir: ./prod/
