@@ -87,7 +87,7 @@ const paths = {
 				dest: './src/assets/svg-sprite/sprite/'
 		},
 		gulpModules: {
-				src: './src/assets/scripts/gulp-modules/*.js',
+				src: './src/assets/scripts/gulp-modules/**/*.js',
 				dest: './dist/assets/scripts/'
 		},
 		libs: {

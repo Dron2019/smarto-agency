@@ -33,16 +33,16 @@ block meta
 block head
   link(rel='stylesheet' href="./assets/styles/main.min.css")
 block scripts
-  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
+  //- script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
   //- script(defer src='./assets/scripts/vendors.bundle.js')
   script(defer src='./assets/scripts/index.bundle.js')
   //- script(defer src='./assets/scripts/index-app.js')
-  script(defer src='./assets/scripts/libs.js')
-  <script defer  src='https://tympanus.net/Development/DecorativeBackgrounds/js/three.min.js'></script>
+  //- script(defer src='./assets/scripts/libs.js')
+  script(defer src='./assets/scripts/three/three.js')
+  //- <script defer  src='https://tympanus.net/Development/DecorativeBackgrounds/js/three.min.js'></script>
   <script defer  src='./assets/scripts/perlin.js'></script>
   script(defer src='./assets/scripts/home.bundle.js')
 block content
-  //- include ../includes/breadcrumbs.pug
   #up.container1.main-screen
     canvas(data-canvas)
     include ../pages-components/index/main-screen-svg.svg
@@ -111,7 +111,7 @@ block content
       .wow__logo-1
         a(href="#") 
           img(src="./assets/images/svg/saga.svg" alt="saga") 
-    .wow__image(data-sequence)
+    .wow__image(data-sequence="./static/andr.json")
       img(data-webgl1="./assets/images/jpg/andriyivsky-city-space.jpg" src="./assets/images/jpg/andriyivsky-city-space.jpg" alt="andriyivsky-city-space")
       img.wow__image-logo-1(src="./assets/images/svg/andriyivsky-city-space.svg" alt="andriyivsky-city-space")
     .wow__year 2021
@@ -169,7 +169,7 @@ block content
       .wow__logo-2
         a(href="#") 
           img(src="./assets/images/svg/linevich-group.svg" alt="linevich-group") 
-    .wow__image(data-sequence)
+    .wow__image(data-sequence="./static/grand-byrzhe.json")
       img( data-webgl1="./assets/images/jpg/linevich-group.jpg" src="./assets/images/jpg/linevich-group.jpg" alt="linevich-group")
       img.wow__image-logo-2(src="./assets/images/svg/grandbourget.svg" alt="grandbourget")
     .wow__year 2021
@@ -285,7 +285,7 @@ block content
       //- .wow__logo-3
       //-   a(href="#") 
       //-     img(src="./assets/images/svg/development.svg" alt="development") 
-    .wow__image(data-sequence-bogun)
+    .wow__image(data-sequence-bogun="./static/bogun.json")
       img(data-webgl1="./assets/images/jpg/a-station.jpg" src="./assets/images/bogun/20.jpg" alt="a-station")
       img.wow__image-logo-3(src="./assets/images/bogun-logo.svg" alt="bogun city")
     .wow__year 2021
