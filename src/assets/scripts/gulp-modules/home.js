@@ -348,7 +348,10 @@ loader(({fastSpeed}) => {
         onUpdate: ({progress}) => {
           const scaleFactor = fake3d1.imagesCount / 100; 
           const percentage = ((progress * 100) * scaleFactor).toFixed(0);
-          fake3d1.changeImage(percentage);
+          requestAnimationFrame(() => {
+            fake3d1.changeImage(percentage);
+          })
+          // fake3d1.changeImage(percentage);
         }
       })
     })
@@ -367,7 +370,9 @@ addIntersectionOnceWithCallback(document.querySelectorAll('[data-sequence]')[0],
       
       const scaleFactor = fake3d2.imagesCount / 100; 
       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
-      fake3d2.changeImage(percentage);
+      requestAnimationFrame(() => {
+        fake3d2.changeImage(percentage);
+      })
     }
   })
 });
@@ -397,7 +402,9 @@ addIntersectionOnceWithCallback(bogunSequenceEl,() => {
     onUpdate: ({progress}) => {
       const scaleFactor = fakeBogun.imagesCount / 100; 
       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
-      fakeBogun.changeImage(percentage);
+      requestAnimationFrame(() => {
+        fakeBogun.changeImage(percentage);
+      })
     }
   })
 })

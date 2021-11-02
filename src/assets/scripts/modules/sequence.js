@@ -13,7 +13,7 @@ export default function fake3d(containerArg, path = '/wp-content/themes/bogun/as
         top: 0;
         object-fit: cover;
         object-position: bottom;
-        will-change: transform;
+        will-change: contents;
         z-index: -1;
     `;
     const container = containerArg;
