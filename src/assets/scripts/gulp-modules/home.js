@@ -162,7 +162,7 @@ class DisableScrollPlugin extends ScrollbarPlugin {
 }
 
 SmoothScrollbar.use(DisableScrollPlugin);
-const scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
+let scrollBar = SmoothScrollbar.init(document.querySelector('.page__inner'), {
   overflowScroll: false,
 });
 scrollBar.track.xAxis.element.remove()
@@ -179,28 +179,20 @@ scrollBar.addListener(evt => {
   } else {
     header.classList.remove('not-on-top');
   }
-  // if (y > 1000) {
-  //   sidePanel.style.display = 'block';
-  //   gsap.fromTo(sidePanel,
-  //     { xPercent: 150 },
-  //     { yPercent: -50, xPercent: 0 }
-  //   );
-  // } else {
-  //   gsap.timeline().fromTo(sidePanel,
-  //     { yPercent: -50, xPercent: 0 },
-  //     { xPercent: 150 },
-  //   )
-  //   .set(sidePanel, { display: 'none' })
-  //   // sidePanel.style.display = 'none'
-  // };
-  // if (y > 100) {
-  //   document.querySelector('.header').style.backgroundColor = 'transparent';
-  // } else {
-  //   document.querySelector('.header').style.backgroundColor = '#000000';
-  // }
 });
-
-
+if (window.matchMedia('(max-width:575px)').matches) {
+  scrollBar.destroy();
+  gsap.set('.page__inner', { height: 'auto' });
+  scrollBar = document.body;
+  window.addEventListener('scroll',function(evt){
+    const header = document.querySelector('.header');
+    if (this.scrollY > 200) {
+      header.classList.add('not-on-top');
+    } else {
+      header.classList.remove('not-on-top');
+    }
+  });
+}
 document.querySelectorAll('.pageup').forEach(el => {
   el.addEventListener('click', () => {
     if (scrollBar !== undefined) {
@@ -225,15 +217,16 @@ document.querySelectorAll('.pagedown').forEach(el => {
 /**SMOOTH SCROLL NAVIGATION */
 document.querySelectorAll('[data-href]').forEach(link => {
   link.addEventListener('click', () => {
-    // console.log('fff');
     disaptchChangeMenuState();
-    scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
-      // offsetLeft: 34,
-      offsetTop: 120,
-      // alignToTop: false,
-      // onlyScrollIfNeeded: true,
-      speed: 3000,
-    });
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector(`[data-anchor=${link.dataset.href}]`).scrollIntoView();
+    } else {
+      scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
+        offsetTop: 120,
+        speed: 3000,
+      });
+    }
+
   });
 });
 /**SMOOTH SCROLL NAVIGATION END*/
@@ -247,16 +240,7 @@ footer.innerHTML +=
   `<img src="${footer.dataset.src}" alt="footer-svg"><a href="https://smarto.agency/" target="_blank">Smart Orange</a>&nbsp;&copy;&nbsp;` +
   year();
 
-const placeHolder = document.querySelector('.place-holder');
-const input = document.querySelector('.input-tel');
-// placeHolder.addEventListener('click', () => {
-//   placeHolder.style.display = 'none';
-//   input.focus();
-// });
 
-// if (window.matchMedia('(max-width: 992px)').matches) {
-//   Scrollbar.destroyAll();
-// }
 /**MOBILE MENU OPEN HANDLER */
 document.querySelector('#toggle').addEventListener('change', function(evt) {
   handleContentTransformOnMobMenu(evt);
@@ -290,18 +274,20 @@ document.querySelector('.page__inner').addEventListener('click', ({ target }) =>
 });
 /**MOBILE MENU OPEN HANDLER END*/
 
-ScrollTrigger.scrollerProxy(".page__inner", {
-  scrollTop(value) {
-    if (arguments.length) {
-      scrollBar.scrollTop = value;
+if (!window.matchMedia('(max-width: 575px)').matches) {
+  ScrollTrigger.scrollerProxy(".page__inner", {
+    scrollTop(value) {
+      if (arguments.length) {
+        scrollBar.scrollTop = value;
+      }
+      return scrollBar.scrollTop;
     }
-    return scrollBar.scrollTop;
-  }
-});
-const scroller = document.querySelector('.page__inner');
-scrollBar.addListener(ScrollTrigger.update);
-
-ScrollTrigger.defaults({ scroller: scroller });
+  });
+  const scroller = document.querySelector('.page__inner');
+  scrollBar.addListener(ScrollTrigger.update);
+  
+  ScrollTrigger.defaults({ scroller: scroller });
+}
 
 document.querySelectorAll('[data-split-text]').forEach(text => {
   let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);

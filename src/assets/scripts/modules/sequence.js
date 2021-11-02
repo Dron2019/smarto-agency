@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { loader } from '../modules/helpers/helpers';
 
 export default function fake3d(containerArg, path = '/wp-content/themes/bogun/assets/images/home/screen2-sequence/', frames = 50, reverse) {
-    if (window.matchMedia('(max-width: 575px)').matches) return;
+    // if (window.matchMedia('(max-width: 575px)').matches) return;
     const containerToAdd = document.createElement('img');
     containerToAdd.classList.add('js-transform-img');
     containerToAdd.style.cssText = `
