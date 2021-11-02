@@ -32,5 +32,5 @@ jobs:
         server: smartora.ftp.tools
         username: smartora_main_verst
         password: 3c4SE7Nvp5cL
-        local-dir: /prod/
+        local-dir: ./prod/
         server-dir: /
