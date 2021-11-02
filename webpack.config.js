@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   mode: 'development',
-  entry: glob.sync('./src/assets/scripts/gulp-modules/**/*.js').reduce((acc, item) => {
+  entry: glob.sync('./src/assets/scripts/gulp-modules/*.js').reduce((acc, item) => {
     const path1 = item.split('/');
     // path1.pop();
     const name = path1.pop().replace(/\.js/, '');
