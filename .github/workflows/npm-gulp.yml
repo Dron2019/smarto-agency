@@ -23,9 +23,9 @@ jobs:
     #     node-version: ${{ matrix.node-version }}
 
     - name: Build
-      echo ${{ steps.ip.outputs.ipv4 }}
-      echo ${{ steps.ip.outputs.ipv6 }}
-    #   run: |
+      run: |
+        echo ${{ steps.ip.outputs.ipv4 }}
+        echo ${{ steps.ip.outputs.ipv6 }}
     #     npm install
     #     gulp prod
     # - name: 📂 Sync files
