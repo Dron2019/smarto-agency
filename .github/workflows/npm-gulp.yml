@@ -1,0 +1,36 @@
+name: NodeJS with Gulp
+
+on:
+  push:
+    branches: [ main, new-sequence-load ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        npm install
+        gulp
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: smartora.ftp.tools
+        username: smartora_main_verst
+        password: smartora.ftp.tools
+        local-dir: /dist/
+        server-dir: /
