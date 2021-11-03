@@ -2,9 +2,9 @@ name: NodeJS with Gulp
 
 on:
   push:
-    branches: [ main1, new-sequence-load1 ]
+    branches: [ main, new-sequence-load1 ]
   pull_request:
-    branches: [ main1 ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
       with:
         server: smartora.ftp.tools
         username: smartora_main_verst
-        password: 3c4SE7Nvp5cL
-        local-dir: ./src/
+        password: ${{ secrets.pass }}
+        local-dir: ./src/pug
