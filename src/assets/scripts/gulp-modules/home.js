@@ -216,10 +216,12 @@ document.querySelectorAll('.pagedown').forEach(el => {
 /**SMOOTH SCROLL END*/
 /**SMOOTH SCROLL NAVIGATION */
 document.querySelectorAll('[data-href]').forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (evt) => {
+    evt.preventDefault();
     disaptchChangeMenuState();
     if (window.matchMedia('(max-width: 575px)').matches) {
-      document.querySelector(`[data-anchor=${link.dataset.href}]`).scrollIntoView();
+      document.querySelector(`[data-anchor="${link.dataset.href}"]`).scrollIntoView();
+      console.log(document.querySelector(`[data-anchor="${link.dataset.href}"]`));
     } else {
       scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${link.dataset.href}]`), {
         offsetTop: 120,
@@ -244,13 +246,26 @@ footer.innerHTML +=
 /**MOBILE MENU OPEN HANDLER */
 document.querySelector('#toggle').addEventListener('change', function(evt) {
   handleContentTransformOnMobMenu(evt);
+  const mobMenu = document.querySelector('#toggle');
+  if (mobMenu.checked && window.matchMedia('(max-width: 575px)').matches) {
+    gsap.set('nav a', { width: 'auto'})
+  } else {
+    gsap.set('nav a', { width: ''})
+  }
 });
 
 function disaptchChangeMenuState() {
   const mobMenu = document.querySelector('#toggle');
   if (mobMenu.checked) {
+    // gsap.to
     mobMenu.checked = false;
     mobMenu.dispatchEvent(new Event('change'));
+  }
+  console.log(mobMenu.checked && window.matchMedia('(max-width: 575px)').matches);
+  if (mobMenu.checked && window.matchMedia('(max-width: 575px)').matches) {
+    gsap.set('nav .a', { width: 'auto'})
+  } else {
+    gsap.set('nav .a', { width: ''})
   }
 }
 
