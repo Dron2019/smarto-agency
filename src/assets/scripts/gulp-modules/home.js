@@ -690,3 +690,12 @@ ScrollTrigger.create({
     partTimeline.play();
   }
 })
+
+
+
+
+document.querySelectorAll('.langs__hover a').forEach(el=> {
+  el.onclick = () => {
+    console.log('dfweagfe');
+  }
+})

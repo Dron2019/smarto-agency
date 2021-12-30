@@ -30,6 +30,17 @@
   * {
     pointer-events: all;
   }
+  &>.langs {
+    position: absolute;
+    right: calc(var(--page-side-fields) + 46px + 40px);
+    top: 50%;
+    z-index: 2;
+    // transform: translateY(-50%);
+    @include from(576px){
+      display: none;
+    }
+    z-index: 3;
+  }
   &__links {
     // background-color: var(--color-red);
     letter-spacing: 0.05em;
@@ -309,19 +320,23 @@
   a {
     text-decoration: none;
     transition: color .5s ease-in-out;
+    color: var(--color-white);
+    @include to(575px){
+      -webkit-tap-highlight-color: red;
+    }
   }
   &__hover {
     position: absolute;
     left: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateZ(10px);
     width: calc(100% - var(--decor-width) - 6px);
     display: flex;
     flex-direction: column;
     transition: .5s ease-in-out;
     opacity: 0;
-    z-index: 2;
-
+    z-index: 10;
+    align-items: flex-start;
     :nth-child(n+2) {
       margin-top: 6px;
     }
@@ -331,6 +346,7 @@
   }
   &:hover &__current {
     opacity: 0;
+    pointer-events: none;
   }
   &:hover &__hover {
     opacity: 1;

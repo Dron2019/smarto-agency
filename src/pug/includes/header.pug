@@ -26,12 +26,17 @@ header.header
     source(media="(min-width: 577px)" srcset="assets/images/logo-mobile.svg")
     source(media="(max-width: 576px)" srcset="assets/images/logo-mobile-320.svg")
     img(src="assets/images/logo.svg")
+  .langs
+    span.langs__current ua
+    .langs__hover
+      a(href="#") ua
+      a(href="#") ru
   .header__links
     .langs
       span.langs__current ua
       .langs__hover
-        a ua
-        a ru
+        a(href="#") ua
+        a(href="#") ru
     each val in links
       a(href="#" data-href=val[1] class=val[2]) #{val[0]} 
     a(href="./static/Smart_Orange_Presentation_compressed.pdf" target='_blank' class="nav-item") PDF ПРЕЗЕНТАЦІЯ
