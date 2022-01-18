@@ -106,8 +106,11 @@
 }
 
 .swal2-html-container video {
-    width: 80vw;
-    height: calc(80vw / 1280 * 720);
+    // width: 80vw;
+    // height: calc(80vw / 1280 * 720);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     @include to(575px){
         width: 100vw;
         height: calc(100vw / 1280 * 720);

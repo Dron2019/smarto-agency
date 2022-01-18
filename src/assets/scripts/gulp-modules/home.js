@@ -699,3 +699,15 @@ document.querySelectorAll('.langs__hover a').forEach(el=> {
     console.log('dfweagfe');
   }
 })
+
+window.addEventListener('click', function showreel(){
+  if (sessionStorage.getItem('first-visit') === null) {
+    setTimeout(() => {
+      
+    }, 2000);
+    document.querySelector('[data-showreel]').dispatchEvent(new Event('click'));
+    document.querySelector('video').play();
+  }
+  sessionStorage.setItem('first-visit', true);
+  window.removeEventListener('click', showreel);
+})

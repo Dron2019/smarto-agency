@@ -96,7 +96,7 @@
     &__links {
       padding: 56px 0px 20px 20px;
       font-size: 14px;
-      a:nth-last-child(n + 2) {
+      :nth-last-child(n + 2) {
         // margin-bottom: 15px;
         margin-right: 30px;
       }
