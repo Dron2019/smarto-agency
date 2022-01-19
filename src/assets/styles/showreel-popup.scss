@@ -76,6 +76,10 @@
         top: calc(100%  - var(--padding));
         width: 140px;
         height: 140px;
+        @include to(575px){
+            left: 45px;
+            top: calc(100% - 45px);
+        }
     }
     &__logo {
         position: absolute;
