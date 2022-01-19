@@ -761,6 +761,7 @@ function showreelPopup() {
     video.style.opacity = 0;
     video.style.visibility = 'hidden';
     popup.classList.remove(className);
+    video.pause();
     morphingPlayButton(false);
   }
   function closePopup() {
