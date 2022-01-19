@@ -581,31 +581,31 @@ gsap.registerEffect({
 /*SIngle effect  END*/
 
 
-document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
-  showreelButton.addEventListener('click',function(evt){
-    Swal.fire({
-      width: 'auto',
-      showCloseButton: true,
-      showConfirmButton: false,
-      padding: '0px',
-      showClass: {
-        popup: 'fade-in-top'
-      },
-      hideClass: {
-        popup: 'fade-out-bottom'
-      },
-      html: `
-      <video playsinline src="${showreelButton.dataset.showreel}" autoplay loop controls="controls">
-        <source src="${showreelButton.dataset.showreel}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      `,
-      customClass: {
-        confirmButton: 'button'
-      }
-    })
-  });
-});
+// document.querySelectorAll('[data-showreel]').forEach(showreelButton => {
+//   showreelButton.addEventListener('click',function(evt){
+//     Swal.fire({
+//       width: 'auto',
+//       showCloseButton: true,
+//       showConfirmButton: false,
+//       padding: '0px',
+//       showClass: {
+//         popup: 'fade-in-top'
+//       },
+//       hideClass: {
+//         popup: 'fade-out-bottom'
+//       },
+//       html: `
+//       <video playsinline src="${showreelButton.dataset.showreel}" autoplay loop controls="controls">
+//         <source src="${showreelButton.dataset.showreel}" type="video/mp4">
+//         Your browser does not support the video tag.
+//       </video>
+//       `,
+//       customClass: {
+//         confirmButton: 'button'
+//       }
+//     })
+//   });
+// });
 
 ScrollTrigger.create({
   trigger: '.main-screen__call-popup .rotate-group',
@@ -716,29 +716,69 @@ document.querySelectorAll('.langs__hover a').forEach(el=> {
 
 
 function showreelPopup() {
+  const callPopup = document.querySelectorAll('[data-showreel]');
   const popup = document.querySelector('[data-showreel-popup-popup]');
   const close = popup.querySelector('[class*="close"]');
   const play = popup.querySelector('[class*="play"]');
   const video = popup.querySelector('video');
-
-  if (sessionStorage.getItem('first-visit') === null) {
-    document.querySelector('[data-showreel-popup-popup]').classList.remove('hidden');
+  const className = 'playing';
+  const morphs = {
+    default: play.querySelector('path').getAttribute('d'),
+    custom: 'M 150 197 V 150 C 150 150 199 150 199 150 L 199 197 C 199 197 199 197 199 197 L 150 197 C 150 197 150 197 150 197 Z'
   }
-  close.addEventListener('click', () => {
-    popup.classList.add('hidden');
-  })
+  if (sessionStorage.getItem('first-visit') === null) {
+    openPopup();
+    sessionStorage.setItem('first-visit', true);
+  }
+  
+  
+  callPopup.forEach(el => el.addEventListener('click',  openPopup))
+  close.addEventListener('click', closePopup)
   play.addEventListener('click',function(evt){
     console.log('d');
+
+    if (popup.classList.contains(className)) {
+      pauseVideo();
+      
+    } else {
+      playVideo();
+      
+    }
+  });
+
+  video.addEventListener('pause', () => {
+    pauseVideo();
+  })
+
+  function playVideo(){
     video.style.opacity = 1;
     video.style.visibility = 'visible';
     video.play();
-  });
-  video.addEventListener('play', () => {
-  })
-  video.addEventListener('pause', () => {
-    console.log('PEUSE');
+    popup.classList.add(className);
+    morphingPlayButton(true);
+  }
+  function pauseVideo() {
     video.style.opacity = 0;
     video.style.visibility = 'hidden';
-  })
+    popup.classList.remove(className);
+    morphingPlayButton(false);
+  }
+  function closePopup() {
+    gsap.fromTo(popup, { autoAlpha: 1 }, { autoAlpha: 0 });
+    pauseVideo();
+  }
+  function openPopup() {
+    gsap.fromTo(popup, { autoAlpha: 0 }, { autoAlpha: 1 })
+  }
+
+  function morphingPlayButton(isPlaying) {
+    
+    console.log(morphs);
+    gsap.to(play.querySelector('path'), {
+      attr: { d: isPlaying ? morphs.custom : morphs.default },
+      ease: 'none',
+      duration: 0.15
+    })
+  }
 }
 showreelPopup()

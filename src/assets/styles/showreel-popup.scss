@@ -14,9 +14,14 @@
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
+    opacity: 0;
+    visibility: hidden;
+    @include to(575px){
+        --padding: 20px;
+    }
     &.hidden {
-        opacity: 0;
-        visibility: hidden;
+        // opacity: 0;
+        // visibility: hidden;
     }
     &__title {
         position: absolute;
@@ -27,6 +32,20 @@
         position: absolute;
         top: var(--padding);
         right: var(--padding);
+        cursor: pointer;
+        z-index: 1;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        circle,
+        path {
+            transition: .5s ease-in-out;
+        }
+        @include to(575px){
+            width: 40px;
+            height: 40px;
+        }
     }
     &__play-button {
         position: absolute;
@@ -34,11 +53,43 @@
         top: 50%;
         transform: translate(-50%,-50%);
         cursor: pointer;
+        width: 350px;
+        height: 350px;
+        z-index: 1;
+        transition: .5s ease-in-out;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        circle,
+        path {
+            transition: .5s ease-in-out;
+        }
+        @include to(575px){
+            width: 50vw;
+            height: 50vw;
+        }
+    }
+
+    &.playing &__play-button {
+        left: var(--padding);
+        top: calc(100%  - var(--padding));
+        width: 140px;
+        height: 140px;
     }
     &__logo {
         position: absolute;
         top: var(--padding);
         left: var(--padding);
+        
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        @include to(575px){
+            width: 50vw;
+            height: auto;
+        }
     }
     video {
         position: absolute;
@@ -51,5 +102,28 @@
         opacity: 0;
         transition: opacity .3s ease-in-out;
         visibility: hidden;
+    }
+
+
+    @include from(1025px){
+        
+
+        &__close:hover {
+
+            circle {
+                fill: var(--color-red);
+            }
+            path {
+                stroke: #fff;
+            }
+        }
+        &__play-button:hover {
+            circle {
+                fill: var(--color-red);
+            }
+            path {
+                fill: #fff;
+            }
+        }
     }
 }
