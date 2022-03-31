@@ -64,21 +64,6 @@ for (let j = 0; j < linesAmount; j++) {
   line.hor = true;
   sphere.add(line);
 }
-// for (let j = 0; j < linesAmount; j++) {
-//   const index = j;
-//   const geometry = new THREE.Geometry();
-//   geometry.y = (index / linesAmount) * radius * 2;
-//   for (let i = 0; i <= verticesAmount; i++) {
-//     const vector = new THREE.Vector3();
-//     vector.x = Math.tan((i / linesAmount) * Math.PI * 2);
-//     vector.z = Math.tan((i / linesAmount) * Math.PI * 2);
-//     vector._o = vector.clone();
-//     geometry.vertices.push(vector);
-//   }
-//   const line = new THREE.Line(geometry, material);
-//   sphere.add(line);
-//   line.vert = true;
-// }
 
 function updateVertices(a) {
   for (let j = 0; j < sphere.children.length; j++) {
@@ -228,9 +213,19 @@ document.querySelectorAll('[data-href]').forEach(link => {
         speed: 3000,
       });
     }
-
   });
 });
+
+const elementToScroll = document.querySelector(`[data-anchor=${window.location.hash.replace('#','')}]`);
+if (elementToScroll) {
+  setTimeout(() => {
+    scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${window.location.hash.replace('#','')}]`), {
+      offsetTop: 120,
+      speed: 4500,
+    });
+  }, 1000);
+}
+  console.log(elementToScroll);
 /**SMOOTH SCROLL NAVIGATION END*/
 const year = function() {
   const date = new Date();
