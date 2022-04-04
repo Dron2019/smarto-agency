@@ -5,121 +5,134 @@ import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 // import * as THREE from 'three';
 gsap.registerPlugin(ScrollTrigger);
+global.ScrollTrigger = ScrollTrigger;
 import headerLogo3d from '../modules/3d-header-logo';
 import picturesHoverEffect from '../modules/projects-webgl-hover';
 import fake3d from '../modules/sequence';
 import Swal from 'sweetalert2';
 
 
+
+
+window.addEventListener('lazy-img-load', () => {
+  ScrollTrigger.refresh(true);
+  // console.log('lazy-img-laod');
+})
+
 picturesHoverEffect('[data-webgl]');
 headerLogo3d('[data-canvas-logo]');
 
 /**Шарик на первом Экране */
-const canvas = document.querySelector('[data-canvas]');
-let width = canvas.offsetWidth;
-let height = canvas.offsetHeight;
+function mainScreenBall() {
+  const canvas = document.querySelector('[data-canvas]');
+  if (canvas === null) return;
+  let width = canvas.offsetWidth;
+  let height = canvas.offsetHeight;
 
-const renderer = new THREE.WebGLRenderer({
-  canvas,
-  antialias: true,
-  alpha: true,
-});
-renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-renderer.setSize(width, height);
-renderer.setClearColor(0xffffff, 0);
 
-const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-camera.position.set(0, 0, 375);
-window.camera = camera;
-const sphere = new THREE.Group();
-scene.add(sphere);
-if (window.matchMedia('(max-width: 575px)').matches) {
-  const scaleFactor = 0.8;
-  sphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
-}
-const material = new THREE.LineBasicMaterial({
-  //   color: 0x0C50DB,
-  color: 0xff3300,
-});
-const linesAmount = 18;
-const radius = 100;
-const verticesAmount = 100;
-const verticalLinesAmount = 100;
-
-for (let j = 0; j < linesAmount; j++) {
-
-  const index = j;
-  const geometry = new THREE.Geometry();
-  geometry.y = (index / linesAmount) * radius * 2;
-  for (let i = 0; i <= verticesAmount; i++) {
-    const vector = new THREE.Vector3();
-    vector.x = Math.cos((i / verticesAmount) * Math.PI * 2);
-    vector.z = Math.sin((i / verticesAmount) * Math.PI * 2);
-    vector._o = vector.clone();
-    geometry.vertices.push(vector);
-  }
-  const line = new THREE.Line(geometry, material);
-  line.hor = true;
-  sphere.add(line);
-}
-
-function updateVertices(a) {
-  for (let j = 0; j < sphere.children.length; j++) {
-    const line = sphere.children[j];
-    if (line.hor !== true) break;
-    line.geometry.y += 0.1;
-    if (line.geometry.y > radius * 2) {
-      line.geometry.y = 0;
-    }
-    const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
-    for (let i = 0; i <= verticesAmount; i++) {
-      const vector = line.geometry.vertices[i];
-      var ratio = noise.simplex3(vector.x*0.009, vector.z*0.009 + a*0.0006, line.geometry.y*0.009) * 15;
-      vector.copy(vector._o);
-      vector.multiplyScalar(radiusHeight + ratio);
-      vector.y = line.geometry.y - radius;
-    }
-    line.geometry.verticesNeedUpdate = true;
-  }
-}
-
-sphere.rotation.x = 0.75;
-function render(a) {
-  requestAnimationFrame(render);
-  updateVertices(a);
-  renderer.render(scene, camera);
-}
-
-function onResize() {
-  canvas.style.width = '';
-  canvas.style.height = '';
-  width = canvas.offsetWidth;
-  height = canvas.offsetHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+  });
+  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
   renderer.setSize(width, height);
+  renderer.setClearColor(0xffffff, 0);
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+  camera.position.set(0, 0, 375);
+  window.camera = camera;
+  const sphere = new THREE.Group();
+  scene.add(sphere);
+  if (window.matchMedia('(max-width: 575px)').matches) {
+    const scaleFactor = 0.8;
+    sphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+  }
+  const material = new THREE.LineBasicMaterial({
+    //   color: 0x0C50DB,
+    color: 0xff3300,
+  });
+  const linesAmount = 18;
+  const radius = 100;
+  const verticesAmount = 100;
+  const verticalLinesAmount = 100;
+
+  for (let j = 0; j < linesAmount; j++) {
+
+    const index = j;
+    const geometry = new THREE.Geometry();
+    geometry.y = (index / linesAmount) * radius * 2;
+    for (let i = 0; i <= verticesAmount; i++) {
+      const vector = new THREE.Vector3();
+      vector.x = Math.cos((i / verticesAmount) * Math.PI * 2);
+      vector.z = Math.sin((i / verticesAmount) * Math.PI * 2);
+      vector._o = vector.clone();
+      geometry.vertices.push(vector);
+    }
+    const line = new THREE.Line(geometry, material);
+    line.hor = true;
+    sphere.add(line);
+  }
+
+  function updateVertices(a) {
+    for (let j = 0; j < sphere.children.length; j++) {
+      const line = sphere.children[j];
+      if (line.hor !== true) break;
+      line.geometry.y += 0.1;
+      if (line.geometry.y > radius * 2) {
+        line.geometry.y = 0;
+      }
+      const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
+      for (let i = 0; i <= verticesAmount; i++) {
+        const vector = line.geometry.vertices[i];
+        var ratio = noise.simplex3(vector.x*0.009, vector.z*0.009 + a*0.0006, line.geometry.y*0.009) * 15;
+        vector.copy(vector._o);
+        vector.multiplyScalar(radiusHeight + ratio);
+        vector.y = line.geometry.y - radius;
+      }
+      line.geometry.verticesNeedUpdate = true;
+    }
+  }
+
+  sphere.rotation.x = 0.75;
+  function render(a) {
+    requestAnimationFrame(render);
+    updateVertices(a);
+    renderer.render(scene, camera);
+  }
+
+  function onResize() {
+    canvas.style.width = '';
+    canvas.style.height = '';
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  }
+
+  const mouse = new THREE.Vector2(0.8, 0.5);
+  function onMouseMove(e) {
+    mouse.y = e.clientY / window.innerHeight;
+    mouse.x = e.clientX / window.innerWidth;
+    sphere.rotation.z = -0.25 + (mouse.x * 0.75);
+    sphere.rotation.x = 0.5 + (mouse.y * 0.75);
+
+  }
+
+  requestAnimationFrame(render);
+  document.querySelector('.main-screen').addEventListener('mousemove', onMouseMove);
+  let resizeTm;
+  window.addEventListener('resize', () => {
+    resizeTm = clearTimeout(resizeTm);
+    resizeTm = setTimeout(onResize, 500);
+  });
 }
 
-const mouse = new THREE.Vector2(0.8, 0.5);
-function onMouseMove(e) {
-  mouse.y = e.clientY / window.innerHeight;
-  mouse.x = e.clientX / window.innerWidth;
-  sphere.rotation.z = -0.25 + (mouse.x * 0.75);
-  sphere.rotation.x = 0.5 + (mouse.y * 0.75);
-
-}
-
-requestAnimationFrame(render);
-document.querySelector('.main-screen').addEventListener('mousemove', onMouseMove);
-let resizeTm;
-window.addEventListener('resize', () => {
-  resizeTm = clearTimeout(resizeTm);
-  resizeTm = setTimeout(onResize, 500);
-});
-
-
+mainScreenBall();
 /**Шарик на первом Экране END*/
 /**SMOOTH SCROLL */
 
