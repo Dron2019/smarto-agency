@@ -175,3 +175,23 @@
 	font-weight: 100;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'TenorSans';
+	src: url('../fonts/TenorSans-Regular.eot');
+	src: local('TenorSans-Regular'),
+		url('../fonts/TenorSans-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/TenorSans-Regular.woff') format('woff'),
+		url('../fonts/TenorSans-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'CormorantGaramond';
+	src: url('../fonts/CormorantGaramond-Light.eot');
+	src: local('CormorantGaramond-Light'),
+		url('../fonts/CormorantGaramond-Light.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/CormorantGaramond-Light.woff') format('woff'),
+		url('../fonts/CormorantGaramond-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
