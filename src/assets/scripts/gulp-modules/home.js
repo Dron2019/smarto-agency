@@ -229,16 +229,19 @@ document.querySelectorAll('[data-href]').forEach(link => {
   });
 });
 
-const elementToScroll = document.querySelector(`[data-anchor=${window.location.hash.replace('#','')}]`);
-if (elementToScroll) {
-  setTimeout(() => {
-    scrollBar.scrollIntoView(document.querySelector(`[data-anchor=${window.location.hash.replace('#','')}]`), {
-      offsetTop: 120,
-      speed: 4500,
-    });
-  }, 1000);
+function scrollOnLoadToAnchor() {
+  const elementToScroll = document.querySelector(`[data-anchor="${window.location.hash.replace('#','')}"]`);
+  if (elementToScroll) {
+    setTimeout(() => {
+      scrollBar.scrollIntoView(document.querySelector(`[data-anchor"=${window.location.hash.replace('#','')}]"`), {
+        offsetTop: 120,
+        speed: 4500,
+      });
+    }, 1000);
+  }
+    console.log(elementToScroll);
 }
-  console.log(elementToScroll);
+scrollOnLoadToAnchor();
 /**SMOOTH SCROLL NAVIGATION END*/
 const year = function() {
   const date = new Date();
@@ -422,6 +425,24 @@ addIntersectionOnceWithCallback(bogunSequenceEl,() => {
   if (fakeBogun === undefined) return;
   ScrollTrigger.create({
     trigger: document.querySelector('[data-sequence-bogun]'),
+    onUpdate: ({progress}) => {
+      const scaleFactor = fakeBogun.imagesCount / 100; 
+      const percentage = ((progress * 100) * scaleFactor).toFixed(0);
+      requestAnimationFrame(() => {
+        fakeBogun.changeImage(percentage);
+      })
+    }
+  })
+})
+const ozonSequenceEl = document.querySelector('[data-sequence-ozon]');
+addIntersectionOnceWithCallback(ozonSequenceEl,() => {
+
+  const fakeBogun = fake3d(
+    ozonSequenceEl, 
+    ozonSequenceEl.dataset.sequenceOzon, 34);
+  if (fakeBogun === undefined) return;
+  ScrollTrigger.create({
+    trigger: document.querySelector('[data-sequence-ozon]'),
     onUpdate: ({progress}) => {
       const scaleFactor = fakeBogun.imagesCount / 100; 
       const percentage = ((progress * 100) * scaleFactor).toFixed(0);
