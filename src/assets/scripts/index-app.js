@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 import FormMonster from '../../pug/components/form/form';
 import SexyInput from '../../pug/components/input/input';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 /** ******************************* */
 /*
@@ -11,6 +12,8 @@ import SexyInput from '../../pug/components/input/input';
  */
 global.gsap = gsap;
 global.axios = axios;
+global.ScrollTrigger = ScrollTrigger;
+gsap.registerPlugin(ScrollTrigger);
 /*
  * smooth scroll end
  */
