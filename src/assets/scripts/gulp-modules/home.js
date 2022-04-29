@@ -178,7 +178,8 @@ scrollBar.addListener(evt => {
     header.classList.remove('not-on-top');
   }
 });
-if (window.matchMedia('(max-width:575px)').matches && !window.location.href.match(/grandbourget/)) {
+if (window.matchMedia('(max-width:575px)').matches 
+    && !window.location.href.match(/grandbourget|ozon/)) {
   scrollBar.destroy();
   gsap.set('.page__inner', { height: 'auto' });
   scrollBar = document.body;
