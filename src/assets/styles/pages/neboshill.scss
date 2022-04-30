@@ -591,7 +591,7 @@
         font-size: min(vw(100, 1440), 150px);
         color: #072826;
         @include to(575px) {
-          font-size: 64px;
+          font-size: 54px;
           color: #072826;
         }
       }
@@ -1560,7 +1560,7 @@
       padding: 200px 0 210px;
       position: relative;
       @include to(992px) {
-        padding: 120px 0;
+        padding: 100px 0;
       }
       .crm__deco {
         position: absolute;
@@ -1569,16 +1569,22 @@
         width: 921px;
         height: 1650px;
         z-index: 1;
+        @include to(575px) {
+          bottom: auto;
+          top: 150px;
+          left: -300px;
+          width: 800px;
+          height: 1200px;
+          transform: rotate(17deg);
+        }
       }
       .section-marker__text {
         background: #072826;
       }
       .header-neboshill {
         margin-bottom: 100px;
-        @include to(992px) {
-          margin-bottom: 136px;
-        }
         @include to(575px) {
+          margin-bottom: 50px;
           align-items: flex-start;
           .header-neboshill__name {
             text-align: right;
@@ -1616,6 +1622,14 @@
         right: calc((-1)*(390px/2));
         z-index: -1;
         filter: drop-shadow(0px 100px 70px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 20px #D6DADF);
+        @include to(575px) {
+          width: 260px;
+          height: 260px;
+          right: 50%;
+          transform: translateX(50%);
+          top: auto;
+          bottom: 42%;
+        }
       }
     }
     &__content-item {
@@ -1631,7 +1645,7 @@
       margin-top: 210px;
       padding: 0;
       @include to(575px) {
-        margin-top: 60px;
+        margin-top: 140px;
       }
       &-conteiner {
         @include to(575px) {
@@ -1642,6 +1656,11 @@
     .main-section__img-conteiner .main-deco {
       right: -352px;
       @include to(575px) {
+        display: none;
+      }
+    }
+    @include to(575px) {
+      .header-neboshill__title {
         display: none;
       }
     }
@@ -1661,11 +1680,16 @@
 
     @include to(575px) {
       position: relative;
-      padding: 30px;
-      margin-top: 30px;
-      width: 120%;
+      padding: 40px;
+      margin-top: 50px;
+      width: 100%;
       right: 0;
       bottom: 0;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
       &::after {
         content: "";
         display: inline-block;
@@ -1677,6 +1701,10 @@
         left: 50%;
         top: -29px;
         transform: translate(-50%);
+        @include to(575px) {
+          transform: rotateY(180deg);
+          left: 0;
+        }
       }
     }
     h3 {
@@ -1707,10 +1735,13 @@
         z-index: 2;
         &:nth-child(2) {
           padding-left: 85px;
+          @include to(575px) {
+            padding-left: 0;
+          }
         }
         @include to(575px) {
-          width: 100%;
-          padding-left: 43px;
+          width: 80%;
+          padding-left: 0;
           &:first-child {
             margin-bottom: 40px;
           }
@@ -1742,7 +1773,8 @@
           }
           @include to(575px) {
             font-size: 87px;
-            top: 8px;
+            top: -25px;
+            left: -35px;
           }
         }
       }
@@ -1815,8 +1847,8 @@
     @include to(575px) {
       width: calc(100% - 40px);
       margin-left: 20px;
-      margin-top: 120px;
-      padding: 30px 50px 30px 30px;
+      margin-top: 80px;
+      padding: 40px 28px;
     }
     h3 {
       @include item-title-nebo;
@@ -1829,6 +1861,7 @@
       }
       @include to(575px) {
         white-space: normal;
+        margin-bottom: 20px;
       }
     }
     p {
@@ -1844,7 +1877,7 @@
         padding-left: 10px;
       }
       @include to(575px) {
-        padding-left: 44px;
+        padding-left: 0;
       }
     }
   }
@@ -1865,15 +1898,18 @@
       }
     }
     @include to(575px) {
-      padding: 120px 0;
+      padding: 0 0 100px;
       min-height: auto;
       .section-description {
-        margin-top: 160px;
+        margin-top: 0px;
       }
       .section-marker {
-        top: 120px;
+        top: 0px;
         &__text {
           font-size: 24px;
+          @include to(575px) {
+            font-size: 20px;
+          }
         }
       }
     }
@@ -1883,6 +1919,9 @@
       left: 0;
       z-index: 1;
       height: 100%;
+      @include to(575px) {
+        display: none;
+      }
     }
     .section-marker__text {
       width: 390px;
@@ -1890,6 +1929,10 @@
     .section-content__item {
       width: 55%;
       background: #F4F4F4;
+      @include to(575px) {
+        width: 100%;
+        margin-top: 118px;
+      }
     }
   }
   .crm__video {
@@ -1905,6 +1948,7 @@
 
       @include to(575px) {
         border-radius: 35px;
+        border: 5px solid #072826;
       }
       .video-mobile {
         display: none;
@@ -1933,6 +1977,7 @@
     width: 100%;
     @include to(992px) {
       flex-direction: column;
+      padding: 100px 20px;
     }
   }
   .bg-1, .bg-2, .bg-3 {
@@ -1955,11 +2000,22 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 40%;
+    @include to(575px) {
+      width: 100%;
+      margin-bottom: 50px;
+    }
     h3 {
       @include item-title-nebo;
       font-size: min(vw(40, 1440), 44px);
       color: #072826;
       font-family: 'TenorSans';
+      @include to(1440px) {
+        font-size: 40px;
+      }
+      @include to(575px) {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
     }
     p {
       @include item-text-nebo;
@@ -1970,6 +2026,7 @@
       width: 70%;
       @include to(1440px) {
         font-size: 14px;
+        width: 100%;
       }
     }
     p + p {
@@ -1979,6 +2036,9 @@
   .crm__admin-img {
     width: 55%;
     position: relative;
+    @include to(575px) {
+      width: 100%;
+    }
     img {
       object-fit: contain;
     }
@@ -1989,6 +2049,11 @@
       bottom: 0;
       padding: 20px 30px;
       background-color: #072826;
+      @include to(575px) {
+        width: 100%;
+        border-radius: 0 0 35px 35px;
+        padding: 30px 20px;
+      }
       p {
         color: #FFFFFF;
       }
@@ -1997,6 +2062,14 @@
   .last-item {
     .crm__admin-img {
       width: 48.7%;
+      @include to(575px) {
+        width: 100%;
+      }
+      &:first-child {
+        @include to(575px) {
+          margin-bottom: 50px;
+        }
+      }
     }
   }
   .results {
@@ -2006,12 +2079,9 @@
     background-size: cover;
     position: relative;
     padding: 210px 0 720px;
-    @include to(992px) {
-      padding: 120px 0;
-    }
     @include to(575px) {
       background-image: url(../images/neboshill/bg-results-mob.jpg);
-      z-index: -1;
+      padding: 120px 0 420px;
     }
     .section-content {
       @include to(575px) {
@@ -2020,19 +2090,14 @@
     }
     .header-neboshill {
       margin-bottom: 100px;
-      @include to(992px) {
-        margin-bottom: 136px;
-      }
       @include to(575px) {
-        margin-bottom: 178px;
+        margin-bottom: 50px;
       }
     }
     .section-title {
       align-items: center;
       margin-bottom: 100px;
       @include to(575px) {
-        flex-direction: column;
-        align-items: start;
         margin-bottom: 50px;
       }
       &__num {
@@ -2042,10 +2107,13 @@
       }
       .results__num {
         padding-left: vw(110, 1440);
+        @include to(575px) {
+          padding-left: 20px;
+        }
       }
       .section-title__name {
         @include to(575px) {
-          padding-left: 20px;
+          padding-left: 15px;
         }
       }
       .section-title__name h2 {
@@ -2057,12 +2125,18 @@
     .section-marker__text {
       background: #072826;
       width: 350px;
+      @include to(575px) {
+        width: 100%;
+      }
     }
     .results__item.last-item {
       box-shadow: none;
       img {
         object-fit: cover;
         height: auto;
+        @include to(575px) {
+          object-fit: contain;
+        }
       }
     }
     &__item {
@@ -2079,7 +2153,7 @@
         padding: 50px 40px;
         @include to(575px) {
           width: 100%;
-          padding: 30px 20px;
+          padding: 40px 20px;
         }
         h3 {
           @include item-title-nebo;
@@ -2168,13 +2242,10 @@
       height: 550px;
       position: relative;
       margin-bottom: 0;
-      @include to(992px) {
-        height: 580px;
-      }
       @include to(575px) {
         display: flex;
         justify-content: center;
-        height: 504px;
+        height: auto;
       }
       &-container1 {
         width: 100%;
@@ -2189,9 +2260,6 @@
       height: 100%;
       left: 0;
       top: 0;
-      @include to(575px) {
-        z-index: -1;
-      }
     }
     .result__item-svg {
       position: absolute;
@@ -2215,7 +2283,7 @@
       }
       @include to(575px) {
         padding: 12px;
-        width: calc(100% - 92px);
+        width: 168px;
         min-height: 73px;
         margin-bottom: 12px;
       }
@@ -2248,21 +2316,31 @@
       margin-bottom: 32px;
       border-radius: 20px 20px 0 20px;
       @include to(575px) {
-        margin-bottom: 12px;
+        margin-bottom: 30px;
+        border-radius: 20px 0 20px 0;
       }
     }
     .results__item-cont2 {
       border-radius: 20px 20px 20px 0;
+      @include to(575px) {
+        border-radius: 20px 0 20px 0;
+        margin-bottom: 67px;
+      }
     }
     .results__item-cont4 {
       border-radius: 20px 0 20px 0;
+      @include to(575px) {
+        margin-bottom: 0;
+        margin-left: 65px;
+      }
     }
     .results__item-cont3 {
       position: relative;
       margin-bottom: 155px;
       border-radius: 20px 0 20px 20px;
       @include to(575px) {
-        margin-bottom: 12px;
+        border-radius: 20px 0 20px 0;
+        margin-bottom: 75px;
       }
       &::after {
         content: "";
@@ -2285,9 +2363,11 @@
     position: absolute;
     top: 50px;
     left: 24.38%;
+    z-index: 1;
     @include to(575px) {
       position: initial;
-      margin-left: 78px;
+      margin-left: 91px;
+      margin-top: 50px;
       align-items: start;
     }
   }
@@ -2299,9 +2379,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    z-index: 1;
     @include to(575px) {
       position: initial;
-      margin-left: 78px;
+      margin-left: 91px;
       align-items: start;
     }
   }

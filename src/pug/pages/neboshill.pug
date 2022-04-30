@@ -357,7 +357,10 @@ block content
             source(media="(max-width: 575px)" srcset="./assets/images/neboshill/bg-crm1-mob.jpg")
             img(src="./assets/images/neboshill/bg-crm1.jpg" alt="")
         .crm__functionality-deco
-          img(src="./assets/images/neboshill/crm-laptop.png" alt="")
+          picture
+            source(media="(max-width: 575px)" srcset="./assets/images/neboshill/crm-laptop-mob.png")
+            img(src="./assets/images/neboshill/crm-laptop.png" alt="")
+
         .crm__functionality-item
           h3 CRM Functionality
           p All in one system for property management
