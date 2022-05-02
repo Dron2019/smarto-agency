@@ -1,6 +1,5 @@
 #neboshill-page {
   background-color: #F4F4F4;
-  font-family: "TenorSans";
 }
 #neboshill-page footer {
   display: none;
@@ -27,7 +26,9 @@
   }
 }
 
-
+#neboshill-page .page__inner {
+  font-family: 'TenorSans';
+}
 
 #neboshill-page .header {
   align-items: center;
