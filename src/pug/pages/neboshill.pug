@@ -11,12 +11,11 @@ block variable
         link: pagesLink[0].about
       }
     ]
-
 block meta
   title= title_page
   meta(name='description', content='')
 block head
-    link(rel='stylesheet', href="./assets/styles/main.min.css")
+  link(rel='stylesheet', href="./assets/styles/main.min.css")
 block scripts
   script(defer src='./assets/scripts/vendors.bundle.js')
   script(defer src='./assets/scripts/index.bundle.js')
@@ -38,9 +37,9 @@ block content
         .project__link
           a( href="#" target="_blank") Visit website
       .project__title
-        h1(data-span-entry1) Nebos’hill
-        h1(data-span-entry2) premium
-        h1(data-span-entry3) home
+        h1 Nebos’hill
+        h1 premium
+        h1 home
         .scroll-down.js-scroll-down
           p Europe, Ukraine
           .waves-container.js-scroll-down
@@ -111,19 +110,19 @@ block content
     ul.goals__list
       li.goals__item
         .goals__item-num 01
-        h3(data-span-fade-up) Create stylish UI
+        h3 Create stylish UI
         p Create a stylish and memorable design to increase the popularity of a residential complex
       li.goals__item
         .goals__item-num 02
-        h3(data-span-fade-up) Design awesome UX
+        h3 Design awesome UX
         p Design a user-friendly and intuitive interface for a choosing individual unit
       li.goals__item
         .goals__item-num 03
-        h3(data-span-fade-up) Integrate CRM
+        h3 Integrate CRM
         p Develop a system to view a real-time unit availability for the booking platform
       li.goals__item
         .goals__item-num 04
-        h3(data-span-fade-up) Increase ROI
+        h3 Increase ROI
         p Improve a lead generation process
 
     picture.goals-deco
@@ -161,9 +160,9 @@ block content
             p Impress your prospect with creative and neat website design. Implementing the brand identity tightly into the layout makes it more memorable.
     .video.ui__video
       .video__border
-        video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="")
+        video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="")
           <source src="./assets/images/neboshill/video/Home.mp4" type="video/mp4">
-        video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
+        video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
           <source src="./assets/images/neboshill/video/Home-mob.mp4" type="video/mp4">
     .ui__desktop
       .ui__desktop-left
@@ -284,15 +283,18 @@ block content
           h3 Interactive VR tour
           p Increasing the engagement of the prospect by showing the  interior with an absolute freedom in navigation and photorealistic window view
       .vr-tour__left
+        .section-content__item.filter__item
+          h3 Interior
+          p Increasing the engagement of the prospect by showing the  interior with an absolute freedom in navigation and real photorealistic window view
         .vr-tour__img
           picture
             source(media="(max-width: 575px)" srcset="./assets/images/neboshill/vr2-mob.jpg")
             img(src="./assets/images/neboshill/vr2.jpg" alt="Laptop")
     .video.vr-video
       .video__border
-        video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="")
+        video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="")
           <source src="./assets/images/neboshill/video/VRNET.mp4" type="video/mp4">
-        video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
+        video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
           <source src="./assets/images/neboshill/video/VRNET-mob.mp4" type="video/mp4">
 
   section.crm
@@ -379,9 +381,9 @@ block content
             p DevBase can be connected with different CRM systems to transer all data via API. You can see the deals list and deals history, contact information, responsible manager and price changes.
       .crm__video
         .crm__video-border
-          video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="")
+          video(class="desctop-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="")
             <source src="./assets/images/neboshill/video/DevBase.mp4" type="video/mp4">
-          video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop="" playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
+          video(class="mobile-video" width="100%" height="100%" preload="none" autoplay="false" muted="" loop playsinline="" poster="./assets/images/neboshill/video/poster.jpg")
             <source src="./assets/images/neboshill/video/DevBase-mob.mp4" type="video/mp4">
 
       .crm__integration-deco
@@ -402,8 +404,7 @@ block content
       .crm__admin-item
         .crm__admin-text
           h3 Automation of routine processes.
-          p Now, managers do not need to search for information, fill out questionnaires, enter data, and get distracted —focus on sales.
-          p Give your partners, agents, or brokers an account with the history of their views, orders, personal manager.
+          p Now, managers do not need to search for information, fill out questionnaires, enter data, and get distracted —focus on sales. Give your partners, agents, or brokers an account with the history of their views, orders, personal manager.
         .crm__admin-img
           picture
             source(media="(max-width: 575px)" srcset="./assets/images/neboshill/admin1-2-mob.jpg")
@@ -430,18 +431,18 @@ block content
           .section-content__item
             p Provide the client with the prices and availability of the interested units by creating a customer account.
       .crm__admin-item.last-item.bg-3
-          .crm__admin-img
-            picture
-              source(media="(max-width: 575px)" srcset="./assets/images/neboshill/admin5-1-mob.jpg")
-              img(src="./assets/images/neboshill/admin5-1.jpg" alt="")
-            .section-content__item
-              p Send the personalized PDF file with the stylish, well-designed offer.
-          .crm__admin-img
-            picture
-              source(media="(max-width: 575px)" srcset="./assets/images/neboshill/admin5-2-mob.jpg")
-              img(src="./assets/images/neboshill/admin5-2.jpg" alt="")
-            .section-content__item
-              p Engage the client by giving him the PDF with the comparison of chosen units.
+        .crm__admin-img
+          picture
+            source(media="(max-width: 575px)" srcset="./assets/images/neboshill/admin5-1-mob.jpg")
+            img(src="./assets/images/neboshill/admin5-1.jpg" alt="")
+          .section-content__item
+            p Send the personalized PDF file with the stylish, well-designed offer.
+        .crm__admin-img
+          picture
+            source(media="(max-width: 575px)" srcset="./assets/images/neboshill/admin5-2-mob.jpg")
+            img(src="./assets/images/neboshill/admin5-2.jpg" alt="")
+          .section-content__item
+            p Engage the client by giving him the PDF with the comparison of chosen units.
 
   section.results
     .header-neboshill

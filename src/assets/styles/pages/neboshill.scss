@@ -1,10 +1,11 @@
-#id-page-neboshill {
+#neboshill-page {
   background-color: #F4F4F4;
+  font-family: "TenorSans";
 }
-#id-page-neboshill footer {
+#neboshill-page footer {
   display: none;
 }
-#id-page-neboshill .bg-header {
+#neboshill-page .bg-header {
   height: 90px;
   background: rgba(223, 237, 221, 0.856);
   transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
@@ -13,7 +14,7 @@
     height: 60px;
   }
 }
-#id-page-neboshill {
+#neboshill-page {
   .not-on-top {
     background: rgba(223, 237, 221, 0.856);
     height: 90px;
@@ -28,33 +29,33 @@
 
 
 
-#id-page-neboshill .header {
+#neboshill-page .header {
   align-items: center;
 }
-#id-page-neboshill .header svg path {
+#neboshill-page .header svg path {
   fill: #2a3341;
 }
-#id-page-neboshill .header__links{
+#neboshill-page .header__links{
   color: #2a3341;
   padding: 0;
   top: auto;
   align-content: center;
 }
 @media (max-width: 575px) {
-  #id-page-neboshill .nav {
+  #neboshill-page .nav {
     top: 19px;
   }
-  #id-page-neboshill .button-toggle {
+  #neboshill-page .button-toggle {
     top: 6px;
   }
-  #id-page-neboshill .header {
+  #neboshill-page .header {
     height: 60px;
   }
-  #id-page-neboshill .not-on-top {
+  #neboshill-page .not-on-top {
     box-shadow: none;
   }
 }
-#id-page-neboshill {
+#neboshill-page {
   --text-title-nebo: 150px;
   --text-small: 14px;
   --text-middle: 18px;
@@ -62,7 +63,7 @@
   --padding: 110px;
 }
 @media (max-width: 1440px) {
-  #id-page-neboshill {
+  #neboshill-page {
     --text-title-nebo: 100px;
     --text-small: 12px;
     --text-middle: 16px;
@@ -70,7 +71,7 @@
   }
 }
 @media (max-width: 1000px) {
-  #id-page-neboshill {
+  #neboshill-page {
     --text-title-nebo: 84px;
     --text-middle: 14px;
     --text-middle-b: 20px;
@@ -78,7 +79,7 @@
   }
 }
 @media (max-width: 575px) {
-  #id-page-neboshill {
+  #neboshill-page {
     --text-title-nebo: 55px;
     --text-small: 12px;
     --text-middle: 14px;
@@ -100,7 +101,7 @@
   font-weight: 400;
   line-height: 140%;
 }
-#id-page-neboshill {
+#neboshill-page {
   .main-section {
     padding-top: calc(var(--header-h) + 100px);
     position: relative;
@@ -831,7 +832,7 @@
     }
     &__border {
       margin: 0 vw(70, 1440);
-      border: 5px solid #072826;
+      border: 7px solid #072826;
       border-radius: 40px;
       overflow: hidden;
       position: relative;
@@ -978,11 +979,13 @@
       height: 4700px;
     }
     @include to(1024px) {
-      padding: 800px 20px 460px;
+      padding: 800px 40px 460px;
       height: 2800px;
     }
     @include to(575px) {
-      padding-top: 485px;
+      padding-top: 500px;
+      padding-right: 0px;
+      padding-left: 0px;
       background-image: url("../images/neboshill/bg1-ui-mob.jpg");
       height: 3200px;
     }
@@ -1102,6 +1105,9 @@
       height: max-content;
       @include to(1024px) {
         width: 65%;
+      }
+      @include to(575px) {
+        width: 100%;
       }
       h4 {
         @include item-title-nebo;
@@ -1518,6 +1524,31 @@
       @include to(1024px) {
         padding: 0;
       }
+      .filter__item {
+        width: 65%;
+        margin-top: auto;
+        background: #FFFFFF;
+        @include to(1024px) {
+          display: none;
+        }
+        h3 {
+          color: #072826;
+        }
+        p {
+          color: #626F75;
+        }
+        &:before {
+          right: auto;
+          left: -62px;
+          background-image: url(../images/neboshill/circle-2.svg);
+        }
+        &:after {
+          border-top: 30px solid #FFFFFF;
+          transform: rotateY(180deg);
+          right: auto;
+          left: 0;
+        }
+      }
     }
     &__item-top {
       width: 55.35%;
@@ -1736,7 +1767,7 @@
     background: #072826;
     width: 81%;
     position: absolute;
-    bottom: 47px;
+    bottom: 45px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -2018,9 +2049,12 @@
   }
   .crm__video {
     margin-top: 200px;
-    padding: 0 vw(140, 1440);
+    padding: 0 vw(70, 1440);
     @include to(1024px) {
       margin-top: 100px;
+    }
+    @include to(575px) {
+      padding: 0 20px;
     }
     &-border {
       border-radius: 40px;
@@ -2212,6 +2246,9 @@
     .section-marker {
       @include to(1024px) {
         top: 160px;
+      }
+      @include to(575px) {
+        top: 0px;
       }
     }
     .section-marker__text {

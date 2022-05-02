@@ -29,7 +29,81 @@ if (buttonDown) {
             .scrollIntoView({ behavior: "smooth" });
     });
 }
-// const paralaxPattern = document.querySelectorAll('');
+
+function homeAnimationAdditional() {
+    const addIntersectionOnceWithCallback = (el, cb = () => {
+    }, config = {}) => {
+        const image = el;
+        const target = image;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    cb();
+                    observer.unobserve(target);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1,
+            ...config
+        });
+        observer.observe(target);
+    }
+
+    function splitToLinesAndFadeUp(selector, $scroller) {
+        document.querySelectorAll(selector).forEach(text => {
+            let mathM = text.innerHTML.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
+            if (mathM === null) return;
+            mathM = mathM.map(el => `<span style="display:inline-flex; overflow: hidden"><span>${el}</span></span>`);
+            text.innerHTML = mathM.join(' ');
+
+            let tl = gsap
+                .timeline({
+                    paused: true,
+                    scrollTrigger: {
+                        // scroller: $scroller ? $scroller : null,
+                        trigger: text,
+                        once: true,
+                    },
+                })
+                .fromTo(
+                    text.querySelectorAll('span>span'),
+                    {yPercent: 100, start: '-100% top',},
+                    {yPercent: 0, stagger: 0.1, duration: 1.5, end: '100% top', ease: 'power4.out'},
+                );
+            addIntersectionOnceWithCallback(text, () => {
+                tl.play();
+            })
+        });
+    }
+
+    splitToLinesAndFadeUp('.project__title h1, .project__real-estate p, .project__link a, .goals__item h3, .goals__item p, h2, .section-title p, .section-content__item h3, .section-content__item p, .model-3d__item h4, .model-3d__item p, .viewer-interest__item h3, .viewer-interest__item p, .crm__functionality-item h3, .crm__functionality-item p, .crm__admin-text h3, .crm__admin-text p, .results__item-left p, .results__item-left h3');
+}
+homeAnimationAdditional();
+
+document.querySelectorAll(".page__content video").forEach((video) => {
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: video,
+            scroller: document.body,
+            onEnter: () => {
+                video.play();
+            },
+            onEnterBack: () => {
+                video.play();
+            },
+            onLeaveBack: () => {
+                video.pause();
+            },
+            onLeave: () => {
+                video.pause();
+            },
+        },
+    });
+});
+
+// const paralaxPattern = document.querySelectorAll('.main-section__deco img');
 // paralaxPattern.forEach((image) => {
 //     const wrap = document.createElement('div');
 //     wrap.style.overflow = 'visible';
@@ -42,23 +116,19 @@ if (buttonDown) {
 //         .timeline({
 //             ease: 'none',
 //             scrollTrigger: {
+//                 start: -100 % bottom,
+//                 end: 100 % bottom,
 //                 trigger: wrap,
 //                 scrub: 1.1,
-//                 scroller: '.page__inner',
-//                 onLeave: () => {
-//                     console.log('leave');
-//                 },
 //             },
 //         })
 //         .fromTo(
 //             image,
 //             {
-//                 // rotate: 30,
-//                 rotate: 0,
+//                 scale: 1,
 //             },
 //             {
-//                 // y: 50,
-//                 rotate: 90,
+//                 scale: 1.1,
 //                 ease: 'ease',
 //             },
 //         );
@@ -102,214 +172,91 @@ if (buttonDown) {
 //             },
 //         );
 // });
-const spanBezier1 = "power4.ease";
-const spanEntries1 = document.querySelectorAll("[data-span-entry1]");
-const spanEntries2 = document.querySelectorAll("[data-span-entry2]");
-const spanEntries3 = document.querySelectorAll("[data-span-entry3]");
-spanEntries1.forEach((section, index) => {
-    gsap.set(section, { overflow: "hidden" });
-    section.innerHTML = `
-    <div>
-      ${section.innerHTML}
-    </div>
-  `;
-    const tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-            triggerHook: 1,
-            trigger: section,
-            scroller: document.body,
-            onEnter: () => {
-                if (index === 0) console.log("enter");
-            },
-            once: true,
-        },
-    });
-    tl.fromTo(
-        section.querySelector("div"),
-        {
-            y: "50%",
-            autoAlpha: 0 },
-        {
-            y: 0,
-            autoAlpha: 1,
-            duration: 1,
-            ease: spanBezier1,
-        }
-    );
-});
-spanEntries2.forEach((section, index) => {
-    gsap.set(section, { overflow: "hidden" });
-    section.innerHTML = `
-    <div>
-      ${section.innerHTML}
-    </div>
-  `;
-    const tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-            triggerHook: 1,
-            trigger: section,
-            scroller: document.body,
-            onEnter: () => {
-                if (index === 0) console.log("enter");
-            },
-            once: true,
-        },
-    });
-    tl.fromTo(
-        section.querySelector("div"),
-        { y: "50%", autoAlpha: 0 },
-        {
-            y: 0,
-            autoAlpha: 1,
-            delay: 0.3,
-            duration: 1,
-            ease: spanBezier1,
-        }
-    );
-});
-spanEntries3.forEach((section, index) => {
-    gsap.set(section, { overflow: "hidden" });
-    section.innerHTML = `
-    <div>
-      ${section.innerHTML}
-    </div>
-  `;
-    const tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-            triggerHook: 1,
-            trigger: section,
-            scroller: document.body,
-            onEnter: () => {
-                if (index === 0) console.log("enter");
-            },
-            once: true,
-        },
-    });
-    tl.fromTo(
-        section.querySelector("div"),
-        { y: "50%", autoAlpha: 0 },
-        {
-            y: 0,
-            autoAlpha: 1,
-            delay: 0.5,
-            duration: 1,
-            ease: spanBezier1,
-        }
-    );
-});
 
-// function fixedMarkers() {
-//     if (window.matchMedia('(min-width: 576px)').matches) return;
-//     const root = document.documentElement;
-//     gsap.timeline({
-//         scrollTrigger: {
-//             trigger: document.querySelector(".ui"),
-//             endTrigger: document.querySelector(".crm"),
-//             scroller: document.body,
-//
-//             onEnter: () => {
-//                 gsap.to(".goals-marker", { autoAlpha: 1 });
-//             },
-//             onLeave: () => {
-//                 gsap.to(".goals-marker", { autoAlpha: 0 });
-//             },
-//             onEnterBack: () => {
-//                 gsap.to(".goals-marker", { autoAlpha: 1 });
-//             },
-//             onLeaveBack: () => {
-//                 gsap.to(".goals-marker", { autoAlpha: 0 });
-//             },
-//         },
-//     });
-//     const fixedMarkers = document.querySelectorAll(
-//         ".goals-marker .goals-marker__item"
-//     );
-//
-//     fixedMarkers.forEach((el) => {
-//         const { to } = el.dataset;
-//         el.addEventListener("click", () => {
-//             document.querySelector(to).scrollIntoView({
-//                 behavior: "smooth",
-//             });
-//             fixedMarkers.forEach((item) => item.classList.remove("item-active"));
-//             el.classList.add("item-active");
-//         });
-//     });
-//     document.querySelectorAll("[data-to]").forEach((point) => {
-//         const { to, end } = point.dataset;
-//         const toElement = document.querySelector(to);
-//         if (!toElement) return;
-//         gsap.timeline({
-//             scrollTrigger: {
-//                 trigger: toElement,
-//                 scroller: document.body,
-//                 start: "0% top",
-//                 // markers: true,
-//                 endTrigger: document.querySelector(end) ? document.querySelector(end) : toElement,
-//                 onUpdate: ({ progress }) =>
-//                     root.style.setProperty("--line-width", progress),
-//                 onEnter: () => {
-//                     fixedMarkers.forEach((item) => item.classList.remove("item-active"));
-//                     point.classList.add("item-active");
-//                 },
-//                 onEnterBack: () => {
-//                     fixedMarkers.forEach((item) => item.classList.remove("item-active"));
-//                     point.classList.add("item-active");
-//                 },
-//             },
-//         });
-//     });
-// }
-// fixedMarkers();
-// const addIntersectionOnceWithCallback = (el, cb = () => {}) => {
-//     const image = el;
-//     const target = image;
-//     const observer = new IntersectionObserver(
-//         (entries) => {
-//             entries.forEach((entry) => {
-//                 if (entry.isIntersecting) {
-//                     const lazyImage = entry.target;
-//                     cb();
-//                     observer.unobserve(target);
-//                 }
-//             });
-//         },
-//         {
-//             rootMargin: "0px",
-//             threshold: 0.1,
-//         }
-//     );
-//     observer.observe(target);
-// };
+function fixedMarkers() {
+    if (window.matchMedia('(min-width: 576px)').matches) return;
+    const root = document.documentElement;
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: document.querySelector(".ui"),
+            endTrigger: document.querySelector(".crm"),
+            scroller: document.body,
 
-// document.querySelectorAll("img[data-src]").forEach((img) => {
-//     gsap.timeline({
-//         scrollTrigger: {
-//             trigger: img,
-//             scroller: document.body,
-//             once: true,
-//             start: "-500px bottom",
-//             onEnter: () => {
-//                 img.src = img.dataset.src;
-//                 window.dispatchEvent(new Event("lazy-img-load"));
-//             },
-//         },
-//     });
-//     addIntersectionOnceWithCallback(img, () => {
-//         img.src = img.dataset.src;
-//         img.removeAttribute('data-src');
-//         window.dispatchEvent(new Event("lazy-img-load"));
-//     });
-// });
-// document.querySelectorAll("[data-srcset]").forEach((img) => {
-//     addIntersectionOnceWithCallback(img, () => {
-//         img.setAttribute("srcset", img.dataset.srcset);
-//         window.dispatchEvent(new Event("lazy-img-load"));
-//     });
-// });
+            onEnter: () => {
+                gsap.to(".goals-marker", { autoAlpha: 1 });
+            },
+            onLeave: () => {
+                gsap.to(".goals-marker", { autoAlpha: 0 });
+            },
+            onEnterBack: () => {
+                gsap.to(".goals-marker", { autoAlpha: 1 });
+            },
+            onLeaveBack: () => {
+                gsap.to(".goals-marker", { autoAlpha: 0 });
+            },
+        },
+    });
+    const fixedMarkers = document.querySelectorAll(
+        ".goals-marker .goals-marker__item"
+    );
+
+    fixedMarkers.forEach((el) => {
+        const { to } = el.dataset;
+        el.addEventListener("click", () => {
+            document.querySelector(to).scrollIntoView({
+                behavior: "smooth",
+            });
+            fixedMarkers.forEach((item) => item.classList.remove("item-active"));
+            el.classList.add("item-active");
+        });
+    });
+    document.querySelectorAll("[data-to]").forEach((point) => {
+        const { to, end } = point.dataset;
+        const toElement = document.querySelector(to);
+        if (!toElement) return;
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: toElement,
+                scroller: document.body,
+                start: "0% top",
+                // markers: true,
+                endTrigger: document.querySelector(end) ? document.querySelector(end) : toElement,
+                onUpdate: ({ progress }) =>
+                    root.style.setProperty("--line-width", progress),
+                onEnter: () => {
+                    fixedMarkers.forEach((item) => item.classList.remove("item-active"));
+                    point.classList.add("item-active");
+                },
+                onEnterBack: () => {
+                    fixedMarkers.forEach((item) => item.classList.remove("item-active"));
+                    point.classList.add("item-active");
+                },
+            },
+        });
+    });
+}
+fixedMarkers();
+const addIntersectionOnceWithCallback = (el, cb = () => {}) => {
+    const image = el;
+    const target = image;
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    cb();
+                    observer.unobserve(target);
+                }
+            });
+        },
+        {
+            rootMargin: "0px",
+            threshold: 0.1,
+        }
+    );
+    observer.observe(target);
+};
+
 // document.querySelectorAll(".ui-elements").forEach((img) => {
 //     addIntersectionOnceWithCallback(img, () => {
 //         document.querySelector("[data-footer-bg-lazy]").remove();
@@ -335,39 +282,20 @@ spanEntries3.forEach((section, index) => {
 //             })
 //     });
 // }
-// fadeInDownFromHidden('.header-ozon>*');
-// document.querySelectorAll(".page__content video").forEach((video) => {
-//     gsap.timeline({
-//         scrollTrigger: {
-//             trigger: video,
-//             scroller: document.body,
-//             onEnter: () => {
-//                 video.play();
-//             },
-//             onEnterBack: () => {
-//                 video.play();
-//             },
-//             onLeaveBack: () => {
-//                 video.pause();
-//             },
-//             onLeave: () => {
-//                 video.pause();
-//             },
-//         },
-//     });
-// });
-// document.querySelectorAll(".line-through").forEach((el) => {
-//     gsap.set(el, { textDecoration: "none" });
-//     gsap.timeline({
-//         scrollTrigger: {
-//             trigger: el,
-//             scroller: document.body,
-//             once: true,
-//             onEnter: () => {
-//                 setTimeout(() => {
-//                     el.removeAttribute("style");
-//                 }, 2000);
-//             },
-//         },
-//     });
-// });
+// fadeInDownFromHidden('.header-neboshill>*');
+
+document.querySelectorAll(".line-through").forEach((el) => {
+    gsap.set(el, { textDecoration: "none" });
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: el,
+            scroller: document.body,
+            once: true,
+            onEnter: () => {
+                setTimeout(() => {
+                    el.removeAttribute("style");
+                }, 2000);
+            },
+        },
+    });
+});
