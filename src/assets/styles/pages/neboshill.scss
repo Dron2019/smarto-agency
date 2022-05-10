@@ -884,6 +884,8 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: -1;
+        --webkit-filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
+        filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
       }
     }
   }
@@ -1103,9 +1105,6 @@
       width: 100%;
     }
 
-    img {
-      height: auto;
-    }
 
     &:nth-child(2) {
       transform: translateY(-230px);
@@ -1128,20 +1127,26 @@
       position: absolute;
       top: calc((-1) * (390px / 2));
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       z-index: -1;
       height: 390px;
       width: 390px;
+      overflow: hidden;
+      --webkit-overflow: hidden;
       filter: drop-shadow(0px 100px 70px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 20px #D6DADF);
+
       @include to(1024px) {
         height: 300px;
         width: 300px;
         top: calc((-1) * (300px / 2));
       }
       @include to(575px) {
-        height: auto;
+        object-fit: contain;
+        height: 242px;
         width: 242px;
         top: calc((-1) * (242px / 2));
+        filter: drop-shadow(0px 10px 10px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 10px #D6DADF);
+        --webkit-filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 20px #D6DADF);
       }
     }
 
@@ -1264,6 +1269,9 @@
       width: 390px;
       height: 390px;
       filter: drop-shadow(0px 100px 70px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 20px #D6DADF);
+      --webkit-filter: drop-shadow(0px 100px 70px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 20px #D6DADF);
+      overflow: visible;
+      --webkit-overflow: visible;
       @include to(575px) {
         top: -10%;
         bottom: auto;
@@ -1272,6 +1280,8 @@
         width: 234px;
         height: 234px;
         z-index: -2;
+        --webkit-filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
+        filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
       }
     }
 
@@ -1867,7 +1877,7 @@
       .section-content__delimiter {
         margin: 100px 0 50px;
         @include to(575px) {
-          margin: 50px 0 20px;
+          margin: 50px 0 40px;
         }
       }
 
@@ -1904,6 +1914,8 @@
           transform: translateX(50%);
           top: auto;
           bottom: 42%;
+          --webkit-filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
+          filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
         }
       }
     }
@@ -2281,9 +2293,9 @@
           z-index: 1;
           top: 0;
           left: 50%;
-          transform: translateX(-50%);
-          height: 20px;
-          width: 151px;
+          transform: translate(-50%, 0, 0);
+          height: 29px;
+          width: 100%;
         }
       }
 
@@ -2291,6 +2303,7 @@
       .video-mobile {
         display: none;
         @include to(575px) {
+          padding-top: 29px;
           display: block;
           width: 100%;
         }
@@ -2826,6 +2839,8 @@
         transform: translateX(-50%);
         top: 55%;
         z-index: -1;
+        --webkit-filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
+        filter: drop-shadow(0px 20px 20px rgba(169, 180, 203, 0.2)) drop-shadow(-3px -3px 6px #FFFFFF) drop-shadow(0px 3px 3px #D6DADF);
       }
       @include to(575px) {
         top: 60%;
