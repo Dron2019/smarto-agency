@@ -906,7 +906,7 @@
       border: 7px solid #072826;
       border-radius: 40px;
       overflow: hidden;
-      z-index: 1;
+      z-index: 2;
       transform: translateZ(0);
       position: relative;
 
@@ -919,8 +919,8 @@
           top: 0;
           left: 50%;
           transform: translateX(-50%);
-          height: 20px;
-          width: 151px;
+          height: 29px;
+          width: 100%;
         }
       }
 
@@ -3182,6 +3182,7 @@
   .mobile-video {
     display: none;
     @include to(575px) {
+      padding-top: 29px;
       display: block;
       height: 100%;
       width: 100%;
