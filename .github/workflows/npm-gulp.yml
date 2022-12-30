@@ -25,6 +25,7 @@ jobs:
     - name: Build
       run: |
         npm run createDist
+        echo 'ffff'>>./dist/a.json
         ls
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
