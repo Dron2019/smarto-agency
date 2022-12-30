@@ -32,4 +32,4 @@ jobs:
         server: smartora.ftp.tools
         username: smartora_main_verst
         password: ${{ secrets.pass }}
-        local-dir: ./src/pug/
+        local-dir: ./b/
