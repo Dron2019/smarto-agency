@@ -4,7 +4,8 @@
   "description": "work builder",
   "main": "index.js",
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "createDist": "mkdir dist | touch ./dist/a.json"
   },
   "browserslist": [
     "last 3 version"
