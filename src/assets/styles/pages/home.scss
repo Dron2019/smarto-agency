@@ -323,9 +323,21 @@ $base-color: #000;
     margin-top: 20px;
     padding: 0;
     border: none;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
+    width: max-content;
+    border-radius: 0;
+    font-family: 'HelveticaNeueCyr';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 120%;
+    /* identical to box height, or 22px */
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    align-items: center;
+    column-gap: 14px;
+    border: 1px solid #ff3300;
+    // border-radius: 50%;
     // transition: all 0.2s linear;
     .circle-rotate {
       transform-origin: center;
@@ -1001,20 +1013,68 @@ $base-color: #000;
     }
   }
 }
+
+.main-screen {
+  &__call-popup {
+    margin-top: 30px;
+    background-color: #ff3300;
+    border: 1px solid #ff3300;
+    font-family: 'HelveticaNeueCyr';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 120%;
+    /* identical to box height, or 22px */
+
+    text-transform: uppercase;
+
+    /* White */
+
+    color: #FFFFFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0;
+    padding: 25px 80px;
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+
+.wow__link {
+  padding: 25px 45px;
+  background-color: #ff3300;
+  height: max-content;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media (max-width: 1600px) {
   .title-with-star {
     --svg-size: 60px;
-    margin-bottom: 30px;
+    margin-top: 30px;
     svg {
       margin-right: 0;
     }
   }
   .main-screen {
     &__call-popup {
-      margin-bottom: 30px;
+      margin-top: 30px;
+      background-color: #ff3300;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0;
+      padding: 25px 80px;
       svg {
-        width: 130px;
-        height: 130px;
+        width: 24px;
+        height: 24px;
       }
     }
   }
@@ -1060,11 +1120,14 @@ $base-color: #000;
       margin-top: 50px;
     }
     &__link {
-      width: 130px;
-      height: 130px;
+      // width: 130px;
+      // height: 130px;
+      
+      padding: 25px 45px;
+      background-color: #ff3300;
       svg {
-        width: 130px;
-        height: 130px;
+        width: 24px;
+        height: 24px;
       }
     }
   }
@@ -1602,11 +1665,16 @@ $base-color: #000;
   .main-screen {
     height: calc(100vh - var(--header-h) - var(--page-side-fields));
     &__call-popup {
-      margin-bottom: 20px;
-      svg {
-        width: 140px;
-        height: 140px;
-      }
+      margin-top: 20px;
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 12px;
+      // svg {
+      //   width: 140px;
+      //   height: 140px;
+      // }
       .eye {
         width: 50px;
         height: 50px;
@@ -1702,11 +1770,11 @@ $base-color: #000;
     }
     &__link {
       margin-top: 30px;
-      width: 140px;
-      height: 140px;
+      // width: 140px;
+      // height: 140px;
       svg {
-        width: 140px;
-        height: 140px;
+        // width: 140px;
+        // height: 140px;
       }
       .eye {
         width: 50px;
