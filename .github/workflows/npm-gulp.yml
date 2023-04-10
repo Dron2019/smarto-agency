@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -24,18 +24,8 @@ jobs:
 
     - name: Build
       run: |
-        npm install
+        yarn install
         gulp
-    # - name: 📂 Sync files
-    #   uses: SamKirkland/FTP-Deploy-Action@4.1.0
-    #   with:
-    #     server: smartora.ftp.tools
-    #     username: smartora_main_verst
-    #     password: ${{ secrets.pass }}
-    #     local-dir: ./dist/
-  deploy: 
-    runs-on: ubuntu-latest
-    steps:
     - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
       with:
@@ -44,3 +34,4 @@ jobs:
         private-ssh-key: ${{ secrets.ssh }}
         source-path: ./dist/
         destination-path: ~/smarto-agency/main/
+
