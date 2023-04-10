@@ -25,6 +25,7 @@ jobs:
     - name: Build
       run: |
         yarn install
+        ls
         gulp
     - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
@@ -35,4 +36,4 @@ jobs:
         private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
         source-path: ./dist/
         destination-path: ~/smarto.agency/main/
-
+        rsync-options: --size-only --human-readable	
