@@ -23,18 +23,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     # - name: Build
-    #   run: |
-    #     npm install
-    #     # gulp prod
-    #     ls
-    #     cd ../
-    #     ls
-    #     cd ../
-    #     ls
     - name: 📂 Sync files
+      run: |
+        npm install
+        gulp prod
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
         server: smartora.ftp.tools
         username: smartora_main_verst
         password: ${{ secrets.pass }}
-        local-dir: ./src/
+        local-dir: ./prod/
