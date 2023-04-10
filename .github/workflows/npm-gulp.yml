@@ -33,5 +33,5 @@ jobs:
         remote-user: smartora
         private-ssh-key: ${{ secrets.ssh }}
         source-path: ./dist/
-        destination-path: ~/smarto-agency/main/
+        destination-path: ~/smarto.agency/main/
 
