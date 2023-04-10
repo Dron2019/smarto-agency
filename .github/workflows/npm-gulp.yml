@@ -26,10 +26,21 @@ jobs:
       run: |
         npm install
         gulp
+    # - name: 📂 Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@4.1.0
+    #   with:
+    #     server: smartora.ftp.tools
+    #     username: smartora_main_verst
+    #     password: ${{ secrets.pass }}
+    #     local-dir: ./dist/
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      uses: SamKirkland/web-deploy@v1
       with:
-        server: smartora.ftp.tools
-        username: smartora_main_verst
-        password: ${{ secrets.pass }}
-        local-dir: ./dist/
+        target-server: smartora.ftp.tools
+        remote-user: smartora
+        private-ssh-key: ${{ secrets.ssh }}
+        source-path: ./dist/
+        destination-path: ~/smarto-agency/main/
