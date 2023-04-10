@@ -26,10 +26,11 @@ jobs:
       run: |
         npm install
         gulp prod
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: smartora.ftp.tools
-        username: smartora_main_verst
-        password: ${{ secrets.pass }}
-        local-dir: ./prod/
+        ls
+    # - name: 📂 Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@4.1.0
+    #   with:
+    #     server: smartora.ftp.tools
+    #     username: smartora_main_verst
+    #     password: ${{ secrets.pass }}
+    #     local-dir: ./prod/
