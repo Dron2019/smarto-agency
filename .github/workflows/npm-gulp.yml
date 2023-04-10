@@ -35,5 +35,4 @@ jobs:
         private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
         source-path: ./dist/
         destination-path: ~/smarto.agency/main/
-        rsync-options: --itemize-changes
 
