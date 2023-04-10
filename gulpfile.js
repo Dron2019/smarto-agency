@@ -332,7 +332,7 @@ gulp.task('default', gulp.series(
     libs,
     ...additionalTask,
 		gulp.parallel(styles, templates, fonts, gulpModules, testJsLint, images, static),
-		gulp.parallel(watch, server)
+		// gulp.parallel(watch, server)
 ));
 
 
