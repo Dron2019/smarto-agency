@@ -21,6 +21,7 @@ const lang = langDetect();
         translation: {
           // Так называемый namespace по умолчанию
           name: 'Имя:*',
+          valide_email: 'Введите корректный E-mail',
           phone: 'Телефон:*',
           send: 'Отправить',
           sending: 'Отправка',
@@ -49,6 +50,7 @@ const lang = langDetect();
         translation: {
           // Так называемый namespace по умолчанию
           name: 'Ім’я:*',
+          valide_email: 'Введіть коректний  E-mail',
           phone: 'Телефон:*',
           send: 'Надіслати',
           sending: 'Відправлення',
@@ -80,6 +82,7 @@ const lang = langDetect();
           // Так называемый namespace по умолчанию
           name: 'Name:*',
           phone: 'Phone:*',
+          valide_email: 'Enter correct E-mail',
           send: 'Sand',
           sending: 'Sanding',
           field_too_short: 'phone must be at least {{cnt}} characters',

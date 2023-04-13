@@ -54,10 +54,10 @@ formsWithTel.forEach(form => {
             valid: false,
             error: [],
           },
-          text: {
-            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-text]') }),
-            rule: yup.string().required(i18next.t('required')).trim(),
-            defaultMessage: i18next.t('name'),
+          email: {
+            inputWrapper: new SexyInput({ animation: 'none', $field: $form.querySelector('[data-field-email]') }),
+            rule: yup.string().required(i18next.t('required')).email(i18next.t('valide_email')).trim(),
+            defaultMessage: i18next.t('E-mail'),
             valid: false,
             error: [],
           },
@@ -87,5 +87,3 @@ formsWithTel.forEach(form => {
 });
 
 /** ******************************* */
-
-console.log('i here');
