@@ -25,7 +25,6 @@ jobs:
     - name: Build
       run: |
         yarn install
-        ls
         gulp
     - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
