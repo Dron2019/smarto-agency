@@ -36,4 +36,4 @@ jobs:
         private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
         source-path: ./dist/
         destination-path: ~/smarto.agency/main/
-        rsync-options: --archive --verbose --compress --human-readable --progress --delete-after --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore  --size-only --ignore-existing
+        rsync-options: --archive --verbose --compress --human-readable --progress --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore  --size-only --ignore-existing
