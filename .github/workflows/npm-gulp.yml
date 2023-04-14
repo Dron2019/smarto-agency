@@ -27,11 +27,12 @@ jobs:
         yarn install
         ls
         gulp
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
+    - name: 📂 Sync files
+      uses: SamKirkland/web-deploy@v1
       with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-    - name: Deploy with rsync
-      run: |
-        rsync -avz ./dist/ smartora@smartora.ftp.tools:~/smarto.agency/main
+        target-server: smartora.ftp.tools
+        remote-user: smartora
+        ssh-port: 22
+        private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source-path: ./dist/
+        destination-path: ~/smarto.agency/main/
