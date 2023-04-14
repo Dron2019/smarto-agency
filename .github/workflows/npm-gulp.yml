@@ -34,4 +34,4 @@ jobs:
         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
     - name: Deploy with rsync
       run: |
-        rsync -avz ./dist/ smartora@smartora.ftp.tools:/smarto.agency/main/
+        rsync -avz ./dist/ smartora@smartora.ftp.tools/smarto.agency/main/
