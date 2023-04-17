@@ -38,7 +38,7 @@ jobs:
         rsync-options: --archive --verbose --compress --human-readable --progress --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore  --size-only --checksum --log-file=mylog.log
     - name: Make log file
       run: |
-        ls
+        echo $(date '+%Y-%m-%d %H:%M:%S') >> mylog.log
     - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
       with:
