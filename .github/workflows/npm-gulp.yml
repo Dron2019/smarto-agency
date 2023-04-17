@@ -39,12 +39,13 @@ jobs:
     - name: Make log file
       run: |
         ls
-    - name: Sync with rsync
-      uses: peaceiris/actions-rsync@v3
+- name: 📂 Sync files
+      uses: SamKirkland/web-deploy@v1
       with:
-        flags: "-avz"
-        delete: "true"
-        args: "--exclude=.git*"
-        ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        src: "mylog.log"
-        dest: "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/smarto.agency/main/"
+        target-server: smartora.ftp.tools
+        remote-user: smartora
+        ssh-port: 22
+        private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source-path: ./mylog.log
+        destination-path: ~/smarto.agency/main/
+        rsync-options: --archive --verbose --compress --human-readable --progress --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore  --size-only
