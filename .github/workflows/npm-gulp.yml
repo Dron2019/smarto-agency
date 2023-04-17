@@ -39,3 +39,12 @@ jobs:
     - name: Make log file
       run: |
         ls
+    - name: Sync with rsync
+      uses: peaceiris/actions-rsync@v3
+      with:
+        flags: "-avz"
+        delete: "true"
+        args: "--exclude=.git*"
+        ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        src: "mylog.log"
+        dest: "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/smarto.agency/main/"
