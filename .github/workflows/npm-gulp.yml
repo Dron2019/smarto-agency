@@ -37,6 +37,5 @@ jobs:
         destination-path: ~/smarto.agency/main/
         rsync-options: --archive --verbose --compress --human-readable --progress --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore  --size-only --checksum --log-file=mylog.log
     - name: Make log file
-      run: | 
-        cd ./dist
+      run: |
         ls
