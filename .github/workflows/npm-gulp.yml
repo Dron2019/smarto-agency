@@ -39,7 +39,7 @@ jobs:
     - name: Make log file
       run: |
         ls
-- name: 📂 Sync files
+    - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
       with:
         target-server: smartora.ftp.tools
