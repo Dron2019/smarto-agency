@@ -121,8 +121,8 @@ export default class SexyInput {
         /* eslint-enable */
         numericOnly: true,
         prefix: '+',
-        blocks: [4, 2, 3, 2, 2],
-        delimiters: [' ', ' ', ' ', ''],
+        blocks: [4, 2, 3, 2, 2, 2, 2, 2, 2, 2],
+        delimiters: [' ', ' ', ' ', '', '', '', '', '', ''],
       });
       // input.addEventListener('countrychange', () => {
       //   const currentCountry = input.intTelIput.getSelectedCountryData();
